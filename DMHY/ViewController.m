@@ -14,6 +14,7 @@
 #import "TorrentItem.h"
 #import "TitleTableCellView.h"
 #import "NavigationView.h"
+#import "PreferenceController.h"
 
 @interface ViewController()<NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, NSSplitViewDelegate>
 
@@ -26,8 +27,10 @@
 
 @property (nonatomic, strong) NSMutableArray *torrents;
 @property (nonatomic, strong) NSString *searchURLString;
+@property (nonatomic, strong) NSURL *savePath;
 
 @property (nonatomic) BOOL isSearch;
+@property (nonatomic) BOOL isMagnetLink;
 
 @property (nonatomic, strong) AFURLSessionManager *manager;
 @property (nonatomic, strong) NSDateFormatter *dateFormater;
@@ -41,6 +44,7 @@
     
     [self setupTableViewStyle];
     [self setupData:self];
+    [self setupPreference];
     // set NSTextFieldDelegate
     self.keyword.delegate = self;
     
@@ -50,6 +54,16 @@
     CGFloat min = [self.splitView minPossiblePositionOfDividerAtIndex:0];
     CGFloat max = [self.splitView maxPossiblePositionOfDividerAtIndex:0];
     NSLog(@"min %f max %f",min,max);
+    
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self
+                           selector:@selector(handleDownloadTypeChanged:)
+                               name:DMHYDownloadLinkTypeNotification
+                             object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(handleSavaPathChanged:)
+                               name:DMHYSavePathChangedNotification
+                             object:nil];
 }
 
 
@@ -58,6 +72,11 @@
     [super setRepresentedObject:representedObject];
     
     // Update the view, if already loaded.
+}
+
+- (void)viewWillAppear {
+    [super viewWillAppear];
+    NSLog(@"viewWillAppear");
 }
 
 #pragma mark - Setup
@@ -69,6 +88,19 @@
     self.tableView.usesAlternatingRowBackgroundColors = YES;
     [self.tableView sizeLastColumnToFit];
     
+}
+
+- (void)setupPreference {
+    self.isMagnetLink = [PreferenceController preferenceDownloadLinkType];
+    self.savePath = [PreferenceController preferenceSavePath];
+}
+
+- (void)handleDownloadTypeChanged:(NSNotification *)noti {
+    [self setupPreference];
+}
+
+- (void)handleSavaPathChanged:(NSNotification *)noti {
+    [self setupPreference];
 }
 
 - (IBAction)setupData:(id)sender {
@@ -107,6 +139,8 @@
             item.title = [[element firstChildWithTag:@"title"] stringValue];
             item.link = [NSURL URLWithString:[[element firstChildWithTag:@"link"] stringValue]];
             item.author = [[element firstChildWithTag:@"author"] stringValue];
+            NSString *magStr = [[element firstChildWithXPath:@"//enclosure/@url"] stringValue];
+            item.magnet = [NSURL URLWithString:magStr];
             [self.torrents addObject:item];
             
         }];
@@ -167,7 +201,7 @@
 
 
 
-#pragma mark - Property Initialaztion
+#pragma mark - Property Initialization
 
 - (NSMutableArray *)torrents {
     if (!_torrents) {
@@ -204,7 +238,16 @@
     [self startAnimatingProgressIndicator];
     NSInteger row = [self.tableView rowForView:sender];
     TorrentItem *item = (TorrentItem *)[self.torrents objectAtIndex:row];
-    NSURL *url = item.link;
+    NSURL *url;
+    if (self.isMagnetLink) {
+        url = item.magnet;
+        [self stopAnimatingProgressIndicator];
+        [[NSWorkspace sharedWorkspace] openURL:url];
+        return;
+    } else {
+        NSLog(@"not returned download torrent");
+        url = item.link;
+    }
     NSLog(@"%@",item.link);
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
@@ -244,21 +287,12 @@
                                                                      progress:nil
                                                                   destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
                                                                       
-                                                                      return [[self downloadToPath] URLByAppendingPathComponent:[response suggestedFilename]];
+                                                                      return [self.savePath URLByAppendingPathComponent:[response suggestedFilename]];
                                                                       
                                                                   } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nonnull filePath, NSError * _Nonnull error) {
                                                                       NSLog(@"Download to : %@",filePath);
                                                                   }];
     [downloadTask resume];
-}
-
-- (NSURL *)downloadToPath {
-    NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDownloadsDirectory
-                                                                          inDomain:NSUserDomainMask
-                                                                 appropriateForURL:nil
-                                                                            create:NO
-                                                                             error:nil];
-    return documentsDirectoryURL;
 }
 
 #pragma mark - NSTextFieldDelegate
@@ -329,5 +363,11 @@
     return [self.dateFormater stringFromDate:longDate];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:DMHYDownloadLinkTypeNotification
+                                                  object:nil];
+
+}
 
 @end

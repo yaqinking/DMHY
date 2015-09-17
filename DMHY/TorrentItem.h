@@ -12,8 +12,10 @@
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSURL    *link;
-@property (nonatomic, strong) NSString   *pubDate;
+@property (nonatomic, strong) NSURL    *magnet;
+@property (nonatomic, strong) NSString *pubDate;
 @property (nonatomic, strong) NSString *author;
 @property (nonatomic, strong) NSString *category;
+
 
 @end

@@ -7,10 +7,14 @@
 //
 
 #import "AppDelegate.h"
+#import "PreferenceController.h"
+#import "DMHYAPI.h"
 
 @interface AppDelegate ()
 
 - (IBAction)saveAction:(id)sender;
+
+@property (nonatomic) PreferenceController *preferenceController;
 
 @end
 
@@ -18,10 +22,33 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
+    [PreferenceController setupDefaultPreference];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
+}
+
+
+#pragma mark - MenuItem
+
+- (IBAction)showPreference:(id)sender {
+    NSLog(@"show preference %@",self.preferenceController);
+    [self.preferenceController showWindow:self];
+}
+
+- (IBAction)showDownloadPathInFinder:(id)sender {
+    NSURL *savePath = [PreferenceController preferenceSavePath];
+    [[NSWorkspace sharedWorkspace] openURL:savePath];
+}
+
+#pragma mark - Properties Initialization
+
+- (PreferenceController *)preferenceController {
+    if (!_preferenceController) {
+        _preferenceController = [[PreferenceController alloc] init];
+    }
+    return _preferenceController;
 }
 
 #pragma mark - Core Data stack

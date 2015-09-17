@@ -18,6 +18,8 @@
 		F48F8C471BA03705002C96C3 /* TorrentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C441BA03705002C96C3 /* TorrentItem.m */; settings = {ASSET_TAGS = (); }; };
 		F48F8C481BA03705002C96C3 /* TitleTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C461BA03705002C96C3 /* TitleTableCellView.m */; settings = {ASSET_TAGS = (); }; };
 		F48F8C4C1BA05FB9002C96C3 /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C4B1BA05FB9002C96C3 /* NavigationView.m */; settings = {ASSET_TAGS = (); }; };
+		F4DEA05D1BA99890008E89B8 /* PreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DEA05B1BA99890008E89B8 /* PreferenceController.m */; settings = {ASSET_TAGS = (); }; };
+		F4DEA0601BA99936008E89B8 /* Preference.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4DEA05F1BA99936008E89B8 /* Preference.xib */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,9 @@
 		F48F8C461BA03705002C96C3 /* TitleTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleTableCellView.m; sourceTree = "<group>"; };
 		F48F8C4A1BA05FB9002C96C3 /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationView.h; sourceTree = "<group>"; };
 		F48F8C4B1BA05FB9002C96C3 /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationView.m; sourceTree = "<group>"; };
+		F4DEA05A1BA99890008E89B8 /* PreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferenceController.h; sourceTree = "<group>"; };
+		F4DEA05B1BA99890008E89B8 /* PreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferenceController.m; sourceTree = "<group>"; };
+		F4DEA05F1BA99936008E89B8 /* Preference.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preference.xib; sourceTree = "<group>"; };
 		F4FC772F1BA2DA810095F753 /* DMHY.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DMHY.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,6 +105,8 @@
 				F48F8C2A1BA03643002C96C3 /* AppDelegate.m */,
 				F48F8C2F1BA03643002C96C3 /* ViewController.h */,
 				F48F8C301BA03643002C96C3 /* ViewController.m */,
+				F4DEA05A1BA99890008E89B8 /* PreferenceController.h */,
+				F4DEA05B1BA99890008E89B8 /* PreferenceController.m */,
 				F48F8C351BA03643002C96C3 /* Assets.xcassets */,
 				F48F8C371BA03643002C96C3 /* Main.storyboard */,
 				F48F8C3A1BA03643002C96C3 /* Info.plist */,
@@ -109,6 +116,7 @@
 				F48F8C441BA03705002C96C3 /* TorrentItem.m */,
 				F48F8C491BA05F6B002C96C3 /* View */,
 				F48F8C2C1BA03643002C96C3 /* Supporting Files */,
+				F4DEA05F1BA99936008E89B8 /* Preference.xib */,
 			);
 			path = DMHY;
 			sourceTree = "<group>";
@@ -200,6 +208,7 @@
 			files = (
 				F48F8C361BA03643002C96C3 /* Assets.xcassets in Resources */,
 				F48F8C391BA03643002C96C3 /* Main.storyboard in Resources */,
+				F4DEA0601BA99936008E89B8 /* Preference.xib in Resources */,
 				F48F8C411BA036ED002C96C3 /* download.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -248,6 +257,7 @@
 				F48F8C4C1BA05FB9002C96C3 /* NavigationView.m in Sources */,
 				F48F8C471BA03705002C96C3 /* TorrentItem.m in Sources */,
 				F48F8C481BA03705002C96C3 /* TitleTableCellView.m in Sources */,
+				F4DEA05D1BA99890008E89B8 /* PreferenceController.m in Sources */,
 				F48F8C2E1BA03643002C96C3 /* main.m in Sources */,
 				F48F8C2B1BA03643002C96C3 /* AppDelegate.m in Sources */,
 				F48F8C341BA03643002C96C3 /* DMHY.xcdatamodeld in Sources */,

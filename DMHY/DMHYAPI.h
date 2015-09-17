@@ -17,5 +17,10 @@
 #define DMHYURLPrefixFormat          @"https:%@"
 
 #define kXPathTorrentItem @"//item"
+#define kDownloadLinkType @"DownloadLinkType"
+#define kSavePath @"SavePath"
+
+#define DMHYDownloadLinkTypeNotification @"DMHYDownloadLinkTypeNotification"
+#define DMHYSavePathChangedNotification @"DMHYSavaPathChangedNotification"
 
 #endif /* DMHYAPI_h */
