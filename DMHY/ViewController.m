@@ -16,10 +16,9 @@
 #import "NavigationView.h"
 #import "PreferenceController.h"
 
-@interface ViewController()<NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, NSSplitViewDelegate>
+@interface ViewController()<NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate>
 
 @property (weak) IBOutlet NSTableView *tableView;
-@property (weak) IBOutlet NSSplitView *splitView;
 @property (weak) IBOutlet NSProgressIndicator *indicator;
 
 @property (weak) IBOutlet NSTextField *keyword;
@@ -45,38 +44,18 @@
     [self setupTableViewStyle];
     [self setupData:self];
     [self setupPreference];
+    [self observeNotification];
+    
     // set NSTextFieldDelegate
     self.keyword.delegate = self;
-    
-    /**
-     *  Get min/max divider position
-     */
-    CGFloat min = [self.splitView minPossiblePositionOfDividerAtIndex:0];
-    CGFloat max = [self.splitView maxPossiblePositionOfDividerAtIndex:0];
-    NSLog(@"min %f max %f",min,max);
-    
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter addObserver:self
-                           selector:@selector(handleDownloadTypeChanged:)
-                               name:DMHYDownloadLinkTypeNotification
-                             object:nil];
-    [notificationCenter addObserver:self
-                           selector:@selector(handleSavaPathChanged:)
-                               name:DMHYSavePathChangedNotification
-                             object:nil];
-}
 
+}
 
 
 - (void)setRepresentedObject:(id)representedObject {
     [super setRepresentedObject:representedObject];
     
     // Update the view, if already loaded.
-}
-
-- (void)viewWillAppear {
-    [super viewWillAppear];
-    NSLog(@"viewWillAppear");
 }
 
 #pragma mark - Setup
@@ -87,20 +66,11 @@
     self.tableView.columnAutoresizingStyle = NSTableViewUniformColumnAutoresizingStyle;
     self.tableView.usesAlternatingRowBackgroundColors = YES;
     [self.tableView sizeLastColumnToFit];
-    
 }
 
 - (void)setupPreference {
     self.isMagnetLink = [PreferenceController preferenceDownloadLinkType];
     self.savePath = [PreferenceController preferenceSavePath];
-}
-
-- (void)handleDownloadTypeChanged:(NSNotification *)noti {
-    [self setupPreference];
-}
-
-- (void)handleSavaPathChanged:(NSNotification *)noti {
-    [self setupPreference];
 }
 
 - (IBAction)setupData:(id)sender {
@@ -119,7 +89,6 @@
     if (self.isSearch) {
         [self.torrents removeAllObjects];
     }
-    
     
     NSURL *url = [NSURL URLWithString:self.searchURLString];
     NSLog(@"url -> %@",url);
@@ -146,6 +115,7 @@
         }];
         [self stopAnimatingProgressIndicator];
         [self.tableView reloadData];
+        self.info.stringValue = @"加载完成 w";
 //        for (TorrentItem *item in self.torrents) {
 //            //            NSLog(@"%@",item);
 //            NSLog(@"%@", [item valueForKey:@"title"]);
@@ -197,7 +167,37 @@
     return nil;
 }
 
+#pragma mark - Notification
 
+- (void)observeNotification {
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self
+                           selector:@selector(handleDownloadTypeChanged:)
+                               name:DMHYDownloadLinkTypeNotification
+                             object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(handleSavaPathChanged:)
+                               name:DMHYSavePathChangedNotification
+                             object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(handleSelectKeywordChanged:)
+                               name:DMHYSelectKeywordChangedNotification
+                             object:nil];
+}
+
+- (void)handleDownloadTypeChanged:(NSNotification *)noti {
+    [self setupPreference];
+}
+
+- (void)handleSavaPathChanged:(NSNotification *)noti {
+    [self setupPreference];
+}
+
+- (void)handleSelectKeywordChanged:(NSNotification *)noti {
+    NSDictionary *userInfo = noti.userInfo;
+    self.keyword.stringValue = userInfo[kSelectKeyword];
+    [self setupData:self];
+}
 
 
 
@@ -235,6 +235,7 @@
 #pragma mark - Download
 
 - (IBAction)queryDownloadURL:(id)sender {
+    NSLog(@"queryDownloadURL");
     [self startAnimatingProgressIndicator];
     NSInteger row = [self.tableView rowForView:sender];
     TorrentItem *item = (TorrentItem *)[self.torrents objectAtIndex:row];
@@ -303,43 +304,6 @@
     }
 }
 
-#pragma mark - NSSplitViewDelegate
-
-- (BOOL)splitView:(NSSplitView *)splitView canCollapseSubview:(NSView *)subview {
-    if ([subview.identifier isEqualToString:@"navigation"]) {
-        return YES;
-    }
-    return NO;
-}
-
-- (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMinimumPosition ofSubviewAt:(NSInteger)dividerIndex {
-    return proposedMinimumPosition + 300;
-}
-
-- (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMaximumPosition ofSubviewAt:(NSInteger)dividerIndex {
-    return proposedMaximumPosition - 724;
-}
-
-
-- (BOOL)splitView:(NSSplitView *)splitView shouldCollapseSubview:(NSView *)subview forDoubleClickOnDividerAtIndex:(NSInteger)dividerIndex {
-    if ([subview.identifier isEqualToString:@"navigation"]) {
-        return YES;
-    }
-    return NO;
-}
-
-- (BOOL)splitView:(NSSplitView *)splitView shouldAdjustSizeOfSubview:(NSView *)view {
-    if ([view.identifier isEqualToString:@"navigation"]) {
-//        NSLog(@"navi adjust");
-        view.frame = NSMakeRect(0, 0, 320, splitView.bounds.size.height);
-        return NO;
-    }
-    return YES;
-}
-
-//- (BOOL)splitView:(NSSplitView *)splitView shouldHideDividerAtIndex:(NSInteger)dividerIndex {
-//    return YES;
-//}
 
 #pragma mark - ProgressIndicator
 
@@ -361,13 +325,20 @@
     self.dateFormater.dateFormat = @"EEE HH:mm:ss yy-MM-dd";
     self.dateFormater.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
     return [self.dateFormater stringFromDate:longDate];
+    
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:DMHYDownloadLinkTypeNotification
-                                                  object:nil];
-
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter removeObserver:self
+                                  name:DMHYDownloadLinkTypeNotification
+                                object:nil];
+    [notificationCenter removeObserver:self
+                                  name:DMHYSavePathChangedNotification
+                                object:nil];
+    [notificationCenter removeObserver:self
+                                  name:DMHYSelectKeywordChangedNotification
+                                object:nil];
 }
 
 @end

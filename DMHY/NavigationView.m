@@ -19,4 +19,8 @@
 
 }
 
+- (void)viewWillDraw {
+
+}
+
 @end

@@ -18,9 +18,14 @@
 
 #define kXPathTorrentItem @"//item"
 #define kDownloadLinkType @"DownloadLinkType"
-#define kSavePath @"SavePath"
+#define kSavePath         @"SavePath"
+#define kSelectKeyword    @"SelectKeyword"
 
-#define DMHYDownloadLinkTypeNotification @"DMHYDownloadLinkTypeNotification"
-#define DMHYSavePathChangedNotification @"DMHYSavaPathChangedNotification"
+#define DMHYDownloadLinkTypeNotification       @"DMHYDownloadLinkTypeNotification"
+#define DMHYSavePathChangedNotification        @"DMHYSavaPathChangedNotification"
+#define DMHYSelectKeywordChangedNotification   @"DMHYSelectKeywordChangedNotification"
+#define DMHYInitialWeekdayCompleteNotification @"DMHYInitialWeekdayCompleteNotification"
+
+#define DMHYKeywordEntityKey @"Keyword"
 
 #endif /* DMHYAPI_h */

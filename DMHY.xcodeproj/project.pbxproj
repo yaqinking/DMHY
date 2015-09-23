@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		F401A9731BA2895E001BF9BE /* libPods-DMHY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D009E0C851A892591A01FC32 /* libPods-DMHY.a */; };
+		F42DCC111BB180A4004EC373 /* DMHYCoreDataStackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC101BB180A4004EC373 /* DMHYCoreDataStackManager.m */; settings = {ASSET_TAGS = (); }; };
+		F42DCC441BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC3D1BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		F42DCC451BB26DD9004EC373 /* DMHYTorrent.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC3F1BB26DD9004EC373 /* DMHYTorrent.m */; settings = {ASSET_TAGS = (); }; };
+		F42DCC461BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC411BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		F42DCC471BB26DD9004EC373 /* DMHYKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC431BB26DD9004EC373 /* DMHYKeyword.m */; settings = {ASSET_TAGS = (); }; };
+		F483EA1A1BAD92C100D02E60 /* SideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F483EA191BAD92C100D02E60 /* SideViewController.m */; settings = {ASSET_TAGS = (); }; };
+		F483EA1D1BAD9DB200D02E60 /* MainSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F483EA1C1BAD9DB200D02E60 /* MainSplitViewController.m */; settings = {ASSET_TAGS = (); }; };
 		F48F8C2B1BA03643002C96C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C2A1BA03643002C96C3 /* AppDelegate.m */; };
 		F48F8C2E1BA03643002C96C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C2D1BA03643002C96C3 /* main.m */; };
 		F48F8C311BA03643002C96C3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C301BA03643002C96C3 /* ViewController.m */; };
@@ -26,6 +33,20 @@
 		1C595D7C866159F1BCD3B37D /* Pods-DMHY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMHY.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMHY/Pods-DMHY.release.xcconfig"; sourceTree = "<group>"; };
 		D009E0C851A892591A01FC32 /* libPods-DMHY.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DMHY.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAA3952C390934E328DA1C12 /* Pods-DMHY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMHY.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMHY/Pods-DMHY.debug.xcconfig"; sourceTree = "<group>"; };
+		F42DCC0F1BB180A4004EC373 /* DMHYCoreDataStackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHYCoreDataStackManager.h; sourceTree = "<group>"; };
+		F42DCC101BB180A4004EC373 /* DMHYCoreDataStackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHYCoreDataStackManager.m; sourceTree = "<group>"; };
+		F42DCC3C1BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DMHYTorrent+CoreDataProperties.h"; path = "Model/DMHYTorrent+CoreDataProperties.h"; sourceTree = "<group>"; };
+		F42DCC3D1BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DMHYTorrent+CoreDataProperties.m"; path = "Model/DMHYTorrent+CoreDataProperties.m"; sourceTree = "<group>"; };
+		F42DCC3E1BB26DD9004EC373 /* DMHYTorrent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMHYTorrent.h; path = Model/DMHYTorrent.h; sourceTree = "<group>"; };
+		F42DCC3F1BB26DD9004EC373 /* DMHYTorrent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMHYTorrent.m; path = Model/DMHYTorrent.m; sourceTree = "<group>"; };
+		F42DCC401BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DMHYKeyword+CoreDataProperties.h"; path = "Model/DMHYKeyword+CoreDataProperties.h"; sourceTree = "<group>"; };
+		F42DCC411BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DMHYKeyword+CoreDataProperties.m"; path = "Model/DMHYKeyword+CoreDataProperties.m"; sourceTree = "<group>"; };
+		F42DCC421BB26DD9004EC373 /* DMHYKeyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMHYKeyword.h; path = Model/DMHYKeyword.h; sourceTree = "<group>"; };
+		F42DCC431BB26DD9004EC373 /* DMHYKeyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMHYKeyword.m; path = Model/DMHYKeyword.m; sourceTree = "<group>"; };
+		F483EA181BAD92C100D02E60 /* SideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideViewController.h; sourceTree = "<group>"; };
+		F483EA191BAD92C100D02E60 /* SideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideViewController.m; sourceTree = "<group>"; };
+		F483EA1B1BAD9DB200D02E60 /* MainSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSplitViewController.h; sourceTree = "<group>"; };
+		F483EA1C1BAD9DB200D02E60 /* MainSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSplitViewController.m; sourceTree = "<group>"; };
 		F48F8C261BA03643002C96C3 /* DMHY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMHY.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F48F8C291BA03643002C96C3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F48F8C2A1BA03643002C96C3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -79,6 +100,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F43A1E6B1BB1714300B7CFBA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F42DCC3C1BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.h */,
+				F42DCC3D1BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m */,
+				F42DCC3E1BB26DD9004EC373 /* DMHYTorrent.h */,
+				F42DCC3F1BB26DD9004EC373 /* DMHYTorrent.m */,
+				F42DCC401BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.h */,
+				F42DCC411BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m */,
+				F42DCC421BB26DD9004EC373 /* DMHYKeyword.h */,
+				F42DCC431BB26DD9004EC373 /* DMHYKeyword.m */,
+				F48F8C431BA03705002C96C3 /* TorrentItem.h */,
+				F48F8C441BA03705002C96C3 /* TorrentItem.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		F48F8C1D1BA03643002C96C3 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +138,7 @@
 		F48F8C281BA03643002C96C3 /* DMHY */ = {
 			isa = PBXGroup;
 			children = (
+				F43A1E6B1BB1714300B7CFBA /* Model */,
 				F4FC772F1BA2DA810095F753 /* DMHY.entitlements */,
 				F48F8C291BA03643002C96C3 /* AppDelegate.h */,
 				F48F8C2A1BA03643002C96C3 /* AppDelegate.m */,
@@ -112,11 +151,15 @@
 				F48F8C3A1BA03643002C96C3 /* Info.plist */,
 				F48F8C321BA03643002C96C3 /* DMHY.xcdatamodeld */,
 				F48F8C421BA03705002C96C3 /* DMHYAPI.h */,
-				F48F8C431BA03705002C96C3 /* TorrentItem.h */,
-				F48F8C441BA03705002C96C3 /* TorrentItem.m */,
 				F48F8C491BA05F6B002C96C3 /* View */,
 				F48F8C2C1BA03643002C96C3 /* Supporting Files */,
 				F4DEA05F1BA99936008E89B8 /* Preference.xib */,
+				F483EA181BAD92C100D02E60 /* SideViewController.h */,
+				F483EA191BAD92C100D02E60 /* SideViewController.m */,
+				F483EA1B1BAD9DB200D02E60 /* MainSplitViewController.h */,
+				F483EA1C1BAD9DB200D02E60 /* MainSplitViewController.m */,
+				F42DCC0F1BB180A4004EC373 /* DMHYCoreDataStackManager.h */,
+				F42DCC101BB180A4004EC373 /* DMHYCoreDataStackManager.m */,
 			);
 			path = DMHY;
 			sourceTree = "<group>";
@@ -177,7 +220,7 @@
 						DevelopmentTeam = 2RX98WKS48;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -257,9 +300,16 @@
 				F48F8C4C1BA05FB9002C96C3 /* NavigationView.m in Sources */,
 				F48F8C471BA03705002C96C3 /* TorrentItem.m in Sources */,
 				F48F8C481BA03705002C96C3 /* TitleTableCellView.m in Sources */,
+				F42DCC461BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m in Sources */,
+				F42DCC471BB26DD9004EC373 /* DMHYKeyword.m in Sources */,
+				F483EA1A1BAD92C100D02E60 /* SideViewController.m in Sources */,
+				F42DCC451BB26DD9004EC373 /* DMHYTorrent.m in Sources */,
 				F4DEA05D1BA99890008E89B8 /* PreferenceController.m in Sources */,
 				F48F8C2E1BA03643002C96C3 /* main.m in Sources */,
 				F48F8C2B1BA03643002C96C3 /* AppDelegate.m in Sources */,
+				F42DCC441BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m in Sources */,
+				F483EA1D1BAD9DB200D02E60 /* MainSplitViewController.m in Sources */,
+				F42DCC111BB180A4004EC373 /* DMHYCoreDataStackManager.m in Sources */,
 				F48F8C341BA03643002C96C3 /* DMHY.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,6 +414,7 @@
 			baseConfigurationReference = EAA3952C390934E328DA1C12 /* Pods-DMHY.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DMHY/DMHY.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = DMHY/Info.plist;
@@ -380,6 +431,7 @@
 			baseConfigurationReference = 1C595D7C866159F1BCD3B37D /* Pods-DMHY.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DMHY/DMHY.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = DMHY/Info.plist;
