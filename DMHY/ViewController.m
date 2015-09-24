@@ -30,6 +30,7 @@
 
 @property (nonatomic) BOOL isSearch;
 @property (nonatomic) BOOL isMagnetLink;
+@property (nonatomic) BOOL isSubKeyword;
 
 @property (nonatomic, strong) AFURLSessionManager *manager;
 @property (nonatomic, strong) NSDateFormatter *dateFormater;
@@ -48,7 +49,7 @@
     
     // set NSTextFieldDelegate
     self.keyword.delegate = self;
-
+  
 }
 
 
@@ -74,6 +75,13 @@
 }
 
 - (IBAction)setupData:(id)sender {
+    NSLog(@"sender class %@",[sender class]);
+    if ([sender isKindOfClass:[ViewController class]]) {
+        self.isSubKeyword = YES;
+    }
+    if (!self.isSubKeyword) {
+        return;
+    }
     [self startAnimatingProgressIndicator];
     self.info.stringValue = @"";
     if ([self.keyword isEqual:@""]) {
@@ -195,8 +203,18 @@
 
 - (void)handleSelectKeywordChanged:(NSNotification *)noti {
     NSDictionary *userInfo = noti.userInfo;
-    self.keyword.stringValue = userInfo[kSelectKeyword];
-    [self setupData:self];
+    
+    NSString *keywordStr   = userInfo[kSelectKeyword];
+    BOOL isSubKeywordBOOL = [userInfo[kSelectKeywordIsSubKeyword] boolValue];
+   
+    self.isSubKeyword        = isSubKeywordBOOL;
+    if (!isSubKeywordBOOL) {
+        self.keyword.stringValue = @"";
+    } else {
+        self.keyword.stringValue = keywordStr;
+    }
+    
+    [self setupData:userInfo];
 }
 
 

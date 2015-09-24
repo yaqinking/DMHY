@@ -21,6 +21,8 @@
 #define kSavePath         @"SavePath"
 #define kSelectKeyword    @"SelectKeyword"
 
+#define kSelectKeywordIsSubKeyword @"SelectKeywordIsSubKeyword"
+
 #define DMHYDownloadLinkTypeNotification       @"DMHYDownloadLinkTypeNotification"
 #define DMHYSavePathChangedNotification        @"DMHYSavaPathChangedNotification"
 #define DMHYSelectKeywordChangedNotification   @"DMHYSelectKeywordChangedNotification"

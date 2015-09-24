@@ -60,11 +60,13 @@
 #pragma mark - Setup Data
 
 - (void)setupPopupButtonData {
+//    NSLog(@"keywords count %lu",self.keywords.count);
     NSMutableArray *keywordsName = [[NSMutableArray alloc] init];
     for (DMHYKeyword *weekday in self.keywords) {
         [keywordsName addObject:weekday.keyword];
     }
     [self.parentKeywordsPopUpButton addItemsWithTitles:keywordsName];
+//    NSLog(@"popupButtonData end");
 }
 
 
@@ -110,7 +112,9 @@
     
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     NSString *keyword = selectedKeyword.keyword;
-    NSDictionary *userInfo = @{kSelectKeyword : keyword };
+    NSNumber *isSubKeyword = selectedKeyword.isSubKeyword;
+    NSDictionary *userInfo = @{kSelectKeyword             : keyword,
+                               kSelectKeywordIsSubKeyword : isSubKeyword};
     [notificationCenter postNotificationName:DMHYSelectKeywordChangedNotification
                                       object:self
                                     userInfo:userInfo];
@@ -137,23 +141,17 @@
 }
 
 - (void)handleInitialWeekdayComplete:(NSNotification *)noti {
+    self.keywords = nil;
     NSLog(@"InitialWeekdayCompleteNotification");
-//    [self setupPopupButtonData];
-    NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"由于开发者傻，不知道该如何搞定初始化数据加载的 BUG，于是在初次运行的时候，直接会在您点确定的时候结束，请您重新运行，第二次就不会出现啦 OwO ";
-    alert.alertStyle = NSWarningAlertStyle;
-//    alert.delegate = self;
-    [alert addButtonWithTitle:@"只能确定唉……（再次运行就没问题了 >_< ）"];
-    [alert beginSheetModalForWindow:[self.outlineView window]
-                  completionHandler:^(NSModalResponse returnCode) {
-//                      NSLog(@"return code %ld",(long)returnCode);
-                      [[NSApplication sharedApplication] terminate:self];
-                  }];
+    [self setupPopupButtonData];
+    [self reloadData];
+    
 }
 
 #pragma mark - Properties
 
 - (NSMutableArray *)keywords {
+
     if (!_keywords) {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:DMHYKeywordEntityKey];
         NSSortDescriptor *sortDesc = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:YES];
