@@ -31,6 +31,7 @@
     [self observeNotification];
     [self setupPopupButtonData];
     [self expandOutlineViewItem];
+    [self setupMenuItems];
 }
 
 - (void)expandOutlineViewItem {
@@ -69,6 +70,16 @@
 //    NSLog(@"popupButtonData end");
 }
 
+- (void)setupMenuItems {
+    NSMenu *mainMenu = [[NSApplication sharedApplication] mainMenu];
+    NSMenuItem *editMenuItem = [mainMenu itemWithTitle:@"Edit"];
+    NSMenu *editSubMenu = [editMenuItem submenu];
+    NSMenuItem *removeSubKeywordMenuItem = [[NSMenuItem alloc] initWithTitle:@"删除关键字"
+                                                                      action:@selector(deleteSubKeyword)
+                                                               keyEquivalent:@"d"];
+    [editSubMenu addItem:removeSubKeywordMenuItem];
+}
+
 
 #pragma mark - NSOutlineViewDataSource
 
@@ -83,7 +94,6 @@
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(DMHYKeyword *)item {
 //    NSLog(@"item -> keyword %@",item.keyword);
     NSArray *subKeywords = [item.subKeywords allObjects];
-//    NSLog(@"%@",subKeywords);
     return !item ? self.keywords[index] : subKeywords[index];
 }
 
@@ -119,11 +129,6 @@
                                       object:self
                                     userInfo:userInfo];
     
-//    NSMenu *mainMenu = [[NSApplication sharedApplication] mainMenu];
-//    NSMenuItem *fileMenuItem = [mainMenu itemWithTitle:@"File"];
-//    NSMenuItem *removeSubKeywordMenuItem = [[fileMenuItem submenu] itemWithTitle:@"删除关键字"];
-//    removeSubKeywordMenuItem.enabled = NO;
-//    NSLog(@"删除关键 MenuItem Title %@",[removeSubKeywordMenuItem title]);
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldExpandItem:(id)item {
@@ -142,10 +147,40 @@
 
 - (void)handleInitialWeekdayComplete:(NSNotification *)noti {
     self.keywords = nil;
-    NSLog(@"InitialWeekdayCompleteNotification");
+//    NSLog(@"InitialWeekdayCompleteNotification");
     [self setupPopupButtonData];
     [self reloadData];
     
+}
+
+#pragma mark - MenuItem
+
+- (void)deleteSubKeyword {
+    NSInteger selectKeywordIndex = [self.outlineView selectedRow];
+    DMHYKeyword *keyword = [self.outlineView itemAtRow:selectKeywordIndex];
+    if ([keyword.isSubKeyword boolValue]) {
+        DMHYKeyword *parentKeyword = [self.outlineView parentForItem:keyword];
+        [parentKeyword removeSubKeywordsObject:keyword];
+        [self.managedObjectContext deleteObject:keyword];
+        [self saveData];
+        [self reloadData];
+    }
+}
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem {
+    NSString *title = [menuItem title];
+    if ([title isEqualToString:@"删除关键字"]) {
+        //什么都没选的时候
+        if (self.outlineView.selectedRow == -1) {
+            return NO;
+        }
+        DMHYKeyword *keyword = [self.outlineView itemAtRow:[self.outlineView selectedRow]];
+        //记得使用 boolValue 获取 BOOL 值 >_<
+        if (![keyword.isSubKeyword boolValue]) {
+            return NO;
+        }
+    }
+    return YES;
 }
 
 #pragma mark - Properties
@@ -169,6 +204,14 @@
         _context.persistentStoreCoordinator = [[DMHYCoreDataStackManager sharedManager] persistentStoreCoordinator];
     }
     return _context;
+}
+
+#pragma mark - NSTextFieldDelegate
+
+- (void)controlTextDidEndEditing:(NSNotification *)notification {
+    if ([notification.userInfo[@"NSTextMovement"] intValue] == NSReturnTextMovement) {
+        [self addKeyword:nil];
+    }
 }
 
 #pragma mark - Utils

@@ -47,10 +47,6 @@
     [[NSWorkspace sharedWorkspace] openURL:savePath];
 }
 
-- (IBAction)removeSubKeyword:(id)sender {
-    NSLog(@"remove SubKeyword");
-}
-
 #pragma mark - Properties Initialization
 
 - (PreferenceController *)preferenceController {

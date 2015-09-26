@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SideViewController : NSViewController<NSOutlineViewDataSource, NSOutlineViewDelegate>
+@interface SideViewController : NSViewController<NSOutlineViewDataSource, NSOutlineViewDelegate, NSTextFieldDelegate>
 
 @end
