@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15B17c" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9059"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
     </dependencies>
@@ -428,7 +428,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="47"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
-                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kls-fT-HHa">
+                                            <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kls-fT-HHa">
                                                 <rect key="frame" x="7" y="13" width="151" height="21"/>
                                                 <animations/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" placeholderString="输入要保存的关键字" drawsBackground="YES" id="JZC-tz-P9o">
@@ -440,8 +440,8 @@
                                                     <outlet property="delegate" destination="8eD-Eg-0ca" id="Im2-M4-XdU"/>
                                                 </connections>
                                             </textField>
-                                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q6m-FC-pZT">
-                                                <rect key="frame" x="173" y="9" width="55" height="27"/>
+                                            <popUpButton verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q6m-FC-pZT">
+                                                <rect key="frame" x="173" y="9" width="55" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="riS-M7-Uum"/>
                                                 </constraints>
@@ -452,7 +452,7 @@
                                                     <menu key="menu" id="5AA-bW-6Sd"/>
                                                 </popUpButtonCell>
                                             </popUpButton>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PgO-wC-Hxq">
+                                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PgO-wC-Hxq">
                                                 <rect key="frame" x="234" y="7" width="66" height="29"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="x9Q-ZW-Ldr"/>
@@ -593,11 +593,11 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="3P8-WW-Fb1">
+                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="3P8-WW-Fb1">
                                 <rect key="frame" x="450" y="741" width="16" height="16"/>
                                 <animations/>
                             </progressIndicator>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sru-rx-e22">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sru-rx-e22">
                                 <rect key="frame" x="561" y="741" width="270" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="266" id="l0p-m8-UKX"/>

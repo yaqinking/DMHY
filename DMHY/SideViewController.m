@@ -74,9 +74,12 @@
     NSMenu *mainMenu = [[NSApplication sharedApplication] mainMenu];
     NSMenuItem *editMenuItem = [mainMenu itemWithTitle:@"Edit"];
     NSMenu *editSubMenu = [editMenuItem submenu];
+    unichar deleteKey = NSBackspaceCharacter;
+    NSString *delete = [NSString stringWithCharacters:&deleteKey length:1];
     NSMenuItem *removeSubKeywordMenuItem = [[NSMenuItem alloc] initWithTitle:@"删除关键字"
                                                                       action:@selector(deleteSubKeyword)
-                                                               keyEquivalent:@"d"];
+                                                               keyEquivalent:delete];
+    
     [editSubMenu addItem:removeSubKeywordMenuItem];
 }
 

@@ -8,25 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		F401A9731BA2895E001BF9BE /* libPods-DMHY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D009E0C851A892591A01FC32 /* libPods-DMHY.a */; };
-		F42DCC111BB180A4004EC373 /* DMHYCoreDataStackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC101BB180A4004EC373 /* DMHYCoreDataStackManager.m */; settings = {ASSET_TAGS = (); }; };
-		F42DCC441BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC3D1BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
-		F42DCC451BB26DD9004EC373 /* DMHYTorrent.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC3F1BB26DD9004EC373 /* DMHYTorrent.m */; settings = {ASSET_TAGS = (); }; };
-		F42DCC461BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC411BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
-		F42DCC471BB26DD9004EC373 /* DMHYKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC431BB26DD9004EC373 /* DMHYKeyword.m */; settings = {ASSET_TAGS = (); }; };
-		F483EA1A1BAD92C100D02E60 /* SideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F483EA191BAD92C100D02E60 /* SideViewController.m */; settings = {ASSET_TAGS = (); }; };
-		F483EA1D1BAD9DB200D02E60 /* MainSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F483EA1C1BAD9DB200D02E60 /* MainSplitViewController.m */; settings = {ASSET_TAGS = (); }; };
+		F42DCC111BB180A4004EC373 /* DMHYCoreDataStackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC101BB180A4004EC373 /* DMHYCoreDataStackManager.m */; };
+		F42DCC441BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC3D1BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m */; };
+		F42DCC451BB26DD9004EC373 /* DMHYTorrent.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC3F1BB26DD9004EC373 /* DMHYTorrent.m */; };
+		F42DCC461BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC411BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m */; };
+		F42DCC471BB26DD9004EC373 /* DMHYKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC431BB26DD9004EC373 /* DMHYKeyword.m */; };
+		F483EA1A1BAD92C100D02E60 /* SideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F483EA191BAD92C100D02E60 /* SideViewController.m */; };
+		F483EA1D1BAD9DB200D02E60 /* MainSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F483EA1C1BAD9DB200D02E60 /* MainSplitViewController.m */; };
 		F48F8C2B1BA03643002C96C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C2A1BA03643002C96C3 /* AppDelegate.m */; };
 		F48F8C2E1BA03643002C96C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C2D1BA03643002C96C3 /* main.m */; };
 		F48F8C311BA03643002C96C3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C301BA03643002C96C3 /* ViewController.m */; };
 		F48F8C341BA03643002C96C3 /* DMHY.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C321BA03643002C96C3 /* DMHY.xcdatamodeld */; };
 		F48F8C361BA03643002C96C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F48F8C351BA03643002C96C3 /* Assets.xcassets */; };
 		F48F8C391BA03643002C96C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F48F8C371BA03643002C96C3 /* Main.storyboard */; };
-		F48F8C411BA036ED002C96C3 /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = F48F8C401BA036ED002C96C3 /* download.png */; settings = {ASSET_TAGS = (); }; };
-		F48F8C471BA03705002C96C3 /* TorrentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C441BA03705002C96C3 /* TorrentItem.m */; settings = {ASSET_TAGS = (); }; };
-		F48F8C481BA03705002C96C3 /* TitleTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C461BA03705002C96C3 /* TitleTableCellView.m */; settings = {ASSET_TAGS = (); }; };
-		F48F8C4C1BA05FB9002C96C3 /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C4B1BA05FB9002C96C3 /* NavigationView.m */; settings = {ASSET_TAGS = (); }; };
-		F4DEA05D1BA99890008E89B8 /* PreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DEA05B1BA99890008E89B8 /* PreferenceController.m */; settings = {ASSET_TAGS = (); }; };
-		F4DEA0601BA99936008E89B8 /* Preference.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4DEA05F1BA99936008E89B8 /* Preference.xib */; settings = {ASSET_TAGS = (); }; };
+		F48F8C411BA036ED002C96C3 /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = F48F8C401BA036ED002C96C3 /* download.png */; };
+		F48F8C471BA03705002C96C3 /* TorrentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C441BA03705002C96C3 /* TorrentItem.m */; };
+		F48F8C481BA03705002C96C3 /* TitleTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C461BA03705002C96C3 /* TitleTableCellView.m */; };
+		F48F8C4C1BA05FB9002C96C3 /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C4B1BA05FB9002C96C3 /* NavigationView.m */; };
+		F4DEA05D1BA99890008E89B8 /* PreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DEA05B1BA99890008E89B8 /* PreferenceController.m */; };
+		F4DEA0601BA99936008E89B8 /* Preference.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4DEA05F1BA99936008E89B8 /* Preference.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
