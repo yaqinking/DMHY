@@ -2,8 +2,8 @@
 //  DMHYTorrent+CoreDataProperties.m
 //  DMHY
 //
-//  Created by 小笠原やきん on 9/23/15.
-//  Copyright © 2015 yaqinking. All rights reserved.
+//  Created by 小笠原やきん on 16/2/28.
+//  Copyright © 2016年 yaqinking. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
 //  to delete and recreate this implementation file for your updated model.
@@ -15,6 +15,8 @@
 
 @dynamic author;
 @dynamic category;
+@dynamic isDownloaded;
+@dynamic isNewTorrent;
 @dynamic link;
 @dynamic magnet;
 @dynamic pubDate;

@@ -11,7 +11,7 @@
 #import "DMHYCoreDataStackManager.h"
 #import "DMHYKeyword+CoreDataProperties.h"
 #import "DMHYAPI.h"
-
+#import "DMHYTorrent.h"
 @interface AppDelegate ()
 
 @property (nonatomic) PreferenceController *preferenceController;
@@ -47,6 +47,27 @@
     [[NSWorkspace sharedWorkspace] openURL:savePath];
 }
 
+- (IBAction)deleteAllExistTorrents:(id)sender {
+    NSFetchRequest *existTorrentRequest = [NSFetchRequest fetchRequestWithEntityName:@"Torrent"];
+    //    existTorrentRequest.predicate = [NSPredicate predicateWithFormat:@"title LIKE %@",@"传颂"];
+    NSArray *torrents = [self.managedObjectContext executeFetchRequest:existTorrentRequest error:NULL];
+    for (DMHYTorrent *torrent in torrents) {
+        NSLog(@"Delete Torrent %@", torrent.title);
+        [self.managedObjectContext deleteObject:torrent];
+    }
+    [self.managedObjectContext save:NULL];
+    NSLog(@"Delete Done!");
+}
+
+- (IBAction)fetchTorrents:(id)sender {
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Torrent"];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"pubDate" ascending:NO]];
+    NSArray *torrents = [self.managedObjectContext executeFetchRequest:request
+                                                                 error:NULL];
+    for (DMHYTorrent *torrent in torrents) {
+        NSLog(@"Title: %@ \n Date %@ \n isNew %@ \n isDownloaded %@ \n",torrent.title, torrent.pubDate, torrent.isNewTorrent, torrent.isDownloaded);
+    }
+}
 #pragma mark - Properties Initialization
 
 - (PreferenceController *)preferenceController {

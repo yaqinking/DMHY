@@ -27,6 +27,7 @@
 		F48F8C4C1BA05FB9002C96C3 /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C4B1BA05FB9002C96C3 /* NavigationView.m */; };
 		F4DEA05D1BA99890008E89B8 /* PreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DEA05B1BA99890008E89B8 /* PreferenceController.m */; };
 		F4DEA0601BA99936008E89B8 /* Preference.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4DEA05F1BA99936008E89B8 /* Preference.xib */; };
+		F4EC473F1C82FECC00EBF0B9 /* DMHYTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EC473E1C82FECC00EBF0B9 /* DMHYTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,9 +66,13 @@
 		F48F8C461BA03705002C96C3 /* TitleTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleTableCellView.m; sourceTree = "<group>"; };
 		F48F8C4A1BA05FB9002C96C3 /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationView.h; sourceTree = "<group>"; };
 		F48F8C4B1BA05FB9002C96C3 /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationView.m; sourceTree = "<group>"; };
+		F4AC86621C82A6BA00C420F2 /* DMHY v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DMHY v2.xcdatamodel"; sourceTree = "<group>"; };
+		F4AC86631C82D8B500C420F2 /* DMHY v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DMHY v3.xcdatamodel"; sourceTree = "<group>"; };
 		F4DEA05A1BA99890008E89B8 /* PreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferenceController.h; sourceTree = "<group>"; };
 		F4DEA05B1BA99890008E89B8 /* PreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferenceController.m; sourceTree = "<group>"; };
 		F4DEA05F1BA99936008E89B8 /* Preference.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preference.xib; sourceTree = "<group>"; };
+		F4EC473D1C82FECC00EBF0B9 /* DMHYTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHYTool.h; sourceTree = "<group>"; };
+		F4EC473E1C82FECC00EBF0B9 /* DMHYTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHYTool.m; sourceTree = "<group>"; };
 		F4FC772F1BA2DA810095F753 /* DMHY.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DMHY.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,6 +158,8 @@
 				F48F8C421BA03705002C96C3 /* DMHYAPI.h */,
 				F48F8C491BA05F6B002C96C3 /* View */,
 				F48F8C2C1BA03643002C96C3 /* Supporting Files */,
+				F4EC473D1C82FECC00EBF0B9 /* DMHYTool.h */,
+				F4EC473E1C82FECC00EBF0B9 /* DMHYTool.m */,
 				F4DEA05F1BA99936008E89B8 /* Preference.xib */,
 				F483EA181BAD92C100D02E60 /* SideViewController.h */,
 				F483EA191BAD92C100D02E60 /* SideViewController.m */,
@@ -301,6 +308,7 @@
 				F48F8C471BA03705002C96C3 /* TorrentItem.m in Sources */,
 				F48F8C481BA03705002C96C3 /* TitleTableCellView.m in Sources */,
 				F42DCC461BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m in Sources */,
+				F4EC473F1C82FECC00EBF0B9 /* DMHYTool.m in Sources */,
 				F42DCC471BB26DD9004EC373 /* DMHYKeyword.m in Sources */,
 				F483EA1A1BAD92C100D02E60 /* SideViewController.m in Sources */,
 				F42DCC451BB26DD9004EC373 /* DMHYTorrent.m in Sources */,
@@ -470,9 +478,11 @@
 		F48F8C321BA03643002C96C3 /* DMHY.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				F4AC86631C82D8B500C420F2 /* DMHY v3.xcdatamodel */,
+				F4AC86621C82A6BA00C420F2 /* DMHY v2.xcdatamodel */,
 				F48F8C331BA03643002C96C3 /* DMHY.xcdatamodel */,
 			);
-			currentVersion = F48F8C331BA03643002C96C3 /* DMHY.xcdatamodel */;
+			currentVersion = F4AC86631C82D8B500C420F2 /* DMHY v3.xcdatamodel */;
 			path = DMHY.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

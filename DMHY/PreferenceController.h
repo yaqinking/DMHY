@@ -18,4 +18,7 @@
 + (void)setPreferenceSavePath:(NSURL *)path;
 + (NSURL *)preferenceSavePath;
 
++ (void)setPreferenceFetchInterval:(NSInteger) seconds;
++ (NSInteger)preferenceFetchInterval;
+
 @end

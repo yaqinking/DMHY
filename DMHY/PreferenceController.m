@@ -13,6 +13,7 @@
 @interface PreferenceController ()
 @property (weak) IBOutlet NSMatrix *downloadLinkTypeMatrix;
 @property (weak) IBOutlet NSTextField *savePathLabel;
+@property (weak) IBOutlet NSTextField *fetchIntervalTextField;
 
 @end
 
@@ -39,6 +40,10 @@
     
     NSURL *url = [PreferenceController preferenceSavePath];
     self.savePathLabel.stringValue = [url path];
+    
+    NSInteger seconds = [PreferenceController preferenceFetchInterval];
+    NSInteger minutes = seconds / 60;
+    self.fetchIntervalTextField.stringValue = [NSString stringWithFormat:@"%li", (long)minutes];
 }
 
 - (IBAction)downloadLinkTypeChanged:(id)sender {
@@ -63,6 +68,14 @@
     [notificationCenter postNotificationName:DMHYSavePathChangedNotification object:self];
 }
 
+- (IBAction)changeFetchInterval:(id)sender {
+    NSInteger minitues = self.fetchIntervalTextField.integerValue;
+    NSInteger seconds = minitues * 60;
+    [PreferenceController setPreferenceFetchInterval:seconds];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:DMHYFetchIntervalChangedNotification object:self];
+}
+
 
 #pragma mark - Setup
 
@@ -71,6 +84,14 @@
     if (savePath == nil) {
         [PreferenceController setPreferenceDownloadLinkType:NO];
         [PreferenceController setPreferenceSavePath:[self userDownloadPath]];
+        [PreferenceController setPreferenceFetchInterval:kFetchIntervalMinimum];
+    }
+    //For has v0.9.2.1 version installed check
+    NSInteger fetchInterval = [PreferenceController preferenceFetchInterval];
+    NSLog(@"%li",(long)fetchInterval);
+    if (fetchInterval < kFetchIntervalMinimum) {
+        [PreferenceController setPreferenceFetchInterval:kFetchIntervalMinimum];
+        NSLog(@"Set FetchInterval to default 5 minitues.");
     }
 }
 
@@ -104,6 +125,22 @@
 + (NSURL *)preferenceSavePath {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     return [userDefaults URLForKey:kSavePath];
+}
+
++ (void)setPreferenceFetchInterval:(NSInteger)seconds {
+    NSUserDefaults *userDefautls = [NSUserDefaults standardUserDefaults];
+    if (seconds < kFetchIntervalMinimum || seconds > kFetchIntervalMaximun) {
+        //Not allowed set to default
+        [userDefautls setInteger:kFetchIntervalMinimum forKey:kFetchInterval];
+        [userDefautls synchronize];
+    }
+    [userDefautls setInteger:seconds forKey:kFetchInterval];
+    [userDefautls synchronize];
+}
+
++ (NSInteger)preferenceFetchInterval {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults integerForKey:kFetchInterval];
 }
 
 @end

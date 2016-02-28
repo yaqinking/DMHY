@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Automatic">
+    <entity name="Keyword" representedClassName="DMHYKeyword" syncable="YES">
+        <attribute name="createDate" attributeType="Date" syncable="YES"/>
+        <attribute name="isSubKeyword" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="keyword" attributeType="String" syncable="YES"/>
+        <relationship name="subKeywords" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Keyword" syncable="YES"/>
+        <relationship name="torrents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Torrent" inverseName="keyword" inverseEntity="Torrent" syncable="YES"/>
+    </entity>
+    <entity name="Torrent" representedClassName="DMHYTorrent" syncable="YES">
+        <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isDownloaded" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isNewTorrent" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="magnet" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pubDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="keyword" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Keyword" inverseName="torrents" inverseEntity="Keyword" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Keyword" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Torrent" positionX="-308" positionY="84" width="128" height="180"/>
+    </elements>
+</model>

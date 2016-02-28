@@ -9,6 +9,7 @@
 #ifndef DMHYAPI_h
 #define DMHYAPI_h
 
+#define IS_DEBUG_MODE 0
 #define DMHYRSS             @"https://share.dmhy.org/topics/rss/rss.xml"
 #define DMHYSearchByKeyword @"https://share.dmhy.org/topics/rss/rss.xml?keyword=%@"
 
@@ -20,14 +21,17 @@
 #define kDownloadLinkType @"DownloadLinkType"
 #define kSavePath         @"SavePath"
 #define kSelectKeyword    @"SelectKeyword"
-
+#define kFetchInterval    @"FetchInterval"
 #define kSelectKeywordIsSubKeyword @"SelectKeywordIsSubKeyword"
-
+#define kFetchIntervalMinimum 300   //5 minutes
+#define kFetchIntervalMaximun 43200 //12 hours
 #define DMHYDownloadLinkTypeNotification       @"DMHYDownloadLinkTypeNotification"
 #define DMHYSavePathChangedNotification        @"DMHYSavaPathChangedNotification"
 #define DMHYSelectKeywordChangedNotification   @"DMHYSelectKeywordChangedNotification"
 #define DMHYInitialWeekdayCompleteNotification @"DMHYInitialWeekdayCompleteNotification"
+#define DMHYFetchIntervalChangedNotification   @"DMHYFetchIntervalChangedNotification"
 
 #define DMHYKeywordEntityKey @"Keyword"
+#define DMHYTorrentEntityKey @"Torrent"
 
 #endif /* DMHYAPI_h */
