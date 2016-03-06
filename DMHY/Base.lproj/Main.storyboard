@@ -81,6 +81,12 @@
                                                 <action selector="deleteAllExistTorrents:" target="Voe-Tx-rLC" id="mzR-UE-lE8"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Fetch All Torrents Info" id="8pT-dL-euw">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="fetchTorrents:" target="Voe-Tx-rLC" id="Yo5-cy-73c"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -585,7 +591,7 @@
                                 </textFieldCell>
                             </textField>
                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="3P8-WW-Fb1">
-                                <rect key="frame" x="450" y="741" width="16" height="16"/>
+                                <rect key="frame" x="450" y="741" width="16" height="18"/>
                             </progressIndicator>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sru-rx-e22">
                                 <rect key="frame" x="561" y="741" width="270" height="16"/>

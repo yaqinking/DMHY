@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface PreferenceController : NSWindowController
+@interface PreferenceController : NSWindowController<NSWindowDelegate>
 
 + (void)setupDefaultPreference;
 

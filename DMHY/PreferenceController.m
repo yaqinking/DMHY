@@ -7,8 +7,8 @@
 //
 
 #import "PreferenceController.h"
-
 #import "DMHYAPI.h"
+#include <Carbon/Carbon.h>
 
 @interface PreferenceController ()
 @property (weak) IBOutlet NSMatrix *downloadLinkTypeMatrix;
@@ -22,9 +22,19 @@
 - (instancetype)init {
     self = [super initWithWindowNibName:@"Preference"];
     if (self) {
-        
+//        [self.window makeKeyAndOrderFront:self];
     }
     return self;
+}
+
+#pragma mark - NSWindowDelegate
+
+- (void)windowDidBecomeKey:(NSNotification *)notification {
+    NSLog(@"windowDidBecomeKey");
+}
+
+- (void)windowDidBecomeMain:(NSNotification *)notification {
+    NSLog(@"windowDidBecomeMain");
 }
 
 - (void)windowDidLoad {

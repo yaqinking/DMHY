@@ -38,8 +38,8 @@
 #pragma mark - MenuItem
 
 - (IBAction)showPreference:(id)sender {
-    NSLog(@"show preference %@",self.preferenceController);
-    [self.preferenceController showWindow:self];
+    self.preferenceController = [[PreferenceController alloc] init];
+    [self.preferenceController showWindow:nil];
 }
 
 - (IBAction)showDownloadPathInFinder:(id)sender {
@@ -65,18 +65,19 @@
     NSArray *torrents = [self.managedObjectContext executeFetchRequest:request
                                                                  error:NULL];
     for (DMHYTorrent *torrent in torrents) {
-        NSLog(@"Title: %@ \n Date %@ \n isNew %@ \n isDownloaded %@ \n",torrent.title, torrent.pubDate, torrent.isNewTorrent, torrent.isDownloaded);
+        BOOL isNew = torrent.isNewTorrent.boolValue;
+        NSLog(@"[IsNew %@ ][Title: %@ ][Date %@ ]", isNew?@"是":@"否", torrent.title, torrent.pubDate);
     }
 }
 #pragma mark - Properties Initialization
-
+/*
 - (PreferenceController *)preferenceController {
     if (!_preferenceController) {
         _preferenceController = [[PreferenceController alloc] init];
     }
     return _preferenceController;
 }
-
+*/
 - (NSManagedObjectContext *)managedObjectContext {
     if (!_context) {
         _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];

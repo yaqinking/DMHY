@@ -205,6 +205,7 @@
     if (!_context) {
         _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         _context.persistentStoreCoordinator = [[DMHYCoreDataStackManager sharedManager] persistentStoreCoordinator];
+        _context.undoManager = nil;
     }
     return _context;
 }
