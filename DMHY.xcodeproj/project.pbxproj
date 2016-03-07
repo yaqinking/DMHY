@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F401A9731BA2895E001BF9BE /* libPods-DMHY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D009E0C851A892591A01FC32 /* libPods-DMHY.a */; };
+		F41697B81C8D4D1C002521A4 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41697B71C8D4D1C002521A4 /* WindowController.m */; };
 		F42DCC111BB180A4004EC373 /* DMHYCoreDataStackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC101BB180A4004EC373 /* DMHYCoreDataStackManager.m */; };
 		F42DCC441BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC3D1BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m */; };
 		F42DCC451BB26DD9004EC373 /* DMHYTorrent.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC3F1BB26DD9004EC373 /* DMHYTorrent.m */; };
@@ -34,6 +35,8 @@
 		1C595D7C866159F1BCD3B37D /* Pods-DMHY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMHY.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMHY/Pods-DMHY.release.xcconfig"; sourceTree = "<group>"; };
 		D009E0C851A892591A01FC32 /* libPods-DMHY.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DMHY.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAA3952C390934E328DA1C12 /* Pods-DMHY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMHY.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMHY/Pods-DMHY.debug.xcconfig"; sourceTree = "<group>"; };
+		F41697B61C8D4D1C002521A4 /* WindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowController.h; sourceTree = "<group>"; };
+		F41697B71C8D4D1C002521A4 /* WindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindowController.m; sourceTree = "<group>"; };
 		F42DCC0F1BB180A4004EC373 /* DMHYCoreDataStackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHYCoreDataStackManager.h; sourceTree = "<group>"; };
 		F42DCC101BB180A4004EC373 /* DMHYCoreDataStackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHYCoreDataStackManager.m; sourceTree = "<group>"; };
 		F42DCC3C1BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DMHYTorrent+CoreDataProperties.h"; path = "Model/DMHYTorrent+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -153,6 +156,8 @@
 				F4DEA05B1BA99890008E89B8 /* PreferenceController.m */,
 				F48F8C351BA03643002C96C3 /* Assets.xcassets */,
 				F48F8C371BA03643002C96C3 /* Main.storyboard */,
+				F41697B61C8D4D1C002521A4 /* WindowController.h */,
+				F41697B71C8D4D1C002521A4 /* WindowController.m */,
 				F48F8C3A1BA03643002C96C3 /* Info.plist */,
 				F48F8C321BA03643002C96C3 /* DMHY.xcdatamodeld */,
 				F48F8C421BA03705002C96C3 /* DMHYAPI.h */,
@@ -308,6 +313,7 @@
 				F48F8C471BA03705002C96C3 /* TorrentItem.m in Sources */,
 				F48F8C481BA03705002C96C3 /* TitleTableCellView.m in Sources */,
 				F42DCC461BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m in Sources */,
+				F41697B81C8D4D1C002521A4 /* WindowController.m in Sources */,
 				F4EC473F1C82FECC00EBF0B9 /* DMHYTool.m in Sources */,
 				F42DCC471BB26DD9004EC373 /* DMHYKeyword.m in Sources */,
 				F483EA1A1BAD92C100D02E60 /* SideViewController.m in Sources */,

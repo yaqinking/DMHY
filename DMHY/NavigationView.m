@@ -7,6 +7,14 @@
 //
 
 #import "NavigationView.h"
+#import "PreferenceController.h"
+
+#define DMHYThemeKey @"ThemeType"
+
+typedef NS_ENUM(NSInteger, DMHYThemeType) {
+    DMHYThemeLight,
+    DMHYThemeDark
+};
 
 @implementation NavigationView
 
@@ -16,7 +24,21 @@
     // Drawing code here.
 
 //    self.frame = NSMakeRect(0, 0, 320, self.bounds.size.height);
+    NSInteger themecode = [PreferenceController preferenceTheme];
+    
+    switch (themecode) {
+        case DMHYThemeLight:
+           self.appearance = [NSAppearance appearanceNamed:NSAppearanceNameVibrantLight];
+            break;
+        case DMHYThemeDark:
+            self.appearance = [NSAppearance appearanceNamed:NSAppearanceNameVibrantDark];
+        default:
+            break;
+    }
+}
 
+- (BOOL)allowsVibrancy {
+    return YES;
 }
 
 - (void)viewWillDraw {

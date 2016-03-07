@@ -21,4 +21,7 @@
 + (void)setPreferenceFetchInterval:(NSInteger) seconds;
 + (NSInteger)preferenceFetchInterval;
 
++ (void)setPreferenceTheme:(NSInteger) themeCode;
++ (NSInteger)preferenceTheme;
+
 @end

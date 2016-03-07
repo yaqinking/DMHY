@@ -153,4 +153,24 @@
     return [userDefaults integerForKey:kFetchInterval];
 }
 
++ (void)setPreferenceTheme:(NSInteger)themeCode {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    switch (themeCode) {
+        case DMHYThemeLight:
+            [userDefaults setInteger:DMHYThemeLight forKey:DMHYThemeKey];
+            break;
+        case DMHYThemeDark:
+            [userDefaults setInteger:DMHYThemeDark forKey:DMHYThemeKey];
+            break;
+        default:
+            [userDefaults setInteger:DMHYThemeLight forKey:DMHYThemeKey];
+            break;
+    }
+    [userDefaults synchronize];
+}
+
++ (NSInteger)preferenceTheme {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults integerForKey:DMHYThemeKey];
+}
 @end

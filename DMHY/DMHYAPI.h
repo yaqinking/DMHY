@@ -30,8 +30,16 @@
 #define DMHYSelectKeywordChangedNotification   @"DMHYSelectKeywordChangedNotification"
 #define DMHYInitialWeekdayCompleteNotification @"DMHYInitialWeekdayCompleteNotification"
 #define DMHYFetchIntervalChangedNotification   @"DMHYFetchIntervalChangedNotification"
+#define DMHYThemeChangedNotification           @"DMHYThemeChangedNotification"
 
 #define DMHYKeywordEntityKey @"Keyword"
 #define DMHYTorrentEntityKey @"Torrent"
+
+#define DMHYThemeKey @"ThemeType"
+
+typedef NS_ENUM(NSInteger, DMHYThemeType) {
+    DMHYThemeLight,
+    DMHYThemeDark
+};
 
 #endif /* DMHYAPI_h */

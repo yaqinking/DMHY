@@ -146,6 +146,10 @@
                            selector:@selector(handleInitialWeekdayComplete:)
                                name:DMHYInitialWeekdayCompleteNotification
                              object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(handleThemeChanged:)
+                               name:DMHYThemeChangedNotification
+                             object:nil];
 }
 
 - (void)handleInitialWeekdayComplete:(NSNotification *)noti {
@@ -154,6 +158,10 @@
     [self setupPopupButtonData];
     [self reloadData];
     
+}
+
+- (void)handleThemeChanged:(NSNotification *)noti {
+    [self.view setNeedsDisplay:YES];
 }
 
 #pragma mark - MenuItem
@@ -222,8 +230,10 @@
 
 - (void)saveData {
     NSError *error = nil;
-    if (![self.managedObjectContext save:&error]) {
-        NSLog(@"Error %@",[error localizedDescription]);
+    if ([self.managedObjectContext hasChanges]) {
+        if (![self.managedObjectContext save:&error]) {
+            NSLog(@"Error %@",[error localizedDescription]);
+        }
     }
 }
 

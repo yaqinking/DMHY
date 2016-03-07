@@ -231,6 +231,10 @@
                            selector:@selector(handleFetchIntervalChanged:)
                                name:DMHYFetchIntervalChangedNotification
                              object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(handleThemeChanged:)
+                               name:DMHYThemeChangedNotification
+                             object:nil];
 }
 
 - (void)handleDownloadTypeChanged:(NSNotification *)noti {
@@ -262,6 +266,10 @@
     self.timer = nil;
     self.fetchInterval = [PreferenceController preferenceFetchInterval];
     [self setupRepeatTask];
+}
+
+- (void)handleThemeChanged:(NSNotification *)noti {
+    [self.view setNeedsDisplay:YES];
 }
 
 #pragma mark - Property Initialization
@@ -404,6 +412,10 @@
 
 - (void)openTorrentLink:(id) sender {
     NSInteger rowIndex = self.tableView.clickedRow;
+    if (rowIndex < 0) {
+        //Click column header do nothing.
+        return;
+    }
     TorrentItem *item = self.torrents[rowIndex];
     [[NSWorkspace sharedWorkspace] openURL:item.link];
 }

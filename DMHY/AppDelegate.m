@@ -69,6 +69,25 @@
         NSLog(@"[IsNew %@ ][Title: %@ ][Date %@ ]", isNew?@"是":@"否", torrent.title, torrent.pubDate);
     }
 }
+
+- (IBAction)switchTheme:(id)sender {
+    NSInteger themeCode = [PreferenceController preferenceTheme];
+    [PreferenceController setPreferenceTheme:!themeCode];
+    NSInteger currentTheme = [PreferenceController preferenceTheme];
+    switch (currentTheme) {
+        case DMHYThemeLight:
+            NSLog(@"Light");
+            break;
+        case DMHYThemeDark:
+            NSLog(@"Dark");
+        default:
+            break;
+    }
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:DMHYThemeChangedNotification
+                                      object:nil];
+}
+
 #pragma mark - Properties Initialization
 /*
 - (PreferenceController *)preferenceController {
