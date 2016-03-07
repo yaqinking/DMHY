@@ -2,8 +2,20 @@
 更容易的从 [动漫花园](share.dmhy.org) 下载种子
 
 ## Screenshot
-![v0.9](http://i.imgur.com/LbVWS5sh.jpg)
+暗色主题
+
+![1.1Dark](http://i.imgur.com/tUZHfWe.jpg)
+
+亮色主题
+
+![1.1Light](http://i.imgur.com/hWpYxs0.jpg)
+
+设置界面
+
 ![v1.0](http://i.imgur.com/xxhe8U8.jpg)
+
+自动下载新种子（后台观测时，实际使用时只会在下载完成时通知。）
+
 ![v1.0](http://i.imgur.com/vI4WHLw.jpg)
 
 ## Usage
@@ -23,8 +35,12 @@
 - 使用 Sandbox
 
 ## Contact
-- [About](https://about.me/yaqinking)
 - [Twitter](https://twitter.com/yaqinking)
+- [Telegram](https://telegram.me/yaqinking)
+
+## Donate
+- [Alipay](https://www.alipay.com) yaqinking@yahoo.co.jp
+- [PayPal](https://www.paypal.com) yaqinking@yahoo.co.jp
 
 ## Thanks
 - [AFNetworking](https://github.com/AFNetworking/AFNetworking)
