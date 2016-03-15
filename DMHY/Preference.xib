@@ -8,23 +8,24 @@
         <customObject id="-2" userLabel="File's Owner" customClass="PreferenceController">
             <connections>
                 <outlet property="downloadLinkTypeMatrix" destination="eAP-3x-K3E" id="d4L-Nd-GnV"/>
+                <outlet property="downloadSiteMatrix" destination="he2-a2-dzN" id="UDQ-kp-df7"/>
                 <outlet property="fetchIntervalTextField" destination="J7E-Bk-7D5" id="RKf-IG-ZP1"/>
                 <outlet property="savePathLabel" destination="Bix-q3-hie" id="naa-WA-zqa"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="设置" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g" customClass="NSPanel">
+        <window title="设置" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" documentModal="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="400" height="550"/>
+            <rect key="contentRect" x="196" y="240" width="400" height="514"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="400" height="550"/>
+                <rect key="frame" x="0.0" y="0.0" width="400" height="514"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <box fixedFrame="YES" title="下载类型" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="sx8-zv-LSI">
-                        <rect key="frame" x="48" y="366" width="242" height="114"/>
+                        <rect key="frame" x="48" y="380" width="242" height="114"/>
                         <view key="contentView" id="pk3-gs-GnU">
                             <rect key="frame" x="1" y="1" width="240" height="98"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -61,7 +62,7 @@
                         <font key="titleFont" size="11" name=".PingFangSC-Regular"/>
                     </box>
                     <box fixedFrame="YES" title="存储路径" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="YPT-tM-Ald">
-                        <rect key="frame" x="48" y="193" width="242" height="111"/>
+                        <rect key="frame" x="48" y="265" width="242" height="111"/>
                         <view key="contentView" id="0Tq-a0-fao">
                             <rect key="frame" x="1" y="1" width="240" height="95"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -81,7 +82,7 @@
                         <font key="titleFont" size="11" name=".PingFangSC-Regular"/>
                     </box>
                     <box fixedFrame="YES" title="自动下载新种子间隔时间" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="cHQ-he-j42">
-                        <rect key="frame" x="48" y="91" width="242" height="68"/>
+                        <rect key="frame" x="48" y="193" width="242" height="68"/>
                         <view key="contentView" id="h5r-KW-QAX">
                             <rect key="frame" x="1" y="1" width="240" height="52"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -116,7 +117,7 @@
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S9V-av-zOy">
-                        <rect key="frame" x="308" y="103" width="66" height="32"/>
+                        <rect key="frame" x="308" y="205" width="66" height="32"/>
                         <buttonCell key="cell" type="push" title="设置" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1Zp-VO-fgi">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" size="13" name=".PingFangSC-Regular"/>
@@ -126,7 +127,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="poN-XL-DOT">
-                        <rect key="frame" x="309" y="237" width="64" height="25"/>
+                        <rect key="frame" x="309" y="309" width="64" height="25"/>
                         <buttonCell key="cell" type="roundTextured" title="更改到…" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9wO-kr-pE1">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" size="13" name=".PingFangSC-Regular"/>
@@ -135,9 +136,54 @@
                             <action selector="changeSavePath:" target="-2" id="1CI-lY-hZ2"/>
                         </connections>
                     </button>
+                    <box fixedFrame="YES" title="下载站点" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="kCZ-W3-c7R">
+                        <rect key="frame" x="48" y="36" width="242" height="153"/>
+                        <view key="contentView" id="nKJ-hS-wNe">
+                            <rect key="frame" x="1" y="1" width="240" height="137"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="he2-a2-dzN">
+                                    <rect key="frame" x="26" y="12" width="188" height="118"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="cellSize" width="188" height="19"/>
+                                    <size key="intercellSpacing" width="0.0" height="14"/>
+                                    <buttonCell key="prototype" type="radio" title="站点" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="1fg-2m-DsY">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                    </buttonCell>
+                                    <cells>
+                                        <column>
+                                            <buttonCell type="radio" title="share.dmhy.org" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="gfL-iE-su3">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                            </buttonCell>
+                                            <buttonCell type="radio" title="dmhy.dandanplay.com" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="vsI-fy-TX8">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                            </buttonCell>
+                                            <buttonCell type="radio" title="bt.acg.gg" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="UKz-Qd-EQg">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                            </buttonCell>
+                                            <buttonCell type="radio" title="bangumi.moe" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="cFC-8N-NYw">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                            </buttonCell>
+                                        </column>
+                                    </cells>
+                                    <connections>
+                                        <action selector="downloadSiteChanged:" target="-2" id="X58-sZ-D9I"/>
+                                    </connections>
+                                </matrix>
+                            </subviews>
+                        </view>
+                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <font key="titleFont" size="11" name=".PingFangSC-Regular"/>
+                    </box>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="545" y="537"/>
+            <point key="canvasLocation" x="677" y="511"/>
         </window>
     </objects>
 </document>

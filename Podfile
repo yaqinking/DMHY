@@ -3,9 +3,9 @@ platform :osx, '10.10'
 
 target 'DMHY' do
 
-pod "AFNetworking", "~> 2.0"
+pod 'AFNetworking', '~> 2.0'
 pod 'Ono'
-pod 'AFOnoResponseSerializer', '~> 1.0.0'
+pod 'AFOnoResponseSerializer'
 
 end
 

@@ -14,6 +14,7 @@
 @property (weak) IBOutlet NSMatrix *downloadLinkTypeMatrix;
 @property (weak) IBOutlet NSTextField *savePathLabel;
 @property (weak) IBOutlet NSTextField *fetchIntervalTextField;
+@property (weak) IBOutlet NSMatrix *downloadSiteMatrix;
 
 @end
 
@@ -48,6 +49,9 @@
     NSInteger idx = [PreferenceController preferenceDownloadLinkType];
     [self.downloadLinkTypeMatrix selectCellAtRow:idx column:0];
     
+    NSInteger siteIdx = [PreferenceController preferenceDownloadSite];
+    [self.downloadSiteMatrix selectCellAtRow:siteIdx column:0];
+    
     NSURL *url = [PreferenceController preferenceSavePath];
     self.savePathLabel.stringValue = [url path];
     
@@ -63,6 +67,14 @@
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:linkType] forKey:kDownloadLinkType];
     [notificationCenter postNotificationName:DMHYDownloadLinkTypeNotification object:self userInfo:dict];
+}
+- (IBAction)downloadSiteChanged:(id)sender {
+    NSInteger site = [self.downloadSiteMatrix selectedRow];
+    [PreferenceController setPreferenceDownloadSite:site];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:site] forKey:kDownloadSite];
+    [notificationCenter postNotificationName:DMHYDownloadSiteChangedNotification object:self userInfo:dict];
+    
 }
 
 - (IBAction)changeSavePath:(id)sender {
@@ -101,7 +113,7 @@
     NSLog(@"%li",(long)fetchInterval);
     if (fetchInterval < kFetchIntervalMinimum) {
         [PreferenceController setPreferenceFetchInterval:kFetchIntervalMinimum];
-        NSLog(@"Set FetchInterval to default 5 minitues.");
+        NSLog(@"Set FetchInterval to default %i minitues.",kFetchIntervalMinimum);
     }
 }
 
@@ -126,6 +138,17 @@
     return [userDefaults boolForKey:kDownloadLinkType];
 }
 
++ (void)setPreferenceDownloadSite:(NSInteger)site {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setInteger:site forKey:kDownloadSite];
+    [userDefaults synchronize];
+}
+
++ (NSInteger)preferenceDownloadSite {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults integerForKey:kDownloadSite];
+}
+
 + (void)setPreferenceSavePath:(NSURL *)path {
     NSUserDefaults *userDefautls = [NSUserDefaults standardUserDefaults];
     [userDefautls setURL:path forKey:kSavePath];
@@ -146,6 +169,7 @@
     }
     [userDefautls setInteger:seconds forKey:kFetchInterval];
     [userDefautls synchronize];
+    NSLog(@"Set Fetch Interval to %li seconds.",(long)seconds);
 }
 
 + (NSInteger)preferenceFetchInterval {

@@ -208,6 +208,7 @@
 				F48F8C231BA03643002C96C3 /* Frameworks */,
 				F48F8C241BA03643002C96C3 /* Resources */,
 				626678F78F4AB1EF5DA77307 /* Copy Pods Resources */,
+				AA47D900DBF300FE9787F7D7 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -299,6 +300,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DMHY/Pods-DMHY-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AA47D900DBF300FE9787F7D7 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DMHY/Pods-DMHY-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

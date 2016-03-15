@@ -30,6 +30,9 @@
    
 }
 
+/*
+ Always show divider.
+ */
 - (BOOL)splitView:(NSSplitView *)splitView shouldHideDividerAtIndex:(NSInteger)dividerIndex {
     [super splitView:splitView shouldHideDividerAtIndex:dividerIndex];
     return NO;

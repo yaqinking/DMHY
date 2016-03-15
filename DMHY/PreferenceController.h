@@ -24,4 +24,7 @@
 + (void)setPreferenceTheme:(NSInteger) themeCode;
 + (NSInteger)preferenceTheme;
 
++ (void)setPreferenceDownloadSite:(NSInteger)site;
++ (NSInteger)preferenceDownloadSite;
+
 @end
