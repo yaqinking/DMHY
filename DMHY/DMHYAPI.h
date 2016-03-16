@@ -40,7 +40,7 @@
 #define kSelectKeyword    @"SelectKeyword"
 #define kFetchInterval    @"FetchInterval"
 #define kSelectKeywordIsSubKeyword @"SelectKeywordIsSubKeyword"
-
+#define kWeekdayOther    @"其他"
 #define kFetchIntervalMinimum 30   //5 minutes
 #define kFetchIntervalMaximun 43200 //12 hours
 
