@@ -1,5 +1,14 @@
 # DMHY
-更容易的从 [动漫花园](share.dmhy.org) 下载种子
+更容易的从 [动漫花园](https://share.dmhy.org) 下载种子(自动下载订阅的新番)
+
+使用手册见 [Wiki](https://github.com/yaqinking/DMHY/wiki)
+
+目前也支持从 http://dmhy.dandanplay.com 自动下载
+
+同时也支持以下站点搜索和打开磁力链功能（在设置中保持选中磁力链和相应站点，暂未在 releases 里发布。） 
+
+- http://bt.acg.gg
+- https://bangumi.moe
 
 ## Screenshot
 暗色主题
