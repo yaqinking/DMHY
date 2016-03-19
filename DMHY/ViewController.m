@@ -7,19 +7,20 @@
 //
 
 #import "ViewController.h"
-#import "AFNetworking.h"
-#import "AFOnoResponseSerializer.h"
+#import "PreferenceController.h"
 #import "DMHYAPI.h"
-#import "Ono.h"
-#import "TorrentItem.h"
 #import "DMHYTorrent.h"
 #import "DMHYKeyword.h"
-#import "TitleTableCellView.h"
-#import "NavigationView.h"
-#import "PreferenceController.h"
 #import "DMHYCoreDataStackManager.h"
 #import "DMHYTool.h"
+#import "TorrentItem.h"
+#import "TitleTableCellView.h"
+#import "NavigationView.h"
+#import "AFNetworking.h"
+#import "AFOnoResponseSerializer.h"
+#import "Ono.h"
 
+#import <Carbon/Carbon.h>
 @interface ViewController()<NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate>
 
 @property (weak) IBOutlet NSTableView         *tableView;
@@ -63,7 +64,7 @@
     [self setupPreference];
     [self observeNotification];
     [self setupRepeatTask];
-
+    [self setupMenuItems];
     self.keyword.delegate       = self;
     
     self.tableView.doubleAction = @selector(openTorrentLink:);
@@ -294,21 +295,9 @@
     NSCalendar* cal        = [NSCalendar currentCalendar];
     NSDateComponents *com  = [cal components:NSCalendarUnitWeekday fromDate:now];
     NSInteger weekdayToday = [com weekday];// 1 = Sunday, 2 = Monday, etc.
-    self.today             = [DMHYTool cn_weekdayFromWeekdayCode:weekdayToday];
-    switch (weekdayToday) {
-        case 1:
-            self.yesterday = [DMHYTool cn_weekdayFromWeekdayCode:7];
-            self.dayBeforeYesterday = [DMHYTool cn_weekdayFromWeekdayCode:6];
-            break;
-        case 2:
-            self.yesterday = [DMHYTool cn_weekdayFromWeekdayCode:weekdayToday-1];
-            self.dayBeforeYesterday = [DMHYTool cn_weekdayFromWeekdayCode:7];
-            break;
-        default:
-            self.yesterday = [DMHYTool cn_weekdayFromWeekdayCode:weekdayToday-1];
-            self.dayBeforeYesterday = [DMHYTool cn_weekdayFromWeekdayCode:weekdayToday-2];
-            break;
-    }
+    self.today              = [DMHYTool cn_weekdayFromWeekdayCode:weekdayToday];
+    self.yesterday          = [DMHYTool cn_weekdayFromWeekdayCode:weekdayToday-1];
+    self.dayBeforeYesterday = [DMHYTool cn_weekdayFromWeekdayCode:weekdayToday-2];
     [self automaticDownloadTorrentWithWeekday:self.today];
 }
 
@@ -623,9 +612,7 @@
  *  @param weekday today string
  */
 - (void)automaticDownloadTorrentWithWeekday:(NSString *) weekday {
-    NSFetchRequest *requestTodayKeywords = [NSFetchRequest fetchRequestWithEntityName:@"Keyword"];
-    requestTodayKeywords.predicate = [NSPredicate predicateWithFormat:@"keyword == %@ OR keyword == %@ OR keyword == %@ OR keyword == %@",self.today, self.yesterday, self.dayBeforeYesterday, kWeekdayOther];
-    
+    NSFetchRequest *requestTodayKeywords = [self fetchRequestTodayKeywords];
     NSArray *fetchedKeywords = [self.managedObjectContext executeFetchRequest:requestTodayKeywords
                                                      error:NULL];
     for (DMHYKeyword *weekdayKeyword in fetchedKeywords) {
@@ -683,16 +670,19 @@
             }];
             [[NSOperationQueue mainQueue] addOperation:op];
         }
- 
     }
+    NSDate *time = [NSDate new];
+    self.dateFormater.dateFormat = @"MM月dd日 HH:mm:ss";
+    self.dateFormater.locale     = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    NSString *formatedDate = [self.dateFormater stringFromDate:time];
+    self.info.stringValue = [NSString stringWithFormat:@"上次检查时间 %@",formatedDate];
 }
 
 /**
  *  Fetch info from database then check if it has new torrent then invoke extractTorrentDownloadURLWithURLString:
  */
 - (void)downloadNewTorrents {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:DMHYKeywordEntityKey];
-    request.predicate = [NSPredicate predicateWithFormat:@"keyword == %@ OR keyword == %@ OR keyword == %@ OR keyword == %@",self.today, self.yesterday, self.dayBeforeYesterday, kWeekdayOther];
+    NSFetchRequest *request = [self fetchRequestTodayKeywords];
     NSArray *fetchedKeywords = [self.managedObjectContext executeFetchRequest:request
                                                               error:NULL];
 
@@ -712,6 +702,17 @@
         [self.managedObjectContext save:NULL];
     }
     
+}
+
+/**
+ *  Init a Today Keywords Fetch Request
+ *
+ *  @return fetch request with today keywords
+ */
+- (NSFetchRequest *)fetchRequestTodayKeywords {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:DMHYKeywordEntityKey];
+    request.predicate = [NSPredicate predicateWithFormat:@"keyword == %@ OR keyword == %@ OR keyword == %@ OR keyword == %@",self.today, self.yesterday, self.dayBeforeYesterday, kWeekdayOther];
+    return request;
 }
 
 /**
@@ -771,6 +772,19 @@
         _context.undoManager = nil;
     }
     return _context;
+}
+
+
+- (void)setupMenuItems {
+    NSMenu *mainMenu = [[NSApplication sharedApplication] mainMenu];
+    NSMenuItem *fileMenuItem = [mainMenu itemWithTitle:@"File"];
+    NSMenu *fileSubMenu = [fileMenuItem submenu];
+    // 设置快捷键时默认 mask 是 command，然后加单键使用小写字母（如：@“r” == cmd+r），想要多加个 shift mask，用大写字母。（如：@“R” == cmd+shift+r）
+    NSMenuItem *menuRefreshSubKeywordMenuItem = [[NSMenuItem alloc] initWithTitle:@"手动检查订阅更新"
+                                                                      action:@selector(setupAutomaticDownloadNewTorrent)
+                                                                    keyEquivalent:@"r"];
+    [fileSubMenu addItem:menuRefreshSubKeywordMenuItem];
+    
 }
 
 @end

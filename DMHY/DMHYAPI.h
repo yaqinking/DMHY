@@ -33,6 +33,9 @@
 #define DMHYBangumiMoeAPITorrentPagePrefixFormat  @"https://bangumi.moe/api/v2/torrent/%@"
 #define DMHYBangumiMoeOpenTorrentPagePrefixFormat @"https://bangumi.moe/torrent/%@"
 
+// bgmlist GitHub raw json file
+#define BGMListYearSeasonFormat @"https://raw.githubusercontent.com/wxt2005/bangumi-list/master/json/bangumi-%@%@.json"
+
 #define kXPathTorrentItem @"//item"
 #define kDownloadLinkType @"DownloadLinkType"
 #define kDownloadSite     @"DownloadSite"
@@ -51,11 +54,48 @@
 #define DMHYFetchIntervalChangedNotification   @"DMHYFetchIntervalChangedNotification"
 #define DMHYThemeChangedNotification           @"DMHYThemeChangedNotification"
 #define DMHYDownloadSiteChangedNotification    @"DMHYDownloadSiteChangedNotification"
-
+#define DMHYSearsonKeywordAddedNotification    @"DMHYSearsonKeywordAddedNotification"
 #define DMHYKeywordEntityKey @"Keyword"
 #define DMHYTorrentEntityKey @"Torrent"
 
 #define DMHYThemeKey @"ThemeType"
+
+// bgmlist entity key
+#define BangumiTitleCNKey     @"titleCN"
+#define BangumiTitleJPKey     @"titleJP"
+#define BangumiTitleENKey     @"titleEN"
+
+#define BangumiWeekDayJPKey   @"weekDayJP"
+#define BangumiWeekDayCNKey   @"weekDayCN"
+
+#define BangumiTimeJPKey      @"timeJP"
+#define BangumiTimeCNKey      @"timeCN"
+
+#define BangumiNewBGMKey      @"newBgm" // 这个可以来做［只添加当季度新番］
+
+#define BangumiShowDateKey    @"showDate"
+#define BangumiOfficalSiteKey @"officalSite"
+/*********************************************
+ * bgmlist example bangumi
+ *********************************************
+ "1601_21": {
+ "titleCN": "红壳的潘多拉",
+ "titleJP": "紅殻のパンドラ",
+ "titleEN": "",
+ "officalSite": "http://k-pandora.com/",
+ "weekDayJP": 5,
+ "weekDayCN": 6,
+ "timeJP": "2200",
+ "timeCN": "0040",
+ "onAirSite": [
+ "http://www.bilibili.com/bangumi/i/3114/"
+ ],
+ "newBgm": true,
+ "showDate": "2016-01-08",
+ "bgmId": 159269
+ }
+ */
+//#define BangumiDownloadKeywordKey @"downloadKeyword" 并没有卯月还要根据字幕组更新速度自己筛选 poi
 
 typedef NS_ENUM(NSInteger, DMHYThemeType) {
     DMHYThemeLight,

@@ -150,6 +150,16 @@
                            selector:@selector(handleThemeChanged:)
                                name:DMHYThemeChangedNotification
                              object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(handleSeasonKeywordAdded:)
+                               name:DMHYSearsonKeywordAddedNotification
+                             object:nil];
+}
+
+- (void)handleSeasonKeywordAdded:(NSNotification *)noti {
+    NSLog(@"handleSeasonKeywordAdded");
+    self.keywords = nil;
+    [self reloadData];
 }
 
 - (void)handleInitialWeekdayComplete:(NSNotification *)noti {

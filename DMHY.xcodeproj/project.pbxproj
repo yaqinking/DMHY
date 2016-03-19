@@ -14,6 +14,8 @@
 		F42DCC451BB26DD9004EC373 /* DMHYTorrent.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC3F1BB26DD9004EC373 /* DMHYTorrent.m */; };
 		F42DCC461BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC411BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m */; };
 		F42DCC471BB26DD9004EC373 /* DMHYKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC431BB26DD9004EC373 /* DMHYKeyword.m */; };
+		F44C9F241C9E3EFD007E1CAA /* KeywordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F44C9F231C9E3EFD007E1CAA /* KeywordViewController.m */; };
+		F44C9F271C9E7624007E1CAA /* Bangumi.m in Sources */ = {isa = PBXBuildFile; fileRef = F44C9F261C9E7624007E1CAA /* Bangumi.m */; };
 		F483EA1A1BAD92C100D02E60 /* SideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F483EA191BAD92C100D02E60 /* SideViewController.m */; };
 		F483EA1D1BAD9DB200D02E60 /* MainSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F483EA1C1BAD9DB200D02E60 /* MainSplitViewController.m */; };
 		F48F8C2B1BA03643002C96C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C2A1BA03643002C96C3 /* AppDelegate.m */; };
@@ -47,6 +49,10 @@
 		F42DCC411BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DMHYKeyword+CoreDataProperties.m"; path = "Model/DMHYKeyword+CoreDataProperties.m"; sourceTree = "<group>"; };
 		F42DCC421BB26DD9004EC373 /* DMHYKeyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMHYKeyword.h; path = Model/DMHYKeyword.h; sourceTree = "<group>"; };
 		F42DCC431BB26DD9004EC373 /* DMHYKeyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMHYKeyword.m; path = Model/DMHYKeyword.m; sourceTree = "<group>"; };
+		F44C9F221C9E3EFD007E1CAA /* KeywordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeywordViewController.h; sourceTree = "<group>"; };
+		F44C9F231C9E3EFD007E1CAA /* KeywordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeywordViewController.m; sourceTree = "<group>"; };
+		F44C9F251C9E7624007E1CAA /* Bangumi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bangumi.h; path = Model/Bangumi.h; sourceTree = "<group>"; };
+		F44C9F261C9E7624007E1CAA /* Bangumi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Bangumi.m; path = Model/Bangumi.m; sourceTree = "<group>"; };
 		F483EA181BAD92C100D02E60 /* SideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideViewController.h; sourceTree = "<group>"; };
 		F483EA191BAD92C100D02E60 /* SideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideViewController.m; sourceTree = "<group>"; };
 		F483EA1B1BAD9DB200D02E60 /* MainSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSplitViewController.h; sourceTree = "<group>"; };
@@ -121,6 +127,8 @@
 				F42DCC431BB26DD9004EC373 /* DMHYKeyword.m */,
 				F48F8C431BA03705002C96C3 /* TorrentItem.h */,
 				F48F8C441BA03705002C96C3 /* TorrentItem.m */,
+				F44C9F251C9E7624007E1CAA /* Bangumi.h */,
+				F44C9F261C9E7624007E1CAA /* Bangumi.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -152,6 +160,8 @@
 				F48F8C2A1BA03643002C96C3 /* AppDelegate.m */,
 				F48F8C2F1BA03643002C96C3 /* ViewController.h */,
 				F48F8C301BA03643002C96C3 /* ViewController.m */,
+				F44C9F221C9E3EFD007E1CAA /* KeywordViewController.h */,
+				F44C9F231C9E3EFD007E1CAA /* KeywordViewController.m */,
 				F4DEA05A1BA99890008E89B8 /* PreferenceController.h */,
 				F4DEA05B1BA99890008E89B8 /* PreferenceController.m */,
 				F48F8C351BA03643002C96C3 /* Assets.xcassets */,
@@ -324,6 +334,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F44C9F271C9E7624007E1CAA /* Bangumi.m in Sources */,
 				F48F8C311BA03643002C96C3 /* ViewController.m in Sources */,
 				F48F8C4C1BA05FB9002C96C3 /* NavigationView.m in Sources */,
 				F48F8C471BA03705002C96C3 /* TorrentItem.m in Sources */,
@@ -340,6 +351,7 @@
 				F42DCC441BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m in Sources */,
 				F483EA1D1BAD9DB200D02E60 /* MainSplitViewController.m in Sources */,
 				F42DCC111BB180A4004EC373 /* DMHYCoreDataStackManager.m in Sources */,
+				F44C9F241C9E3EFD007E1CAA /* KeywordViewController.m in Sources */,
 				F48F8C341BA03643002C96C3 /* DMHY.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -115,6 +115,7 @@
         [PreferenceController setPreferenceFetchInterval:kFetchIntervalMinimum];
         NSLog(@"Set FetchInterval to default %i minitues.",kFetchIntervalMinimum);
     }
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
 }
 
 + (NSURL *)userDownloadPath {

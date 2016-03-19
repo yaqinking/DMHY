@@ -11,8 +11,8 @@
 @interface DMHYTool : NSObject
 /**
  *  Get chinese weekday.
- *
- *  @param weekday the weekday code.
+ *  1 周日 2 周一 3 周二 4 周三 5 周四 6 周五 7 周日 0 周六 -1 周五
+ *  @param weekday the weekday code. -1 to 7
  *
  *  @return Chinese weekday string.
  */
@@ -26,4 +26,12 @@
  */
 + (NSURL *)convertToURLWithURLString:(NSString *)urlString;
 
+/**
+ *  Get bangumi season by month
+ *
+ *  @param month The current month code
+ *
+ *  @return belong to season
+ */
++ (NSString *) bangumiSeasonOfMonth:(NSInteger )month;
 @end
