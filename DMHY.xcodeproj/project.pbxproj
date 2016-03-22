@@ -9,15 +9,30 @@
 /* Begin PBXBuildFile section */
 		F401A9731BA2895E001BF9BE /* libPods-DMHY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D009E0C851A892591A01FC32 /* libPods-DMHY.a */; };
 		F41697B81C8D4D1C002521A4 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41697B71C8D4D1C002521A4 /* WindowController.m */; };
+		F4258FA11CA5808500B4DF8D /* FileManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4258FA01CA5808500B4DF8D /* FileManagerViewController.m */; };
+		F4258FA41CA580D700B4DF8D /* SavedDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4258FA31CA580D700B4DF8D /* SavedDataViewController.m */; };
+		F4258FA71CA5815700B4DF8D /* ContainerSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4258FA61CA5815700B4DF8D /* ContainerSplitViewController.m */; };
+		F4258FAB1CA5818C00B4DF8D /* VerticalSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4258FA91CA5818C00B4DF8D /* VerticalSplitViewController.m */; };
 		F42DCC111BB180A4004EC373 /* DMHYCoreDataStackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC101BB180A4004EC373 /* DMHYCoreDataStackManager.m */; };
 		F42DCC441BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC3D1BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m */; };
 		F42DCC451BB26DD9004EC373 /* DMHYTorrent.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC3F1BB26DD9004EC373 /* DMHYTorrent.m */; };
 		F42DCC461BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC411BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m */; };
 		F42DCC471BB26DD9004EC373 /* DMHYKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC431BB26DD9004EC373 /* DMHYKeyword.m */; };
+		F43E8C221CA37E6B0068AF92 /* DMHYDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E8C211CA37E6B0068AF92 /* DMHYDownloader.m */; };
+		F43E8C3B1CA3AADA0068AF92 /* ViewerPreferences.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F43E8C3A1CA3AADA0068AF92 /* ViewerPreferences.tiff */; };
 		F44C9F241C9E3EFD007E1CAA /* KeywordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F44C9F231C9E3EFD007E1CAA /* KeywordViewController.m */; };
 		F44C9F271C9E7624007E1CAA /* Bangumi.m in Sources */ = {isa = PBXBuildFile; fileRef = F44C9F261C9E7624007E1CAA /* Bangumi.m */; };
+		F4592BBF1CA16BEA00981DDF /* SitePreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4592BBD1CA16BEA00981DDF /* SitePreferenceController.m */; };
+		F4592BC01CA16BEA00981DDF /* SitePreferenceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4592BBE1CA16BEA00981DDF /* SitePreferenceController.xib */; };
+		F46EFC121CA054BB00B2E3F3 /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46EFC101CA054BB00B2E3F3 /* MASPreferencesWindowController.m */; };
+		F46EFC131CA054BB00B2E3F3 /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F46EFC111CA054BB00B2E3F3 /* MASPreferencesWindow.xib */; };
+		F46EFC191CA05C4900B2E3F3 /* ViewPreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46EFC171CA05C4900B2E3F3 /* ViewPreferenceController.m */; };
+		F46EFC1A1CA05C4900B2E3F3 /* ViewPreferenceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F46EFC181CA05C4900B2E3F3 /* ViewPreferenceController.xib */; };
+		F4712E921CA6DFB000BD332D /* FileItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4712E911CA6DFB000BD332D /* FileItem.m */; };
+		F4712E951CA6EA9000BD332D /* FileTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4712E941CA6EA9000BD332D /* FileTableView.m */; };
 		F483EA1A1BAD92C100D02E60 /* SideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F483EA191BAD92C100D02E60 /* SideViewController.m */; };
 		F483EA1D1BAD9DB200D02E60 /* MainSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F483EA1C1BAD9DB200D02E60 /* MainSplitViewController.m */; };
+		F48CC38D1CA2643200EBEAB7 /* DMHYNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = F48CC38C1CA2643200EBEAB7 /* DMHYNotification.m */; };
 		F48F8C2B1BA03643002C96C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C2A1BA03643002C96C3 /* AppDelegate.m */; };
 		F48F8C2E1BA03643002C96C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C2D1BA03643002C96C3 /* main.m */; };
 		F48F8C311BA03643002C96C3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C301BA03643002C96C3 /* ViewController.m */; };
@@ -28,6 +43,7 @@
 		F48F8C471BA03705002C96C3 /* TorrentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C441BA03705002C96C3 /* TorrentItem.m */; };
 		F48F8C481BA03705002C96C3 /* TitleTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C461BA03705002C96C3 /* TitleTableCellView.m */; };
 		F48F8C4C1BA05FB9002C96C3 /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C4B1BA05FB9002C96C3 /* NavigationView.m */; };
+		F4A0E3E21CA130A700092C4D /* NSTableView+ContextMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A0E3E11CA130A700092C4D /* NSTableView+ContextMenu.m */; };
 		F4DEA05D1BA99890008E89B8 /* PreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DEA05B1BA99890008E89B8 /* PreferenceController.m */; };
 		F4DEA0601BA99936008E89B8 /* Preference.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4DEA05F1BA99936008E89B8 /* Preference.xib */; };
 		F4EC473F1C82FECC00EBF0B9 /* DMHYTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EC473E1C82FECC00EBF0B9 /* DMHYTool.m */; };
@@ -39,6 +55,14 @@
 		EAA3952C390934E328DA1C12 /* Pods-DMHY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMHY.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMHY/Pods-DMHY.debug.xcconfig"; sourceTree = "<group>"; };
 		F41697B61C8D4D1C002521A4 /* WindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowController.h; sourceTree = "<group>"; };
 		F41697B71C8D4D1C002521A4 /* WindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindowController.m; sourceTree = "<group>"; };
+		F4258F9F1CA5808500B4DF8D /* FileManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManagerViewController.h; sourceTree = "<group>"; };
+		F4258FA01CA5808500B4DF8D /* FileManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManagerViewController.m; sourceTree = "<group>"; };
+		F4258FA21CA580D700B4DF8D /* SavedDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedDataViewController.h; sourceTree = "<group>"; };
+		F4258FA31CA580D700B4DF8D /* SavedDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedDataViewController.m; sourceTree = "<group>"; };
+		F4258FA51CA5815700B4DF8D /* ContainerSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainerSplitViewController.h; path = Controller/ContainerSplitViewController.h; sourceTree = "<group>"; };
+		F4258FA61CA5815700B4DF8D /* ContainerSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContainerSplitViewController.m; path = Controller/ContainerSplitViewController.m; sourceTree = "<group>"; };
+		F4258FA81CA5818C00B4DF8D /* VerticalSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VerticalSplitViewController.h; path = Controller/VerticalSplitViewController.h; sourceTree = "<group>"; };
+		F4258FA91CA5818C00B4DF8D /* VerticalSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VerticalSplitViewController.m; path = Controller/VerticalSplitViewController.m; sourceTree = "<group>"; };
 		F42DCC0F1BB180A4004EC373 /* DMHYCoreDataStackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHYCoreDataStackManager.h; sourceTree = "<group>"; };
 		F42DCC101BB180A4004EC373 /* DMHYCoreDataStackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHYCoreDataStackManager.m; sourceTree = "<group>"; };
 		F42DCC3C1BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DMHYTorrent+CoreDataProperties.h"; path = "Model/DMHYTorrent+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -49,14 +73,33 @@
 		F42DCC411BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DMHYKeyword+CoreDataProperties.m"; path = "Model/DMHYKeyword+CoreDataProperties.m"; sourceTree = "<group>"; };
 		F42DCC421BB26DD9004EC373 /* DMHYKeyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMHYKeyword.h; path = Model/DMHYKeyword.h; sourceTree = "<group>"; };
 		F42DCC431BB26DD9004EC373 /* DMHYKeyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMHYKeyword.m; path = Model/DMHYKeyword.m; sourceTree = "<group>"; };
+		F43E8C201CA37E6B0068AF92 /* DMHYDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHYDownloader.h; sourceTree = "<group>"; };
+		F43E8C211CA37E6B0068AF92 /* DMHYDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHYDownloader.m; sourceTree = "<group>"; };
+		F43E8C3A1CA3AADA0068AF92 /* ViewerPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ViewerPreferences.tiff; sourceTree = "<group>"; };
 		F44C9F221C9E3EFD007E1CAA /* KeywordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeywordViewController.h; sourceTree = "<group>"; };
 		F44C9F231C9E3EFD007E1CAA /* KeywordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeywordViewController.m; sourceTree = "<group>"; };
 		F44C9F251C9E7624007E1CAA /* Bangumi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bangumi.h; path = Model/Bangumi.h; sourceTree = "<group>"; };
 		F44C9F261C9E7624007E1CAA /* Bangumi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Bangumi.m; path = Model/Bangumi.m; sourceTree = "<group>"; };
+		F4592BBC1CA16BEA00981DDF /* SitePreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SitePreferenceController.h; path = Preferences/SitePreferenceController.h; sourceTree = "<group>"; };
+		F4592BBD1CA16BEA00981DDF /* SitePreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SitePreferenceController.m; path = Preferences/SitePreferenceController.m; sourceTree = "<group>"; };
+		F4592BBE1CA16BEA00981DDF /* SitePreferenceController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SitePreferenceController.xib; path = Preferences/SitePreferenceController.xib; sourceTree = "<group>"; };
+		F46EFC0E1CA054BB00B2E3F3 /* MASPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASPreferencesViewController.h; sourceTree = "<group>"; };
+		F46EFC0F1CA054BB00B2E3F3 /* MASPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASPreferencesWindowController.h; sourceTree = "<group>"; };
+		F46EFC101CA054BB00B2E3F3 /* MASPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASPreferencesWindowController.m; sourceTree = "<group>"; };
+		F46EFC111CA054BB00B2E3F3 /* MASPreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MASPreferencesWindow.xib; sourceTree = "<group>"; };
+		F46EFC161CA05C4900B2E3F3 /* ViewPreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewPreferenceController.h; path = Preferences/ViewPreferenceController.h; sourceTree = "<group>"; };
+		F46EFC171CA05C4900B2E3F3 /* ViewPreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewPreferenceController.m; path = Preferences/ViewPreferenceController.m; sourceTree = "<group>"; };
+		F46EFC181CA05C4900B2E3F3 /* ViewPreferenceController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewPreferenceController.xib; path = Preferences/ViewPreferenceController.xib; sourceTree = "<group>"; };
+		F4712E901CA6DFB000BD332D /* FileItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileItem.h; path = Model/FileItem.h; sourceTree = "<group>"; };
+		F4712E911CA6DFB000BD332D /* FileItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileItem.m; path = Model/FileItem.m; sourceTree = "<group>"; };
+		F4712E931CA6EA9000BD332D /* FileTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileTableView.h; path = View/FileTableView.h; sourceTree = "<group>"; };
+		F4712E941CA6EA9000BD332D /* FileTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileTableView.m; path = View/FileTableView.m; sourceTree = "<group>"; };
 		F483EA181BAD92C100D02E60 /* SideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideViewController.h; sourceTree = "<group>"; };
 		F483EA191BAD92C100D02E60 /* SideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideViewController.m; sourceTree = "<group>"; };
 		F483EA1B1BAD9DB200D02E60 /* MainSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSplitViewController.h; sourceTree = "<group>"; };
 		F483EA1C1BAD9DB200D02E60 /* MainSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSplitViewController.m; sourceTree = "<group>"; };
+		F48CC38B1CA2643200EBEAB7 /* DMHYNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHYNotification.h; sourceTree = "<group>"; };
+		F48CC38C1CA2643200EBEAB7 /* DMHYNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHYNotification.m; sourceTree = "<group>"; };
 		F48F8C261BA03643002C96C3 /* DMHY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMHY.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F48F8C291BA03643002C96C3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F48F8C2A1BA03643002C96C3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -75,6 +118,8 @@
 		F48F8C461BA03705002C96C3 /* TitleTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleTableCellView.m; sourceTree = "<group>"; };
 		F48F8C4A1BA05FB9002C96C3 /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationView.h; sourceTree = "<group>"; };
 		F48F8C4B1BA05FB9002C96C3 /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationView.m; sourceTree = "<group>"; };
+		F4A0E3E01CA130A700092C4D /* NSTableView+ContextMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSTableView+ContextMenu.h"; path = "View/NSTableView+ContextMenu.h"; sourceTree = "<group>"; };
+		F4A0E3E11CA130A700092C4D /* NSTableView+ContextMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSTableView+ContextMenu.m"; path = "View/NSTableView+ContextMenu.m"; sourceTree = "<group>"; };
 		F4AC86621C82A6BA00C420F2 /* DMHY v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DMHY v2.xcdatamodel"; sourceTree = "<group>"; };
 		F4AC86631C82D8B500C420F2 /* DMHY v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DMHY v3.xcdatamodel"; sourceTree = "<group>"; };
 		F4DEA05A1BA99890008E89B8 /* PreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferenceController.h; sourceTree = "<group>"; };
@@ -117,6 +162,7 @@
 		F43A1E6B1BB1714300B7CFBA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F48F8C321BA03643002C96C3 /* DMHY.xcdatamodeld */,
 				F42DCC3C1BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.h */,
 				F42DCC3D1BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m */,
 				F42DCC3E1BB26DD9004EC373 /* DMHYTorrent.h */,
@@ -129,8 +175,37 @@
 				F48F8C441BA03705002C96C3 /* TorrentItem.m */,
 				F44C9F251C9E7624007E1CAA /* Bangumi.h */,
 				F44C9F261C9E7624007E1CAA /* Bangumi.m */,
+				F4712E901CA6DFB000BD332D /* FileItem.h */,
+				F4712E911CA6DFB000BD332D /* FileItem.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		F46EFC141CA054F500B2E3F3 /* MASPreferences */ = {
+			isa = PBXGroup;
+			children = (
+				F46EFC0E1CA054BB00B2E3F3 /* MASPreferencesViewController.h */,
+				F46EFC0F1CA054BB00B2E3F3 /* MASPreferencesWindowController.h */,
+				F46EFC101CA054BB00B2E3F3 /* MASPreferencesWindowController.m */,
+				F46EFC111CA054BB00B2E3F3 /* MASPreferencesWindow.xib */,
+			);
+			name = MASPreferences;
+			sourceTree = "<group>";
+		};
+		F46EFC151CA05C0300B2E3F3 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				F4DEA05A1BA99890008E89B8 /* PreferenceController.h */,
+				F4DEA05B1BA99890008E89B8 /* PreferenceController.m */,
+				F4DEA05F1BA99936008E89B8 /* Preference.xib */,
+				F46EFC161CA05C4900B2E3F3 /* ViewPreferenceController.h */,
+				F46EFC171CA05C4900B2E3F3 /* ViewPreferenceController.m */,
+				F46EFC181CA05C4900B2E3F3 /* ViewPreferenceController.xib */,
+				F4592BBC1CA16BEA00981DDF /* SitePreferenceController.h */,
+				F4592BBD1CA16BEA00981DDF /* SitePreferenceController.m */,
+				F4592BBE1CA16BEA00981DDF /* SitePreferenceController.xib */,
+			);
+			name = Preferences;
 			sourceTree = "<group>";
 		};
 		F48F8C1D1BA03643002C96C3 = {
@@ -154,32 +229,38 @@
 		F48F8C281BA03643002C96C3 /* DMHY */ = {
 			isa = PBXGroup;
 			children = (
+				F46EFC151CA05C0300B2E3F3 /* Preferences */,
+				F48F8C491BA05F6B002C96C3 /* View */,
 				F43A1E6B1BB1714300B7CFBA /* Model */,
-				F4FC772F1BA2DA810095F753 /* DMHY.entitlements */,
+				F48F8C2C1BA03643002C96C3 /* Supporting Files */,
 				F48F8C291BA03643002C96C3 /* AppDelegate.h */,
 				F48F8C2A1BA03643002C96C3 /* AppDelegate.m */,
+				F483EA181BAD92C100D02E60 /* SideViewController.h */,
+				F483EA191BAD92C100D02E60 /* SideViewController.m */,
 				F48F8C2F1BA03643002C96C3 /* ViewController.h */,
 				F48F8C301BA03643002C96C3 /* ViewController.m */,
 				F44C9F221C9E3EFD007E1CAA /* KeywordViewController.h */,
 				F44C9F231C9E3EFD007E1CAA /* KeywordViewController.m */,
-				F4DEA05A1BA99890008E89B8 /* PreferenceController.h */,
-				F4DEA05B1BA99890008E89B8 /* PreferenceController.m */,
-				F48F8C351BA03643002C96C3 /* Assets.xcassets */,
+				F4258FA21CA580D700B4DF8D /* SavedDataViewController.h */,
+				F4258FA31CA580D700B4DF8D /* SavedDataViewController.m */,
+				F4258F9F1CA5808500B4DF8D /* FileManagerViewController.h */,
+				F4258FA01CA5808500B4DF8D /* FileManagerViewController.m */,
 				F48F8C371BA03643002C96C3 /* Main.storyboard */,
-				F41697B61C8D4D1C002521A4 /* WindowController.h */,
-				F41697B71C8D4D1C002521A4 /* WindowController.m */,
-				F48F8C3A1BA03643002C96C3 /* Info.plist */,
-				F48F8C321BA03643002C96C3 /* DMHY.xcdatamodeld */,
 				F48F8C421BA03705002C96C3 /* DMHYAPI.h */,
-				F48F8C491BA05F6B002C96C3 /* View */,
-				F48F8C2C1BA03643002C96C3 /* Supporting Files */,
 				F4EC473D1C82FECC00EBF0B9 /* DMHYTool.h */,
 				F4EC473E1C82FECC00EBF0B9 /* DMHYTool.m */,
-				F4DEA05F1BA99936008E89B8 /* Preference.xib */,
-				F483EA181BAD92C100D02E60 /* SideViewController.h */,
-				F483EA191BAD92C100D02E60 /* SideViewController.m */,
+				F48CC38B1CA2643200EBEAB7 /* DMHYNotification.h */,
+				F48CC38C1CA2643200EBEAB7 /* DMHYNotification.m */,
+				F43E8C201CA37E6B0068AF92 /* DMHYDownloader.h */,
+				F43E8C211CA37E6B0068AF92 /* DMHYDownloader.m */,
 				F483EA1B1BAD9DB200D02E60 /* MainSplitViewController.h */,
 				F483EA1C1BAD9DB200D02E60 /* MainSplitViewController.m */,
+				F4258FA51CA5815700B4DF8D /* ContainerSplitViewController.h */,
+				F4258FA61CA5815700B4DF8D /* ContainerSplitViewController.m */,
+				F4258FA81CA5818C00B4DF8D /* VerticalSplitViewController.h */,
+				F4258FA91CA5818C00B4DF8D /* VerticalSplitViewController.m */,
+				F41697B61C8D4D1C002521A4 /* WindowController.h */,
+				F41697B71C8D4D1C002521A4 /* WindowController.m */,
 				F42DCC0F1BB180A4004EC373 /* DMHYCoreDataStackManager.h */,
 				F42DCC101BB180A4004EC373 /* DMHYCoreDataStackManager.m */,
 			);
@@ -189,6 +270,11 @@
 		F48F8C2C1BA03643002C96C3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F48F8C3A1BA03643002C96C3 /* Info.plist */,
+				F48F8C351BA03643002C96C3 /* Assets.xcassets */,
+				F4FC772F1BA2DA810095F753 /* DMHY.entitlements */,
+				F43E8C3A1CA3AADA0068AF92 /* ViewerPreferences.tiff */,
+				F46EFC141CA054F500B2E3F3 /* MASPreferences */,
 				F48F8C401BA036ED002C96C3 /* download.png */,
 				F48F8C2D1BA03643002C96C3 /* main.m */,
 			);
@@ -198,10 +284,14 @@
 		F48F8C491BA05F6B002C96C3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F4A0E3E01CA130A700092C4D /* NSTableView+ContextMenu.h */,
+				F4A0E3E11CA130A700092C4D /* NSTableView+ContextMenu.m */,
 				F48F8C451BA03705002C96C3 /* TitleTableCellView.h */,
 				F48F8C461BA03705002C96C3 /* TitleTableCellView.m */,
 				F48F8C4A1BA05FB9002C96C3 /* NavigationView.h */,
 				F48F8C4B1BA05FB9002C96C3 /* NavigationView.m */,
+				F4712E931CA6EA9000BD332D /* FileTableView.h */,
+				F4712E941CA6EA9000BD332D /* FileTableView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -273,9 +363,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F48F8C361BA03643002C96C3 /* Assets.xcassets in Resources */,
+				F43E8C3B1CA3AADA0068AF92 /* ViewerPreferences.tiff in Resources */,
 				F48F8C391BA03643002C96C3 /* Main.storyboard in Resources */,
+				F46EFC131CA054BB00B2E3F3 /* MASPreferencesWindow.xib in Resources */,
+				F4592BC01CA16BEA00981DDF /* SitePreferenceController.xib in Resources */,
 				F4DEA0601BA99936008E89B8 /* Preference.xib in Resources */,
 				F48F8C411BA036ED002C96C3 /* download.png in Resources */,
+				F46EFC1A1CA05C4900B2E3F3 /* ViewPreferenceController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,14 +428,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4258FA11CA5808500B4DF8D /* FileManagerViewController.m in Sources */,
 				F44C9F271C9E7624007E1CAA /* Bangumi.m in Sources */,
 				F48F8C311BA03643002C96C3 /* ViewController.m in Sources */,
+				F4712E951CA6EA9000BD332D /* FileTableView.m in Sources */,
+				F46EFC191CA05C4900B2E3F3 /* ViewPreferenceController.m in Sources */,
 				F48F8C4C1BA05FB9002C96C3 /* NavigationView.m in Sources */,
 				F48F8C471BA03705002C96C3 /* TorrentItem.m in Sources */,
+				F4258FAB1CA5818C00B4DF8D /* VerticalSplitViewController.m in Sources */,
 				F48F8C481BA03705002C96C3 /* TitleTableCellView.m in Sources */,
+				F4258FA71CA5815700B4DF8D /* ContainerSplitViewController.m in Sources */,
+				F48CC38D1CA2643200EBEAB7 /* DMHYNotification.m in Sources */,
+				F4712E921CA6DFB000BD332D /* FileItem.m in Sources */,
 				F42DCC461BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m in Sources */,
 				F41697B81C8D4D1C002521A4 /* WindowController.m in Sources */,
 				F4EC473F1C82FECC00EBF0B9 /* DMHYTool.m in Sources */,
+				F46EFC121CA054BB00B2E3F3 /* MASPreferencesWindowController.m in Sources */,
 				F42DCC471BB26DD9004EC373 /* DMHYKeyword.m in Sources */,
 				F483EA1A1BAD92C100D02E60 /* SideViewController.m in Sources */,
 				F42DCC451BB26DD9004EC373 /* DMHYTorrent.m in Sources */,
@@ -349,10 +451,14 @@
 				F48F8C2E1BA03643002C96C3 /* main.m in Sources */,
 				F48F8C2B1BA03643002C96C3 /* AppDelegate.m in Sources */,
 				F42DCC441BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m in Sources */,
+				F4592BBF1CA16BEA00981DDF /* SitePreferenceController.m in Sources */,
 				F483EA1D1BAD9DB200D02E60 /* MainSplitViewController.m in Sources */,
 				F42DCC111BB180A4004EC373 /* DMHYCoreDataStackManager.m in Sources */,
+				F4A0E3E21CA130A700092C4D /* NSTableView+ContextMenu.m in Sources */,
 				F44C9F241C9E3EFD007E1CAA /* KeywordViewController.m in Sources */,
+				F43E8C221CA37E6B0068AF92 /* DMHYDownloader.m in Sources */,
 				F48F8C341BA03643002C96C3 /* DMHY.xcdatamodeld in Sources */,
+				F4258FA41CA580D700B4DF8D /* SavedDataViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

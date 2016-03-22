@@ -8,48 +8,62 @@
 
 #import "ViewController.h"
 #import "PreferenceController.h"
+#import "ViewPreferenceController.h"
 #import "DMHYAPI.h"
 #import "DMHYTorrent.h"
 #import "DMHYKeyword.h"
 #import "DMHYCoreDataStackManager.h"
-#import "DMHYTool.h"
 #import "TorrentItem.h"
 #import "TitleTableCellView.h"
 #import "NavigationView.h"
+// Networking and XML parse
 #import "AFNetworking.h"
 #import "AFOnoResponseSerializer.h"
 #import "Ono.h"
 
+#import "NSTableView+ContextMenu.h"
 #import <Carbon/Carbon.h>
-@interface ViewController()<NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate>
 
-@property (weak) IBOutlet NSTableView         *tableView;
+/**
+ *  加载数据步骤：
+ 1. 判断当前站点返回是 XML 还是 JSON 数据
+ 2. 调用相应的解析方法
+ 3. 解析完毕，重新载入 tableview
+ 
+ 下载动漫花园种子：
+ 1. 获取到该条目的介绍页面
+ 2. 解析介绍页面的 HTML DOM 用 XPath 提取出种子链接
+ 3. 调用下载种子文件的方法（DMHYDownloader downloadTorrentWithURL:）
+ 
+ */
+@interface ViewController()<NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, ContextMenuDelegate>
+
+@property (weak) IBOutlet NSTableView       *tableView;
 @property (weak) IBOutlet NSProgressIndicator *indicator;
 
 @property (weak) IBOutlet NSTextField *keyword;
 @property (weak) IBOutlet NSTextField *info;
 
 @property (nonatomic, strong) NSMutableArray *torrents;
+@property (nonatomic, strong) NSArray        *fetchedTorrents;
 @property (nonatomic, strong) NSString       *searchURLString;
 @property (nonatomic, strong) NSString       *today;
 @property (nonatomic, strong) NSString       *yesterday;
 @property (nonatomic, strong) NSString       *dayBeforeYesterday;
+@property (nonatomic, strong) NSDictionary   *currentSite;
 
-@property (nonatomic, strong) NSURL          *savePath;
-
-@property (nonatomic) BOOL isSearch;
 @property (nonatomic) BOOL isMagnetLink;
 @property (nonatomic) BOOL isSubKeyword;
-@property (nonatomic) NSInteger downloadSite;
-@property (nonatomic) NSInteger fetchInterval;
 
-@property (nonatomic, strong) AFURLSessionManager *manager;
+@property (nonatomic) NSInteger fetchInterval;
+@property (nonatomic) NSInteger currentRow;
+
 @property (nonatomic, strong) AFHTTPSessionManager *httpManager;
+
 @property (nonatomic, strong) NSDateFormatter     *dateFormater;
 
 @property (nonatomic, readonly) NSManagedObjectContext *managedObjectContext;
 
-@property (nonatomic, strong) NSArray *fetchedTorrents;
 @property (nonatomic, strong) NSTimer *timer;
 @end
 
@@ -58,33 +72,44 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self setupTableViewStyle];
     [self setupData:self];
     [self setupPreference];
     [self observeNotification];
     [self setupRepeatTask];
     [self setupMenuItems];
+    [self setupTableViewDoubleAction];
     self.keyword.delegate       = self;
-    
-    self.tableView.doubleAction = @selector(openTorrentLink:);
-
 }
 
 
 - (void)setRepresentedObject:(id)representedObject {
     [super setRepresentedObject:representedObject];
-    
-    // Update the view, if already loaded.
 }
 
 #pragma mark - Setup
 
 - (void)setupTableViewStyle {
+    self.tableView.rowSizeStyle = [self preferedRowSizeStyle];
     self.tableView.usesAlternatingRowBackgroundColors = YES;
-    self.tableView.rowSizeStyle                       = NSTableViewRowSizeStyleLarge;
     self.tableView.columnAutoresizingStyle            = NSTableViewUniformColumnAutoresizingStyle;
     [self.tableView sizeLastColumnToFit];
+}
+
+
+- (NSTableViewRowSizeStyle )preferedRowSizeStyle {
+    NSInteger rowStyle = [ViewPreferenceController viewPreferenceTableViewRowStyle];
+    switch (rowStyle) {
+        case 0:
+            return NSTableViewRowSizeStyleSmall;
+        case 1:
+            return NSTableViewRowSizeStyleMedium;
+        case 2:
+            return NSTableViewRowSizeStyleLarge;
+        default:
+            break;
+    }
+    return NSTableViewRowSizeStyleSmall;
 }
 
 /**
@@ -92,17 +117,7 @@
  */
 - (void)setupPreference {
     self.isMagnetLink  = [PreferenceController preferenceDownloadLinkType];
-    self.savePath      = [PreferenceController preferenceSavePath];
     self.fetchInterval = [PreferenceController preferenceFetchInterval];
-    self.downloadSite  = [PreferenceController preferenceDownloadSite];
-}
-
-- (BOOL)isCurrentSiteBangumiMoe {
-    return ([PreferenceController preferenceDownloadSite] == DMHYSiteBangumiMoe) ? YES : NO;
-}
-
-- (BOOL)isCurrentSiteACGGG {
-    return ([PreferenceController preferenceDownloadSite] == DMHYSiteACGGG) ? YES : NO;
 }
 
 /**
@@ -119,21 +134,25 @@
     }
     [self startAnimatingProgressIndicator];
     [self configureSearchURLString];
+    // Check is it JSON response site
     if ([self isCurrentSiteBangumiMoe]) {
         [self setupJSONData];
         return;
     }
-    if (self.isSearch) {
-        [self.torrents removeAllObjects];
-    }
+    [self setupXMLData];
+}
+
+/**
+ *  处理 XML 返回数据
+ */
+- (void)setupXMLData {
+    [self.torrents removeAllObjects];
     
     NSURL *url = [NSURL URLWithString:self.searchURLString];
     NSLog(@"url -> %@",url);
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    BOOL isACGGGSite = (self.downloadSite == DMHYSiteACGGG);
-    // Check code it works but mmm.
-    if (op && isACGGGSite) {
+    if (op && [self isCurrentSiteACGGG]) {
         op.responseSerializer = [AFOnoResponseSerializer XMLResponseSerializer];
         op.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/rss+xml"];
     } else {
@@ -148,24 +167,17 @@
         }];
         [self reloadDataAndStopIndicator];
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        // Do this check when first start can't load data. mmm.
-        if ((self.downloadSite == DMHYSiteACGGG) && [self.keyword.stringValue isEqualToString:@""]) {
-            [self setupData:nil];
-            return ;
-        }
-        [self setInfoAndStopIndicator];
+        [self setErrorInfoAndStopIndicator];
         NSLog(@"Error %@",[error localizedDescription]);
     }];
     [[NSOperationQueue mainQueue] addOperation:op];
 }
 
+/**
+ *  处理 JSON 返回数据
+ */
 - (void)setupJSONData {
-    if (self.isSearch) {
-        [self.torrents removeAllObjects];
-    }
-    if ([self.keyword.stringValue isEqualToString:@""]) {
-        self.searchURLString = DMHYBangumiMoeRSS;
-    }
+    [self.torrents removeAllObjects];
     //Bangumi Moe Only Magnet link and open torrent page.
     [self.httpManager GET:self.searchURLString
                parameters:nil
@@ -177,7 +189,7 @@
                     }
                     [self reloadDataAndStopIndicator];
                 } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                    [self setInfoAndStopIndicator];
+                    [self setErrorInfoAndStopIndicator];
                     NSLog(@"Error %@",[error localizedDescription]);
                 }];
 }
@@ -188,11 +200,12 @@
     self.info.stringValue = @"加载完成 w";
 }
 
-- (void)setInfoAndStopIndicator {
+- (void)setErrorInfoAndStopIndicator {
     self.info.stringValue = @"电波很差 poi 或者 花园酱傲娇了 w";
     [self stopAnimatingProgressIndicator];
  
 }
+
 /**
  *  Get a TorrentItem object from ONOXMLElemnt or JSON Dictionary.
  *
@@ -204,7 +217,7 @@
     TorrentItem *item    = [[TorrentItem alloc] init];
     if ([element isKindOfClass:[ONOXMLElement class]]) {
         NSString *dateString = [[element firstChildWithTag:@"pubDate"] stringValue];
-        item.pubDate         = [self formatedDateStringFromDMHYDateString:dateString];
+        item.pubDate         = [[DMHYTool tool] formatedDateStringFromDMHYDateString:dateString];
         item.title           = [[element firstChildWithTag:@"title"] stringValue];
         item.link            = [NSURL URLWithString:[[element firstChildWithTag:@"link"] stringValue]];
         item.author          = [[element firstChildWithTag:@"author"] stringValue];
@@ -219,7 +232,7 @@
         }
         item.title   = element[@"title"];
         item.magnet  = [NSURL URLWithString:element[@"magnet"]];
-        item.link    = [NSURL URLWithString:[NSString stringWithFormat:DMHYBangumiMoeOpenTorrentPagePrefixFormat,link]];
+        item.link    = [NSURL URLWithString:[NSString stringWithFormat:DMHYBangumiMoeOpenTorrentPagePrefixFormat,link]]; //如果返回的 URL 里没有前缀的话，在这里也要处理
         item.pubDate = pubDate;
         item.author  = team_name;
     }
@@ -230,46 +243,12 @@
  *  Set search url string to download site.
  */
 - (void)configureSearchURLString {
-    if ([self.keyword isEqual:@""]) {
-        self.isSearch = NO;
-        switch (self.downloadSite) {
-            case DMHYSiteDefault:
-                self.searchURLString = DMHYRSS;
-                break;
-            case DMHYSiteDandanplay:
-                self.searchURLString = DMHYdandanplayRSS;
-                break;
-            case DMHYSiteACGGG:
-                self.searchURLString = DMHYACGGGRSS;
-                break;
-            case DMHYSiteBangumiMoe:
-                self.searchURLString = DMHYBangumiMoeRSS;
-                break;
-            default:
-                break;
-        }
+    if ([self isLoadHomePage]) {
+        NSString *siteMain = self.currentSite[SiteMainKey];
+        self.searchURLString = siteMain;
     } else {
-        self.isSearch = YES;
-        switch (self.downloadSite) {
-            case DMHYSiteDefault:
-                self.searchURLString = [[NSString stringWithFormat:DMHYSearchByKeyword,self.keyword.stringValue]
-                                        stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-                break;
-            case DMHYSiteDandanplay:
-                self.searchURLString = [[NSString stringWithFormat:DMHYdandanplaySearchByKeyword,self.keyword.stringValue]
-                                        stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-                break;
-            case DMHYSiteACGGG:
-                self.searchURLString = [[NSString stringWithFormat:DMHYACGGGSearchByKeyword,self.keyword.stringValue]
-                                        stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-                break;
-            case DMHYSiteBangumiMoe:
-                self.searchURLString = [[NSString stringWithFormat:DMHYBangumiMoeSearchByKeyword,self.keyword.stringValue]
-                                        stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-                break;
-            default:
-                break;
-        }
+        NSString *siteSearch = self.currentSite[SiteSearchKey];
+        self.searchURLString = [[NSString stringWithFormat:siteSearch, self.keyword.stringValue] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     }
 }
 
@@ -310,14 +289,6 @@
 
 #pragma mark - NSTableViewDelegate
 
-// Cell based
-//- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-//    TorrentItem *torrent = [self.torrents objectAtIndex:row];
-//
-//    return [torrent valueForKey:tableColumn.identifier];
-//}
-
-// View based
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     NSString *identifier = tableColumn.identifier;
     TorrentItem *torrent = self.torrents[row];
@@ -339,45 +310,43 @@
     return nil;
 }
 
+- (void)tableViewSelectionDidChange:(NSNotification *)notification {
+    self.currentRow = self.tableView.selectedRow;
+}
+
+#pragma mark - Table View Context Menu Delegate
+
+- (NSMenu *)tableView:(NSTableView *)aTableView menuForRows:(NSIndexSet *)rows {
+    NSMenu *rightClickMenu = [[NSMenu alloc] initWithTitle:@""];
+    NSMenuItem *openItem = [[NSMenuItem alloc] initWithTitle:@"打开介绍页面"
+                                                      action:@selector(openTorrentLink:)
+                                               keyEquivalent:@""];
+    NSMenuItem *downloadItem = [[NSMenuItem alloc] initWithTitle:@"下载"
+                                                          action:@selector(queryDownloadURL:)
+                                                   keyEquivalent:@""];
+    [rightClickMenu addItem:openItem];
+    [rightClickMenu addItem:downloadItem];
+    return rightClickMenu;
+}
+
 #pragma mark - Notification
 
 - (void)observeNotification {
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter addObserver:self
-                           selector:@selector(handleDownloadTypeChanged:)
-                               name:DMHYDownloadLinkTypeNotification
-                             object:nil];
-    [notificationCenter addObserver:self
-                           selector:@selector(handleSavaPathChanged:)
-                               name:DMHYSavePathChangedNotification
-                             object:nil];
-    [notificationCenter addObserver:self
-                           selector:@selector(handleSelectKeywordChanged:)
-                               name:DMHYSelectKeywordChangedNotification
-                             object:nil];
-    [notificationCenter addObserver:self
-                           selector:@selector(handleFetchIntervalChanged:)
-                               name:DMHYFetchIntervalChangedNotification
-                             object:nil];
-    [notificationCenter addObserver:self
-                           selector:@selector(handleThemeChanged:)
-                               name:DMHYThemeChangedNotification
-                             object:nil];
-    [notificationCenter addObserver:self
-                           selector:@selector(handleDownloadSiteChanged:)
-                               name:DMHYDownloadSiteChangedNotification
-                             object:nil];
+    [DMHYNotification addObserver:self selector:@selector(handleDownloadTypeChanged)   name:DMHYDownloadLinkTypeNotification];
+    [DMHYNotification addObserver:self selector:@selector(handleDownloadSiteChanged)   name:DMHYDownloadSiteChangedNotification];
+    [DMHYNotification addObserver:self selector:@selector(handleSelectKeywordChanged:) name:DMHYSelectKeywordChangedNotification];
+    [DMHYNotification addObserver:self selector:@selector(handleFetchIntervalChanged)  name:DMHYFetchIntervalChangedNotification];
+    [DMHYNotification addObserver:self selector:@selector(handleThemeChanged)          name:DMHYThemeChangedNotification];
+    [DMHYNotification addObserver:self selector:@selector(handleDoubleActionChanged)   name:DMHYDoubleActionChangedNotification];
+    [DMHYNotification addObserver:self selector:@selector(handleMainTableViewRowStyleChanged) name:DMHYMainTableViewRowStyleChangedNotification];
 }
 
-- (void)handleDownloadSiteChanged:(NSNotification *)noti {
+- (void)handleDownloadSiteChanged {
+    self.currentSite = nil;
     [self setupPreference];
 }
 
-- (void)handleDownloadTypeChanged:(NSNotification *)noti {
-    [self setupPreference];
-}
-
-- (void)handleSavaPathChanged:(NSNotification *)noti {
+- (void)handleDownloadTypeChanged {
     [self setupPreference];
 }
 
@@ -397,15 +366,39 @@
     [self setupData:userInfo];
 }
 
-- (void)handleFetchIntervalChanged:(NSNotification *)noti {
+- (void)handleDoubleActionChanged {
+    [self setupTableViewDoubleAction];
+}
+
+- (void)setupTableViewDoubleAction {
+    NSInteger action = [ViewPreferenceController preferenceDoubleAction];
+    switch (action) {
+        case 0:
+            self.tableView.doubleAction = @selector(openTorrentLink:);
+            break;
+        case 1:
+            self.tableView.doubleAction = @selector(queryDownloadURL:);
+            break;
+        default:
+            break;
+    }
+
+}
+
+- (void)handleFetchIntervalChanged {
     [self.timer invalidate];
     self.timer         = nil;
     self.fetchInterval = [PreferenceController preferenceFetchInterval];
     [self setupRepeatTask];
 }
 
-- (void)handleThemeChanged:(NSNotification *)noti {
+- (void)handleThemeChanged {
     [self.view setNeedsDisplay:YES];
+}
+
+- (void)handleMainTableViewRowStyleChanged {
+    [self setupTableViewStyle];
+    [self.tableView setNeedsDisplay:YES];
 }
 
 #pragma mark - Property Initialization
@@ -417,19 +410,18 @@
     return _torrents;
 }
 
+- (NSDictionary *)currentSite {
+    if (!_currentSite) {
+        _currentSite = [[NSUserDefaults standardUserDefaults] dictionaryForKey:kCurrentSite];
+    }
+    return _currentSite;
+}
+
 - (NSString *)searchURLString {
     if (!_searchURLString) {
         _searchURLString = [NSString new];
     }
     return _searchURLString;
-}
-
-- (AFURLSessionManager *)manager {
-    if (!_manager) {
-        NSURLSessionConfiguration *conf = [NSURLSessionConfiguration defaultSessionConfiguration];
-        _manager                        = [[AFURLSessionManager alloc] initWithSessionConfiguration:conf];
-    }
-    return _manager;
 }
 
 - (AFHTTPSessionManager *)httpManager {
@@ -440,11 +432,37 @@
     return _httpManager;
 }
 
-- (NSDateFormatter *)dateFormater {
-    if (!_dateFormater) {
-        _dateFormater = [[NSDateFormatter alloc] init];
-    }
-    return _dateFormater;
+
+
+#pragma mark - Check
+
+- (BOOL)isCurrentSiteResponseJSONData {
+    NSString *responseFileType = self.currentSite[SiteResponseType];
+    return [responseFileType isEqualToString:@"json"] ? YES : NO;
+}
+
+- (BOOL)isCurrentSiteResponseXMLData {
+    NSString *responseFileType = self.currentSite[SiteResponseType];
+    return [responseFileType isEqualToString:@"xml"] ? YES : NO;
+}
+
+/**
+ *  判断搜索关键字是否为空，如果为空的话加载主页，否则加载搜索页
+ *
+ *  @return YES 加载主页数据
+ */
+- (BOOL)isLoadHomePage {
+    return [self.keyword.stringValue isEqualToString:@""] ? YES : NO;
+}
+
+- (BOOL)isCurrentSiteBangumiMoe {
+    NSString *siteName = self.currentSite[SiteNameKey];
+    return [siteName isEqualToString:BangumiMoe] ? YES : NO;
+}
+
+- (BOOL)isCurrentSiteACGGG {
+    NSString *siteName = self.currentSite[SiteNameKey];
+    return [siteName isEqualToString:ACGGG] ? YES : NO;
 }
 
 #pragma mark - Download
@@ -455,82 +473,34 @@
  *  @param sender
  */
 - (IBAction)queryDownloadURL:(id)sender {
-    //NSLog(@"queryDownloadURL");
+    NSInteger row = -1;
+    if ([sender isKindOfClass:[NSButton class]]) {
+        row = [self.tableView rowForView:sender];
+    } else {
+        row = self.currentRow;
+    }
     [self startAnimatingProgressIndicator];
-    NSInteger row     = [self.tableView rowForView:sender];
     TorrentItem *item = (TorrentItem *)[self.torrents objectAtIndex:row];
     if ([self isCurrentSiteACGGG]) {
         // As acggg the enclose url is download url
         if (self.isMagnetLink) {
-            [self downloadTorrentWithURL:item.magnet];
+            [[DMHYDownloader downloader] downloadTorrentWithURL:item.magnet];
             return;
         }
     }
-    NSURL *url;
     if (self.isMagnetLink) {
-        url = item.magnet;
         [self stopAnimatingProgressIndicator];
-        [[NSWorkspace sharedWorkspace] openURL:url];
+        [self openMagnetWith:item.magnet];
         return;
     } else {
-        //NSLog(@"not returned download torrent");
-        url = item.link;
+        [self extractTorrentDownloadURLWithURLString:item.link.absoluteString];
     }
-    //NSLog(@"%@",item.link);
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    if (op) {
-        op.responseSerializer = [AFOnoResponseSerializer HTMLResponseSerializer];
-    }
-    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, ONOXMLDocument *doc ){
-        
-        dispatch_async(dispatch_queue_create("download queue", nil), ^{
-            NSMutableArray *urlArr = [NSMutableArray new];
-            for (ONOXMLElement *element in [doc XPath:kTest]) {
-                [urlArr addObject:[element stringValue]];
-            }
-            
-            NSString *downloadString = [urlArr firstObject];
-            //NSLog(@"DL: %@",downloadString);
-            NSURL *dlURL = [NSURL URLWithString:[NSString stringWithFormat:DMHYURLPrefixFormat,downloadString]];
-            [self downloadTorrentWithURL:dlURL];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self stopAnimatingProgressIndicator];
-            });
-        });
-        
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        NSLog(@"Error %@",[error localizedDescription]);
-        [self stopAnimatingProgressIndicator];
-    }];
-    
-    [[NSOperationQueue mainQueue] addOperation:op];
 }
 
-/**
- *  Download torrent with given url.
- *
- *  @param url The URL to download
- */
-- (void)downloadTorrentWithURL:(NSURL *)url {
-    [self startAnimatingProgressIndicator];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    NSURLSessionDownloadTask *downloadTask = [self.manager downloadTaskWithRequest:request
-                                                                     progress:nil
-                                                                  destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-                                                                      NSString *fileName = [response suggestedFilename];
-                                                                      [self postUserNotificationWithFileName:fileName];
-                                                                      return [self.savePath URLByAppendingPathComponent:[response suggestedFilename]];
-                                                                      
-                                                                  } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nonnull filePath, NSError * _Nonnull error) {
-                                                                      //NSLog(@"Download to : %@",filePath);
-                                                                      if ([self.managedObjectContext hasChanges]) {
-                                                                          [self.managedObjectContext save:NULL];
-                                                                      }
-                                                                      [self stopAnimatingProgressIndicator];
-                                                                  }];
-    [downloadTask resume];
+- (void)openMagnetWith:(NSURL *)magnet {
+    [[NSWorkspace sharedWorkspace] openURL:magnet];
 }
+
 
 #pragma mark - NSTextFieldDelegate
 
@@ -554,23 +524,7 @@
 
 #pragma mark - Utils
 
-- (NSString *)formatedDateStringFromDMHYDateString:(NSString *)dateString {
-//    NSLog(@"dateFormater %@",self.dateFormater);
-    self.dateFormater.dateFormat = @"EEE, dd MM yyyy HH:mm:ss Z";
-    self.dateFormater.locale     = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-    NSDate *longDate             = [self.dateFormater dateFromString:dateString];
-    self.dateFormater.dateFormat = @"EEE HH:mm:ss yy-MM-dd";
-    self.dateFormater.locale     = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
-    return [self.dateFormater stringFromDate:longDate];
-    
-}
 
-- (NSDate *)formatedDateFromDMHYDateString:(NSString *)dateString {
-    self.dateFormater.dateFormat = @"EEE, dd MM yyyy HH:mm:ss Z";
-    self.dateFormater.locale     = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-    NSDate *longDate             = [self.dateFormater dateFromString:dateString];
-    return longDate;
-}
 
 /**
  *  Open Torrent Description Page in default browser.
@@ -578,30 +532,15 @@
  *  @param sender
  */
 - (void)openTorrentLink:(id) sender {
-    NSInteger rowIndex = self.tableView.clickedRow;
+    NSInteger rowIndex = self.currentRow;
     if (rowIndex < 0) {
         //Click column header do nothing.
         return;
     }
+    
     TorrentItem *item = self.torrents[rowIndex];
     NSLog(@"Item Link %@",item.link);
     [[NSWorkspace sharedWorkspace] openURL:item.link];
-}
-
-/**
- *  Remove notification observer.
- */
-- (void)dealloc {
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter removeObserver:self
-                                  name:DMHYDownloadLinkTypeNotification
-                                object:nil];
-    [notificationCenter removeObserver:self
-                                  name:DMHYSavePathChangedNotification
-                                object:nil];
-    [notificationCenter removeObserver:self
-                                  name:DMHYSelectKeywordChangedNotification
-                                object:nil];
 }
 
 #pragma mark - Automatic Download Today Keywords Torrents
@@ -616,9 +555,9 @@
     NSArray *fetchedKeywords = [self.managedObjectContext executeFetchRequest:requestTodayKeywords
                                                      error:NULL];
     for (DMHYKeyword *weekdayKeyword in fetchedKeywords) {
-        NSLog(@"Today has %lu bangumi.",weekdayKeyword.subKeywords.count);
+        NSLog(@"%@ has %lu bangumi.", weekdayKeyword.keyword, weekdayKeyword.subKeywords.count);
         for (DMHYKeyword *keyword in weekdayKeyword.subKeywords) {
-            NSLog(@"Today %@ Keyword %@", weekdayKeyword.keyword, keyword.keyword);
+            NSLog(@"%@ => %@", weekdayKeyword.keyword, keyword.keyword);
             NSString *searchStr = [[NSString stringWithFormat:DMHYSearchByKeyword,keyword.keyword]
                                    stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
             NSURL *url = [NSURL URLWithString:searchStr];
@@ -629,7 +568,6 @@
             }
             
             [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, ONOXMLDocument *xmlDoc) {
-                
                 [xmlDoc enumerateElementsWithXPath:kXPathTorrentItem usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
                     NSString *title                     = [[element firstChildWithTag:@"title"] stringValue];
                     NSFetchRequest *requestExistTorrent = [NSFetchRequest fetchRequestWithEntityName:@"Torrent"];
@@ -641,7 +579,7 @@
                         DMHYTorrent *item = [NSEntityDescription insertNewObjectForEntityForName:@"Torrent"
                                                                           inManagedObjectContext:self.managedObjectContext];
                         NSString *dateString = [[element firstChildWithTag:@"pubDate"] stringValue];
-                        item.pubDate = [self formatedDateFromDMHYDateString:dateString];
+                        item.pubDate = [[DMHYTool tool] formatedDateFromDMHYDateString:dateString];
                         item.title = [[element firstChildWithTag:@"title"] stringValue];
                         item.link = [[element firstChildWithTag:@"link"] stringValue];
                         item.author = [[element firstChildWithTag:@"author"] stringValue];
@@ -651,16 +589,15 @@
                         item.isDownloaded = @NO;
                         item.keyword = keyword;
                         NSLog(@"[New %@]",item.title);
+                        NSError *error = nil;
+                        if (![self.managedObjectContext save:&error]) {
+                            NSLog(@"Error %@",error);
+                        }
+                        [self downloadNewTorrents];
                     } else {
-                        //                    NSLog(@"Exist");
-                        return ;
+                        *stop = 1;
                     }
                 }];
-                NSError *error = nil;
-                if (![self.managedObjectContext save:&error]) {
-                    NSLog(@"Error %@",error);
-                }
-                [self downloadNewTorrents];
             } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
                 /*
                  self.info.stringValue = @"电波很差 poi 或者 花园酱傲娇了 w";
@@ -672,10 +609,7 @@
         }
     }
     NSDate *time = [NSDate new];
-    self.dateFormater.dateFormat = @"MM月dd日 HH:mm:ss";
-    self.dateFormater.locale     = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
-    NSString *formatedDate = [self.dateFormater stringFromDate:time];
-    self.info.stringValue = [NSString stringWithFormat:@"上次检查时间 %@",formatedDate];
+    self.info.stringValue = [NSString stringWithFormat:@"上次检查时间 %@",[[DMHYTool tool] infoDateStringFromDate:time]];
 }
 
 /**
@@ -700,8 +634,8 @@
     
     if ([self.managedObjectContext hasChanges]) {
         [self.managedObjectContext save:NULL];
+        [DMHYNotification postNotificationName:DMHYDatabaseChangedNotification];
     }
-    
 }
 
 /**
@@ -716,9 +650,9 @@
 }
 
 /**
- *  Extract torrent download url then download torrent.
+ *  提取动漫花园条目介绍页面的种子下载链接
  *
- *  @param urlString Donload URL String
+ *  @param urlString 条目页面的 URL
  */
 - (void)extractTorrentDownloadURLWithURLString:(NSString *)urlString {
     [self startAnimatingProgressIndicator];
@@ -731,17 +665,15 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, ONOXMLDocument *doc ){
         
         dispatch_async(dispatch_queue_create("download queue", nil), ^{
-            NSMutableArray *urlArr = [NSMutableArray new];
             
-            for (ONOXMLElement *element in [doc XPath:kTest]) {
-                [urlArr addObject:[element stringValue]];
-            }
-            
-            NSString *downloadString = [urlArr firstObject];
+            __block NSMutableString *downloadString = [NSMutableString new];
+            [doc enumerateElementsWithXPath:kXpathTorrentDirectDownloadLink usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
+                downloadString = [[element stringValue] mutableCopy];
+                *stop = YES;
+            }];
+           
             NSURL *dlURL = [NSURL URLWithString:[NSString stringWithFormat:DMHYURLPrefixFormat,downloadString]];
-            
-            [self downloadTorrentWithURL:dlURL];
-            
+            [[DMHYDownloader downloader] downloadTorrentWithURL:dlURL];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self stopAnimatingProgressIndicator];
             });
@@ -755,16 +687,6 @@
     [[NSOperationQueue mainQueue] addOperation:op];
 }
 
-#pragma mark - LocalNotification
-
-- (void)postUserNotificationWithFileName:(NSString *)fileName {
-    NSUserNotification *notification = [[NSUserNotification alloc] init];
-    notification.title = @"下载完成";
-    notification.informativeText = fileName;
-    notification.soundName = NSUserNotificationDefaultSoundName;
-    [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
-}
-
 - (NSManagedObjectContext *)managedObjectContext {
     if (!_context) {
         _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
@@ -773,7 +695,6 @@
     }
     return _context;
 }
-
 
 - (void)setupMenuItems {
     NSMenu *mainMenu = [[NSApplication sharedApplication] mainMenu];

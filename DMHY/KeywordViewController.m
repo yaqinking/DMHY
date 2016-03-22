@@ -20,17 +20,16 @@
 @interface KeywordViewController ()<NSTableViewDataSource, NSTableViewDelegate>
 
 @property (weak) IBOutlet NSTableView *tableView;
-
 @property (weak) IBOutlet NSTextField *infoTextField;
 
-@property (nonatomic, strong) NSString *bangumiURLString;
-@property (nonatomic, strong) NSMutableArray *allBangumi;
-@property (nonatomic, strong) NSMutableArray *bangumiDatas;
-@property (nonatomic, strong) NSMutableArray *fetchedTitles;
-@property (nonatomic, strong) NSArray *parentKeywords;
-@property (nonatomic, strong) AFHTTPSessionManager *httpManager;
+@property (nonatomic, strong) NSString               *bangumiURLString;
+@property (nonatomic, strong) NSMutableArray         *allBangumi;
+@property (nonatomic, strong) NSMutableArray         *bangumiDatas;
+@property (nonatomic, strong) NSMutableArray         *fetchedTitles;
+@property (nonatomic, strong) NSArray                *parentKeywords;
+@property (nonatomic, strong) AFHTTPSessionManager   *httpManager;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, assign) NSUInteger titleIndex;
+@property (nonatomic, assign) NSUInteger             titleIndex;
 
 @end
 
@@ -40,21 +39,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do view setup here.
     [self setupTableViewStyle];
     [self setupBangumiURLString];
 }
 
 - (void)setupBangumiURLString {
-    NSDate *now            = [NSDate new];
+    NSDate *now                   = [NSDate new];
     NSDateFormatter *dateFormater = [NSDateFormatter new];
-    dateFormater.dateFormat = @"MM";
-//    NSLog(@"Month %@", [dateFormater stringFromDate:now]);
-    NSInteger month = [[dateFormater stringFromDate:now] integerValue];
+    dateFormater.dateFormat       = @"MM";
+    NSInteger month         = [[dateFormater stringFromDate:now] integerValue];
     dateFormater.dateFormat = @"YY";
-    NSString *year = [dateFormater stringFromDate:now];
-    NSString *season = [DMHYTool bangumiSeasonOfMonth:month];
-    self.bangumiURLString = [NSString stringWithFormat:BGMListYearSeasonFormat, year, season];
+    NSString *year          = [dateFormater stringFromDate:now];
+    NSString *season        = [DMHYTool bangumiSeasonOfMonth:month];
+    self.bangumiURLString   = [NSString stringWithFormat:BGMListYearSeasonFormat, year, season];
 }
 
 - (void)setupTableViewStyle {
@@ -175,9 +172,6 @@
         }];
         [[NSOperationQueue mainQueue] addOperation:op];
     }];
-
-    
- 
 }
 
 #pragma mark - Table View

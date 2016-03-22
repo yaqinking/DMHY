@@ -10,6 +10,9 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
+@property (nonatomic) NSWindowController *preferencesWindowController;
+
+- (IBAction)togglePreviewPanel:(id)previewPanel;
 
 @end
 

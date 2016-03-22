@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MASPreferencesViewController.h"
 
-@interface PreferenceController : NSWindowController<NSWindowDelegate>
+@interface PreferenceController : NSViewController<MASPreferencesViewController>
 
 + (void)setupDefaultPreference;
 
@@ -18,13 +19,18 @@
 + (void)setPreferenceSavePath:(NSURL *)path;
 + (NSURL *)preferenceSavePath;
 
++ (void)setFileWatchPath:(NSURL *)path;
++ (NSURL *)fileWatchPath;
+
 + (void)setPreferenceFetchInterval:(NSInteger) seconds;
 + (NSInteger)preferenceFetchInterval;
+
++ (void)setFileWatchInterval:(NSInteger) seconds;
++ (NSInteger)fileWatchInterval;
 
 + (void)setPreferenceTheme:(NSInteger) themeCode;
 + (NSInteger)preferenceTheme;
 
-+ (void)setPreferenceDownloadSite:(NSInteger)site;
-+ (NSInteger)preferenceDownloadSite;
++ (NSURL *)userDownloadPath;
 
 @end

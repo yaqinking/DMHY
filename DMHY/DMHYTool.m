@@ -10,9 +10,20 @@
 
 @interface DMHYTool ()
 
+@property (nonatomic, strong) NSDateFormatter *dateFormater;
+
 @end
 
 @implementation DMHYTool
+
++ (DMHYTool *)tool {
+    static DMHYTool *tool = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        tool = [[DMHYTool alloc] init];
+    });
+    return tool;
+}
 
 + (NSString *) cn_weekdayFromWeekdayCode:(NSInteger )weekday {
     switch (weekday) {
@@ -72,6 +83,43 @@
             break;
     }
     return @"";
+}
+
+- (NSString *)formatedDateStringFromDMHYDateString:(NSString *)dateString {
+    //    NSLog(@"dateFormater %@",self.dateFormater);
+    self.dateFormater.dateFormat = @"EEE, dd MM yyyy HH:mm:ss Z";
+    self.dateFormater.locale     = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    NSDate *longDate             = [self.dateFormater dateFromString:dateString];
+    self.dateFormater.dateFormat = @"EEE HH:mm:ss yy-MM-dd";
+    self.dateFormater.locale     = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    return [self.dateFormater stringFromDate:longDate];
+    
+}
+
+- (NSDate *)formatedDateFromDMHYDateString:(NSString *)dateString {
+    self.dateFormater.dateFormat = @"EEE, dd MM yyyy HH:mm:ss Z";
+    self.dateFormater.locale     = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    NSDate *longDate             = [self.dateFormater dateFromString:dateString];
+    return longDate;
+}
+
+- (NSString *)stringFromSavedDate:(NSDate *)date {
+    self.dateFormater.dateFormat = @"EEE HH:mm:ss yy-MM-dd";
+    self.dateFormater.locale     = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    return [self.dateFormater stringFromDate:date];
+}
+
+- (NSString *)infoDateStringFromDate:(NSDate *)date {
+    self.dateFormater.dateFormat = @"MM月dd日 HH:mm:ss";
+    self.dateFormater.locale     = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    return [self.dateFormater stringFromDate:date];
+}
+
+- (NSDateFormatter *)dateFormater {
+    if (!_dateFormater) {
+        _dateFormater = [[NSDateFormatter alloc] init];
+    }
+    return _dateFormater;
 }
 
 @end

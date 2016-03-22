@@ -8,13 +8,19 @@
 
 #import "AppDelegate.h"
 #import "PreferenceController.h"
+#import "ViewPreferenceController.h"
+#import "SitePreferenceController.h"
 #import "DMHYCoreDataStackManager.h"
 #import "DMHYKeyword+CoreDataProperties.h"
 #import "DMHYAPI.h"
 #import "DMHYTorrent.h"
+#import "MASPreferencesWindowController.h"
+
+@import Quartz;
+
 @interface AppDelegate ()
 
-@property (nonatomic) PreferenceController *preferenceController;
+
 @property (nonatomic, readonly) NSManagedObjectContext *managedObjectContext;
 
 @end
@@ -26,6 +32,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
     [PreferenceController setupDefaultPreference];
+    
     [self setupInitialWeekdaysData];
 }
 
@@ -38,8 +45,7 @@
 #pragma mark - MenuItem
 
 - (IBAction)showPreference:(id)sender {
-    self.preferenceController = [[PreferenceController alloc] init];
-    [self.preferenceController showWindow:nil];
+    [self.preferencesWindowController showWindow:nil];
 }
 
 - (IBAction)showDownloadPathInFinder:(id)sender {
@@ -83,20 +89,50 @@
         default:
             break;
     }
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter postNotificationName:DMHYThemeChangedNotification
-                                      object:nil];
+    [DMHYNotification postNotificationName:DMHYThemeChangedNotification];
+}
+
+- (IBAction)showHelp:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[self helpURL]];
+}
+
+- (IBAction)togglePreviewPanel:(id)previewPanel
+{
+    if ([QLPreviewPanel sharedPreviewPanelExists] && [[QLPreviewPanel sharedPreviewPanel] isVisible])
+    {
+        [[QLPreviewPanel sharedPreviewPanel] orderOut:nil];
+    }
+    else
+    {
+        [[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFront:nil];
+    }
+}
+
+- (NSURL *)helpURL {
+    return [NSURL URLWithString:@"https://github.com/yaqinking/DMHY/wiki"];
 }
 
 #pragma mark - Properties Initialization
-/*
-- (PreferenceController *)preferenceController {
-    if (!_preferenceController) {
-        _preferenceController = [[PreferenceController alloc] init];
+
+- (NSWindowController *)preferencesWindowController
+{
+    if (_preferencesWindowController == nil)
+    {
+        NSViewController *generalViewController = [[PreferenceController alloc] init];
+        NSViewController *viewViewController = [[ViewPreferenceController alloc] init];
+        NSViewController *siteViewController = [[SitePreferenceController alloc] init];
+        NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, viewViewController, siteViewController, nil];
+        
+        // To add a flexible space between General and Advanced preference panes insert [NSNull null]:
+        //     NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, [NSNull null], advancedViewController, nil];
+        
+        NSString *title = @"设置";
+        _preferencesWindowController = [[MASPreferencesWindowController alloc] initWithViewControllers:controllers title:title];
+
     }
-    return _preferenceController;
+    return _preferencesWindowController;
 }
-*/
+
 - (NSManagedObjectContext *)managedObjectContext {
     if (!_context) {
         _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
@@ -126,10 +162,7 @@
             keyword.createDate = [NSDate new];
         };
         [self saveData];
-        NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-        [notificationCenter postNotificationName:DMHYInitialWeekdayCompleteNotification
-                                          object:nil
-                                        userInfo:nil];
+        [DMHYNotification postNotificationName:DMHYInitialWeekdayCompleteNotification];
     } else {
         NSLog(@"Have %lu keywords count ",fetchedWeekdays.count);
     }

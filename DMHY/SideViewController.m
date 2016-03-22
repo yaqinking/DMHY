@@ -123,14 +123,12 @@
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification {
     DMHYKeyword *selectedKeyword = [self.outlineView itemAtRow:[self.outlineView selectedRow]];
     
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     NSString *keyword = selectedKeyword.keyword;
     NSNumber *isSubKeyword = selectedKeyword.isSubKeyword;
     NSDictionary *userInfo = @{kSelectKeyword             : keyword,
                                kSelectKeywordIsSubKeyword : isSubKeyword};
-    [notificationCenter postNotificationName:DMHYSelectKeywordChangedNotification
-                                      object:self
-                                    userInfo:userInfo];
+    
+    [DMHYNotification postNotificationName:DMHYSelectKeywordChangedNotification userInfo:userInfo];
     
 }
 
@@ -141,36 +139,26 @@
 #pragma mark - Notification
 
 - (void)observeNotification {
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter addObserver:self
-                           selector:@selector(handleInitialWeekdayComplete:)
-                               name:DMHYInitialWeekdayCompleteNotification
-                             object:nil];
-    [notificationCenter addObserver:self
-                           selector:@selector(handleThemeChanged:)
-                               name:DMHYThemeChangedNotification
-                             object:nil];
-    [notificationCenter addObserver:self
-                           selector:@selector(handleSeasonKeywordAdded:)
-                               name:DMHYSearsonKeywordAddedNotification
-                             object:nil];
+    [DMHYNotification addObserver:self selector:@selector(handleInitialWeekdayComplete) name:DMHYInitialWeekdayCompleteNotification];
+    [DMHYNotification addObserver:self selector:@selector(handleThemeChanged) name:DMHYThemeChangedNotification];
+    [DMHYNotification addObserver:self selector:@selector(handleSeasonKeywordAdded) name:DMHYSearsonKeywordAddedNotification];
+    
 }
 
-- (void)handleSeasonKeywordAdded:(NSNotification *)noti {
+- (void)handleSeasonKeywordAdded {
     NSLog(@"handleSeasonKeywordAdded");
     self.keywords = nil;
     [self reloadData];
 }
 
-- (void)handleInitialWeekdayComplete:(NSNotification *)noti {
+- (void)handleInitialWeekdayComplete {
     self.keywords = nil;
-//    NSLog(@"InitialWeekdayCompleteNotification");
     [self setupPopupButtonData];
     [self reloadData];
     
 }
 
-- (void)handleThemeChanged:(NSNotification *)noti {
+- (void)handleThemeChanged {
     [self.view setNeedsDisplay:YES];
 }
 
@@ -185,6 +173,7 @@
         [self.managedObjectContext deleteObject:keyword];
         [self saveData];
         [self reloadData];
+        [DMHYNotification postNotificationName:DMHYDatabaseChangedNotification];
     }
 }
 
