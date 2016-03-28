@@ -29,7 +29,7 @@
 #define DMHYDandanplayURLPrefixFormat   @"http:%@"
 
 #define DMHYBangumiMoeAPITorrentPagePrefixFormat  @"https://bangumi.moe/api/v2/torrent/%@"
-#define DMHYBangumiMoeOpenTorrentPagePrefixFormat @"https://bangumi.moe/torrent/%@"
+//#define DMHYBangumiMoeOpenTorrentPagePrefixFormat @"https://bangumi.moe/torrent/%@"
 
 #define DMHY       @"share.dmhy.org"
 #define Dandanplay @"dmhy.dandanplay.com"

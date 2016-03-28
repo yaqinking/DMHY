@@ -17,5 +17,4 @@
 @property (nonatomic, strong) NSString *author;
 @property (nonatomic, strong) NSString *category;
 
-
 @end

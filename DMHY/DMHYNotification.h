@@ -12,6 +12,7 @@
 
 + (void)postNotificationName:(NSString *) name;
 + (void)postNotificationName:(NSString *)name userInfo:(id) info;
++ (void)postNotificationName:(NSString *)name object:(id)object;
 + (void)addObserver:(id)object selector:(SEL) selector name:(NSString *)name;
 
 @end

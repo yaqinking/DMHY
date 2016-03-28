@@ -6,6 +6,7 @@ target 'DMHY' do
 pod 'AFNetworking', '~> 2.0'
 pod 'Ono'
 pod 'AFOnoResponseSerializer'
+pod 'CDEvents'
 
 end
 

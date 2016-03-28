@@ -46,6 +46,8 @@
 		F4A0E3E21CA130A700092C4D /* NSTableView+ContextMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A0E3E11CA130A700092C4D /* NSTableView+ContextMenu.m */; };
 		F4DEA05D1BA99890008E89B8 /* PreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DEA05B1BA99890008E89B8 /* PreferenceController.m */; };
 		F4DEA0601BA99936008E89B8 /* Preference.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4DEA05F1BA99936008E89B8 /* Preference.xib */; };
+		F4DFBB161CACB26B000F4555 /* DMHYXMLDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DFBB151CACB26B000F4555 /* DMHYXMLDataManager.m */; };
+		F4DFBB191CACBF85000F4555 /* DMHYJSONDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DFBB181CACBF85000F4555 /* DMHYJSONDataManager.m */; };
 		F4EC473F1C82FECC00EBF0B9 /* DMHYTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EC473E1C82FECC00EBF0B9 /* DMHYTool.m */; };
 /* End PBXBuildFile section */
 
@@ -125,6 +127,10 @@
 		F4DEA05A1BA99890008E89B8 /* PreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferenceController.h; sourceTree = "<group>"; };
 		F4DEA05B1BA99890008E89B8 /* PreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferenceController.m; sourceTree = "<group>"; };
 		F4DEA05F1BA99936008E89B8 /* Preference.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preference.xib; sourceTree = "<group>"; };
+		F4DFBB141CACB26B000F4555 /* DMHYXMLDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHYXMLDataManager.h; sourceTree = "<group>"; };
+		F4DFBB151CACB26B000F4555 /* DMHYXMLDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHYXMLDataManager.m; sourceTree = "<group>"; };
+		F4DFBB171CACBF85000F4555 /* DMHYJSONDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHYJSONDataManager.h; sourceTree = "<group>"; };
+		F4DFBB181CACBF85000F4555 /* DMHYJSONDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHYJSONDataManager.m; sourceTree = "<group>"; };
 		F4EC473D1C82FECC00EBF0B9 /* DMHYTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHYTool.h; sourceTree = "<group>"; };
 		F4EC473E1C82FECC00EBF0B9 /* DMHYTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHYTool.m; sourceTree = "<group>"; };
 		F4FC772F1BA2DA810095F753 /* DMHY.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DMHY.entitlements; sourceTree = "<group>"; };
@@ -263,6 +269,10 @@
 				F41697B71C8D4D1C002521A4 /* WindowController.m */,
 				F42DCC0F1BB180A4004EC373 /* DMHYCoreDataStackManager.h */,
 				F42DCC101BB180A4004EC373 /* DMHYCoreDataStackManager.m */,
+				F4DFBB141CACB26B000F4555 /* DMHYXMLDataManager.h */,
+				F4DFBB151CACB26B000F4555 /* DMHYXMLDataManager.m */,
+				F4DFBB171CACBF85000F4555 /* DMHYJSONDataManager.h */,
+				F4DFBB181CACBF85000F4555 /* DMHYJSONDataManager.m */,
 			);
 			path = DMHY;
 			sourceTree = "<group>";
@@ -435,9 +445,11 @@
 				F46EFC191CA05C4900B2E3F3 /* ViewPreferenceController.m in Sources */,
 				F48F8C4C1BA05FB9002C96C3 /* NavigationView.m in Sources */,
 				F48F8C471BA03705002C96C3 /* TorrentItem.m in Sources */,
+				F4DFBB161CACB26B000F4555 /* DMHYXMLDataManager.m in Sources */,
 				F4258FAB1CA5818C00B4DF8D /* VerticalSplitViewController.m in Sources */,
 				F48F8C481BA03705002C96C3 /* TitleTableCellView.m in Sources */,
 				F4258FA71CA5815700B4DF8D /* ContainerSplitViewController.m in Sources */,
+				F4DFBB191CACBF85000F4555 /* DMHYJSONDataManager.m in Sources */,
 				F48CC38D1CA2643200EBEAB7 /* DMHYNotification.m in Sources */,
 				F4712E921CA6DFB000BD332D /* FileItem.m in Sources */,
 				F42DCC461BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m in Sources */,

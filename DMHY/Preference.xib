@@ -7,10 +7,11 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PreferenceController">
             <connections>
+                <outlet property="dontDownloadCollectionButton" destination="KeH-fz-ezi" id="oUq-fs-v3s"/>
                 <outlet property="downloadLinkTypeMatrix" destination="gwS-CR-rps" id="e3G-pL-zNR"/>
-                <outlet property="fetchIntervalTextField" destination="fH1-ha-ZtP" id="Spd-yY-2Cz"/>
-                <outlet property="fileWatchIntervalTextField" destination="aet-H3-d4v" id="pX8-7m-YVN"/>
+                <outlet property="fetchIntervalPopUpButton" destination="xDL-0E-GfE" id="K10-ez-lRQ"/>
                 <outlet property="fileWatchPathLabel" destination="Xgl-l1-bw4" id="zas-Q9-pGT"/>
+                <outlet property="fliterKeywordTextField" destination="Bq7-QP-4D3" id="8sH-IE-kaZ"/>
                 <outlet property="savePathLabel" destination="veq-Pa-RmW" id="tRw-4i-wSe"/>
                 <outlet property="view" destination="5li-01-0zP" id="VHC-Ep-lyU"/>
             </connections>
@@ -18,11 +19,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="5li-01-0zP">
-            <rect key="frame" x="0.0" y="0.0" width="382" height="588"/>
+            <rect key="frame" x="0.0" y="0.0" width="382" height="671"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <box fixedFrame="YES" title="下载类型" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="ITO-UL-lQn">
-                    <rect key="frame" x="22" y="446" width="242" height="114"/>
+                    <rect key="frame" x="22" y="529" width="242" height="114"/>
                     <view key="contentView" id="Twf-8a-beD">
                         <rect key="frame" x="1" y="1" width="240" height="98"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -59,7 +60,7 @@
                     <font key="titleFont" size="11" name=".PingFangSC-Regular"/>
                 </box>
                 <box fixedFrame="YES" title="存储路径" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="MJj-R4-r7m">
-                    <rect key="frame" x="22" y="331" width="242" height="111"/>
+                    <rect key="frame" x="22" y="414" width="242" height="111"/>
                     <view key="contentView" id="euh-Kw-Vsn">
                         <rect key="frame" x="1" y="1" width="240" height="95"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -79,7 +80,7 @@
                     <font key="titleFont" size="11" name=".PingFangSC-Regular"/>
                 </box>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eR2-q3-M7M">
-                    <rect key="frame" x="283" y="375" width="64" height="25"/>
+                    <rect key="frame" x="283" y="458" width="64" height="25"/>
                     <buttonCell key="cell" type="roundTextured" title="更改到…" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JSO-cP-aOs">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" size="13" name=".PingFangSC-Regular"/>
@@ -89,7 +90,7 @@
                     </connections>
                 </button>
                 <box fixedFrame="YES" title="文件查看路径" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="FAH-OQ-F7x">
-                    <rect key="frame" x="22" y="216" width="242" height="111"/>
+                    <rect key="frame" x="22" y="299" width="242" height="111"/>
                     <view key="contentView" id="IVQ-J7-X0v">
                         <rect key="frame" x="1" y="1" width="240" height="95"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -109,7 +110,7 @@
                     <font key="titleFont" size="11" name=".PingFangSC-Regular"/>
                 </box>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bks-22-dkE">
-                    <rect key="frame" x="283" y="260" width="64" height="25"/>
+                    <rect key="frame" x="283" y="343" width="64" height="25"/>
                     <buttonCell key="cell" type="roundTextured" title="更改到…" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0NM-sh-ODi">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" size="13" name=".PingFangSC-Regular"/>
@@ -118,14 +119,14 @@
                         <action selector="changeFileWatchPath:" target="-2" id="NUV-67-lOj"/>
                     </connections>
                 </button>
-                <box fixedFrame="YES" title="自动下载新种子间隔时间" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="sr4-HR-LtJ">
-                    <rect key="frame" x="22" y="144" width="242" height="68"/>
+                <box fixedFrame="YES" title="自动下载新种子设置" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="sr4-HR-LtJ">
+                    <rect key="frame" x="22" y="31" width="333" height="223"/>
                     <view key="contentView" id="mFc-SE-EWr">
-                        <rect key="frame" x="1" y="1" width="240" height="52"/>
+                        <rect key="frame" x="1" y="1" width="331" height="207"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dpz-pO-it0">
-                                <rect key="frame" x="192" y="20" width="30" height="17"/>
+                                <rect key="frame" x="174" y="173" width="82" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="分钟" id="Udm-gF-9Me">
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -133,84 +134,87 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zMd-yl-zzB">
-                                <rect key="frame" x="10" y="21" width="30" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="每隔" id="uHq-74-l6j">
+                                <rect key="frame" x="10" y="173" width="69" height="18"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="刷新间隔" id="uHq-74-l6j">
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fH1-ha-ZtP">
-                                <rect key="frame" x="64" y="17" width="113" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="4oQ-lq-DKH">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JlD-ih-h2Y">
+                                <rect key="frame" x="16" y="133" width="56" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="全局过滤" id="ycW-7L-bF6">
+                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bq7-QP-4D3">
+                                <rect key="frame" x="90" y="129" width="71" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="pBQ-W9-eHq">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <outlet property="delegate" destination="-2" id="QFx-8O-Jai"/>
+                                </connections>
                             </textField>
-                        </subviews>
-                    </view>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </box>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="veM-gu-Fw1">
-                    <rect key="frame" x="282" y="156" width="66" height="32"/>
-                    <buttonCell key="cell" type="push" title="设置" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zkW-6k-WgX">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" size="13" name=".PingFangSC-Regular"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="changeFetchInterval:" target="-2" id="xbE-xz-JKe"/>
-                    </connections>
-                </button>
-                <box fixedFrame="YES" title="文件查看列表刷新间隔时间" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="kW0-Ju-21u">
-                    <rect key="frame" x="22" y="72" width="242" height="68"/>
-                    <view key="contentView" id="s5Y-zT-37X">
-                        <rect key="frame" x="1" y="1" width="240" height="52"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SKZ-70-31T">
-                                <rect key="frame" x="192" y="20" width="30" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="分钟" id="oNm-MO-O7Q">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qvM-IB-nGR">
+                                <rect key="frame" x="174" y="132" width="82" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" title="关键字的种子" id="rqG-FG-ibd">
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SvF-xj-VTj">
-                                <rect key="frame" x="10" y="21" width="30" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="每隔" id="DGe-sy-8Ql">
-                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aet-H3-d4v">
-                                <rect key="frame" x="64" y="17" width="113" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="6uh-Kz-YZx">
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xDL-0E-GfE">
+                                <rect key="frame" x="88" y="168" width="76" height="26"/>
+                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Ym3-cj-bm4">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="hI7-5t-u4o">
+                                        <items>
+                                            <menuItem title="5" id="Qe5-44-znp"/>
+                                            <menuItem title="15" id="gCf-2G-rLA"/>
+                                            <menuItem title="30" id="hXm-1g-zGe"/>
+                                            <menuItem title="60" id="zx0-tu-wAc"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="changeFetchInterval:" target="-2" id="hdw-OO-SyD"/>
+                                </connections>
+                            </popUpButton>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40R-Dc-aFd">
+                                <rect key="frame" x="16" y="53" width="297" height="60"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="VUD-LM-ecw">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <string key="placeholderString">使用空格作为分隔（例：[Start]BIG5 MP4[End]）
+设置之后，只下载文件名中既包含 BIG5 同时又包
+含 MP4 的种子</string>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KeH-fz-ezi">
+                                <rect key="frame" x="16" y="21" width="178" height="18"/>
+                                <buttonCell key="cell" type="check" title="不下载合集（完结）的种子" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wtb-Ft-FQh">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="dontDownloadCollection:" target="-2" id="s0Y-vb-bHj"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <font key="titleFont" size="11" name=".PingFangSC-Regular"/>
                 </box>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="www-sN-S5x">
-                    <rect key="frame" x="282" y="84" width="66" height="32"/>
-                    <buttonCell key="cell" type="push" title="设置" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iVL-wV-vn1">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" size="13" name=".PingFangSC-Regular"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="changeFileWatchInterval:" target="-2" id="scW-fS-Qtq"/>
-                    </connections>
-                </button>
             </subviews>
-            <point key="canvasLocation" x="800" y="822"/>
+            <point key="canvasLocation" x="800" y="863.5"/>
         </customView>
     </objects>
 </document>

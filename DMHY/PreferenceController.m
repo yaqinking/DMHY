@@ -12,14 +12,22 @@
 #import "DMHYAPI.h"
 #include <Carbon/Carbon.h>
 
+NSString * const FliterKeywordKey = @"FliterKeyword";
+NSString * const DontDownloadCollectionKey = @"DontDownloadCollection";
+NSString * const DMHYDontDownloadCollectionKeyDidChangedNotification = @"DMHYDontDownloadCollectionKeyDidChangedNotification";
+
 @interface PreferenceController ()
 @property (weak) IBOutlet NSMatrix *downloadLinkTypeMatrix;
 @property (weak) IBOutlet NSTextField *savePathLabel;
 @property (weak) IBOutlet NSTextField *fileWatchPathLabel;
 
 @property (weak) IBOutlet NSTextField *fetchIntervalTextField;
-@property (weak) IBOutlet NSMatrix *downloadSiteMatrix;
-@property (weak) IBOutlet NSTextField *fileWatchIntervalTextField;
+
+@property (weak) IBOutlet NSPopUpButton *fetchIntervalPopUpButton;
+
+@property (weak) IBOutlet NSTextField *fliterKeywordTextField;
+
+@property (weak) IBOutlet NSButton *dontDownloadCollectionButton;
 
 @end
 
@@ -66,9 +74,20 @@
     }
     NSInteger seconds = [PreferenceController preferenceFetchInterval];
     NSInteger minutes = seconds / 60;
-    self.fetchIntervalTextField.stringValue = [NSString stringWithFormat:@"%li", (long)minutes];
-    NSInteger fileWatchInterval = [PreferenceController fileWatchInterval];
-    self.fileWatchIntervalTextField.stringValue = [NSString stringWithFormat:@"%li", (fileWatchInterval/60)];
+    [self.fetchIntervalPopUpButton selectItemWithTitle:[NSString stringWithFormat:@"%li",(long)minutes]];
+    
+    NSInteger dontDownloadCollection = [PreferenceController preferenceDontDownloadCollection];
+    self.dontDownloadCollectionButton.state = dontDownloadCollection;
+    
+    NSString *fliter = [[NSUserDefaults standardUserDefaults] stringForKey:FliterKeywordKey];
+    self.fliterKeywordTextField.stringValue = fliter;
+}
+
+- (void)controlTextDidEndEditing:(NSNotification *)obj {
+    NSString *fliter = ((NSTextField *)obj.object).stringValue;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:fliter forKey:FliterKeywordKey];
+    [userDefaults synchronize];
 }
 
 - (IBAction)downloadLinkTypeChanged:(id)sender {
@@ -104,26 +123,19 @@
 }
 
 - (IBAction)changeFetchInterval:(id)sender {
-    NSInteger minitues = self.fetchIntervalTextField.integerValue;
-    if (minitues < 1 || minitues > 720) {
-        self.fetchIntervalTextField.integerValue = [PreferenceController preferenceFetchInterval]/60;
-        return;
-    }
+    NSInteger minitues = [((NSPopUpButton *)sender).titleOfSelectedItem integerValue];
     NSInteger seconds = minitues * 60;
     [PreferenceController setPreferenceFetchInterval:seconds];
     [DMHYNotification postNotificationName:DMHYFetchIntervalChangedNotification];
 }
 
-- (IBAction)changeFileWatchInterval:(id)sender {
-    NSInteger minitues = self.fileWatchIntervalTextField.integerValue;
-    if (minitues < 1 || minitues > 720 ) {
-        self.fileWatchIntervalTextField.integerValue = [PreferenceController fileWatchInterval]/60;
-        return;
-    }
-    NSInteger seconds = minitues * 60;
-    [PreferenceController setFileWatchInterval:seconds];
-    [DMHYNotification postNotificationName:DMHYFileWatchIntervalChangedNotification];
+- (IBAction)dontDownloadCollection:(id)sender {
+    NSInteger state = ((NSButton *)sender).state;
+    NSLog(@"%li",(long)state);
+    [PreferenceController setPreferenceDontDownloadCollection:state];
+    [DMHYNotification postNotificationName:DMHYDontDownloadCollectionKeyDidChangedNotification];
 }
+
 
 #pragma mark - Setup
 
@@ -144,13 +156,7 @@
         [PreferenceController setPreferenceFetchInterval:kFetchIntervalMinimum];
         NSLog(@"Set FetchInterval to default %i minitues.",kFetchIntervalMinimum);
     }
-    //For has 1.3 version
     
-    NSInteger fileWatchInterval = [PreferenceController fileWatchInterval];
-    if (fileWatchInterval < kFileWatchIntervalMinimum) {
-        [PreferenceController setFileWatchInterval:kFileWatchIntervalMinimum];
-        NSLog(@"Set File Watch Interval To Default %i s", kFileWatchIntervalMinimum);
-    }
 }
 
 + (NSURL *)userDownloadPath {
@@ -172,6 +178,16 @@
 + (BOOL)preferenceDownloadLinkType {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     return [userDefaults boolForKey:kDownloadLinkType];
+}
+
++ (void)setPreferenceDontDownloadCollection:(BOOL)value {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:value forKey:DontDownloadCollectionKey];
+    [userDefaults synchronize];
+}
+
++ (BOOL)preferenceDontDownloadCollection {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:DontDownloadCollectionKey];
 }
 
 + (void)setPreferenceSavePath:(NSURL *)path {
@@ -216,22 +232,6 @@
 + (NSInteger)preferenceFetchInterval {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     return [userDefaults integerForKey:kFetchInterval];
-}
-
-+ (void)setFileWatchInterval:(NSInteger)seconds {
-    NSUserDefaults *userDefautls = [NSUserDefaults standardUserDefaults];
-    if (seconds < kFileWatchIntervalMinimum || seconds > kFileWatchIntervalMaximum) {
-        //Not allowed set to default
-        [userDefautls setInteger:kFileWatchIntervalMinimum forKey:kFileWatchInterval];
-        [userDefautls synchronize];
-    }
-    [userDefautls setInteger:seconds forKey:kFileWatchInterval];
-    [userDefautls synchronize];
-    NSLog(@"Set File Watch Interval to %li seconds.",(long)seconds);
-}
-
-+ (NSInteger)fileWatchInterval {
-    return [[NSUserDefaults standardUserDefaults] integerForKey:kFileWatchInterval];
 }
 
 + (void)setPreferenceTheme:(NSInteger)themeCode {

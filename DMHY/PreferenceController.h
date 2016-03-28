@@ -9,7 +9,11 @@
 #import <Cocoa/Cocoa.h>
 #import "MASPreferencesViewController.h"
 
-@interface PreferenceController : NSViewController<MASPreferencesViewController>
+extern NSString * const FliterKeywordKey;
+extern NSString * const DontDownloadCollectionKey;
+extern NSString * const DMHYDontDownloadCollectionKeyDidChangedNotification;
+
+@interface PreferenceController : NSViewController<MASPreferencesViewController, NSTextFieldDelegate>
 
 + (void)setupDefaultPreference;
 
@@ -25,11 +29,11 @@
 + (void)setPreferenceFetchInterval:(NSInteger) seconds;
 + (NSInteger)preferenceFetchInterval;
 
-+ (void)setFileWatchInterval:(NSInteger) seconds;
-+ (NSInteger)fileWatchInterval;
-
 + (void)setPreferenceTheme:(NSInteger) themeCode;
 + (NSInteger)preferenceTheme;
+
++ (void)setPreferenceDontDownloadCollection:(BOOL)value;
++ (BOOL)preferenceDontDownloadCollection;
 
 + (NSURL *)userDownloadPath;
 

@@ -9,6 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import "MASPreferencesViewController.h"
 
+extern NSString * const SiteResponseJSON;
+extern NSString * const SiteResponseXML;
+
 @interface SitePreferenceController : NSViewController<MASPreferencesViewController>
 
 + (void)setupDefaultSites;

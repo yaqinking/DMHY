@@ -9,11 +9,15 @@
 #import "SitePreferenceController.h"
 #import "DMHYAPI.h"
 
+NSString * const SiteResponseJSON = @"JSON";
+NSString * const SiteResponseXML = @"XML";
+
 @interface SitePreferenceController ()<NSTableViewDelegate, NSTableViewDataSource>
 
 @property (weak) IBOutlet NSTextField *siteNameTextField;
 @property (weak) IBOutlet NSTextField *mainURLTextField;
 @property (weak) IBOutlet NSTextField *searchURLTextField;
+@property (weak) IBOutlet NSPopUpButton *siteResponseTypePopUpButton;
 
 @property (weak) IBOutlet NSTableView *tableView;
 
@@ -44,20 +48,26 @@
 + (void)setupDefaultSites {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSArray *savedSites = [userDefaults arrayForKey:kSupportSite];
-    if (savedSites.count == 0) {
+    NSString *siteResponseType = [[savedSites firstObject] valueForKey:SiteResponseType];
+    
+    if (savedSites.count == 0 || siteResponseType == nil) {
         NSMutableArray *sites = [NSMutableArray array];
         NSDictionary *siteDMHY = @{ SiteNameKey : @"share.dmhy.org",
                                     SiteMainKey : DMHYRSS,
-                                    SiteSearchKey : DMHYSearchByKeyword };
+                                    SiteSearchKey : DMHYSearchByKeyword,
+                                    SiteResponseType : SiteResponseXML };
         NSDictionary *siteDandanplay = @{ SiteNameKey : @"dmhy.dandanplay.com",
                                           SiteMainKey : DMHYdandanplayRSS,
-                                          SiteSearchKey : DMHYdandanplaySearchByKeyword};
+                                          SiteSearchKey : DMHYdandanplaySearchByKeyword,
+                                          SiteResponseType : SiteResponseXML };
         NSDictionary *siteACGGG = @{ SiteNameKey : @"bt.acg.gg",
                                      SiteMainKey : DMHYACGGGRSS,
-                                     SiteSearchKey : DMHYACGGGSearchByKeyword};
+                                     SiteSearchKey : DMHYACGGGSearchByKeyword,
+                                     SiteResponseType : SiteResponseXML };
         NSDictionary *siteBangumiMoe = @{ SiteNameKey : @"bangumi.moe",
-                                     SiteMainKey : DMHYBangumiMoeRSS,
-                                     SiteSearchKey : DMHYBangumiMoeSearchByKeyword};
+                                          SiteMainKey : DMHYBangumiMoeRSS,
+                                          SiteSearchKey : DMHYBangumiMoeSearchByKeyword,
+                                          SiteResponseType : SiteResponseJSON };
         [sites addObject:siteDMHY];
         [sites addObject:siteDandanplay];
         [sites addObject:siteACGGG];
@@ -88,6 +98,13 @@
         cellView.textField.stringValue = siteName;
         return cellView;
     }
+    
+    if ([identifier isEqualToString:@"responseTypeCell"]) {
+        NSTableCellView *cellView   = [tableView makeViewWithIdentifier:@"responseTypeCell" owner:self];
+        NSString *siteMain = [site valueForKey:SiteResponseType];
+        cellView.textField.stringValue = siteMain;
+        return cellView;
+    }
     if ([identifier isEqualToString:@"siteMainCell"]) {
         NSTableCellView *cellView   = [tableView makeViewWithIdentifier:@"siteMainCell" owner:self];
         NSString *siteMain = [site valueForKey:SiteMainKey];
@@ -116,12 +133,14 @@
     NSString *siteName = self.siteNameTextField.stringValue;
     NSString *siteMain = self.mainURLTextField.stringValue;
     NSString *siteSearch = self.searchURLTextField.stringValue;
+    NSString *siteResponseType = self.siteResponseTypePopUpButton.selectedItem.title;
     if (!siteName.length && !siteMain.length && !siteSearch.length) {
         return;
     }
     NSDictionary *newSite = @{ SiteNameKey : siteName,
                                SiteMainKey : siteMain,
-                               SiteSearchKey : siteSearch};
+                               SiteSearchKey : siteSearch,
+                               SiteResponseType : siteResponseType};
     [self.sites addObject:newSite];
     [[NSUserDefaults standardUserDefaults] setObject:self.sites forKey:kSupportSite];
     [[NSUserDefaults standardUserDefaults] synchronize];

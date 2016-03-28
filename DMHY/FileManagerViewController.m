@@ -14,6 +14,9 @@
 #import "NSTableView+ContextMenu.h"
 #import "FileItem.h"
 #import "FileTableView.h"
+#import "CDEvent.h"
+#import "CDEvents.h"
+#import <CDEvents/CDEventsDelegate.h>
 
 @import Quartz;
 
@@ -35,7 +38,7 @@
 
 @end
 
-@interface FileManagerViewController ()<NSTableViewDelegate, NSTableViewDataSource, ContextMenuDelegate, QLPreviewPanelDelegate, QLPreviewPanelDataSource>
+@interface FileManagerViewController ()<NSTableViewDelegate, NSTableViewDataSource, ContextMenuDelegate, QLPreviewPanelDelegate, QLPreviewPanelDataSource, CDEventsDelegate>
 
 @property (weak) IBOutlet FileTableView *tableView;
 @property (weak) IBOutlet NSTextField *infoTextField;
@@ -45,8 +48,12 @@
 @property (nonatomic, strong) NSMutableArray *files;
 @property (nonatomic, strong) NSTimer *timer;
 
-@property (nonatomic, assign) NSInteger fileWatchInterval;
 @property (nonatomic, strong) NSURL *fileWatchURL;
+
+@property (nonatomic, strong) NSFileManager *fileManager;
+@property (nonatomic, strong) NSDateFormatter *formater;
+
+@property (nonatomic, strong) CDEvents *events;
 
 @end
 
@@ -55,30 +62,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self observeNotification];
-    [self setupPreference];
     [self setupFileData];
     [self setupTableViewDoubleAction];
-    [self setupRepeatTask];
-}
-
-- (void)setupPreference {
-    self.fileWatchInterval = [PreferenceController fileWatchInterval];
-    if (self.fileWatchInterval < kFileWatchIntervalMinimum) {
-        self.fileWatchInterval = kFileWatchIntervalMinimum;
-        NSLog(@"File Manager Default set to %li",(long)self.fileWatchInterval);
-    }
+    [self setupFileWatcher];
 }
 
 - (void)setupTableViewDoubleAction {
     self.tableView.doubleAction = @selector(openLocalFile:);
 }
 
-- (void)setupRepeatTask {
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.fileWatchInterval
-                                                  target:self
-                                                selector:@selector(setupFileData)
-                                                userInfo:nil
-                                                 repeats:YES];
+- (void)setupFileWatcher {
+    CDEventsEventStreamCreationFlags creationFlags = kCDEventsDefaultEventStreamFlags;
+    
+    creationFlags |= kFSEventStreamCreateFlagFileEvents;
+    
+    
+    _events = [[CDEvents alloc] initWithURLs:@[self.fileWatchURL]
+                                    delegate:self
+                                   onRunLoop:[NSRunLoop mainRunLoop]
+                        sinceEventIdentifier:kCDEventsSinceEventNow
+                        notificationLantency:CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY
+                     ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
+                                 excludeURLs:0
+                         streamCreationFlags:creationFlags];
+    //[_events setIgnoreEventsFromSubDirectories:YES];
+    
+//    NSLog(@"File Watcher: \n%@\n------\n%@",
+//          _events,
+//          [_events streamDescription]);
 }
 
 - (void)setupTableViewStyle {
@@ -106,8 +117,27 @@
 - (NSURL *)fileWatchURL {
     if (!_fileWatchURL) {
         _fileWatchURL = [PreferenceController fileWatchPath];
+        [_fileWatchURL startAccessingSecurityScopedResource];
     }
     return _fileWatchURL;
+}
+
+//const UInt32 DMHYFileEventFlagFileChanged = 67584;
+typedef NS_ENUM(UInt32, DMHYFileEventFlag) {
+    DMHYFileEventFlagFileMoved = 128256,
+    DMHYFileEventFlagFileChanged = 67584,
+    DMHYFileEventFlagFileDeleted = 70656,
+};
+
+- (void)URLWatcher:(CDEvents *)urlWatcher eventOccurred:(CDEvent *)event {
+//    NSLog(@"[Delegate] URLWatcher: %@\nEvent: %@", urlWatcher, event);
+//    NSLog(@"Event Desc %@" , event.description);
+    if (event.flags == DMHYFileEventFlagFileChanged ||
+        event.flags == DMHYFileEventFlagFileMoved ) {
+//        NSLog(@"\n \n File Changed %@ \n \n Rescan",event);
+        [self setupFileData];
+    }
+    
 }
 
 #pragma mark - File Watch
@@ -116,13 +146,13 @@
 //    NSLog(@"Setup File Data");
     dispatch_queue_t file_queue = dispatch_queue_create("file_watch_queue", 0);
     dispatch_async(file_queue, ^{
-        NSFileManager *fileManager = [NSFileManager defaultManager];
+//        NSLog(@"File Manager %p File Watch URL %p",self.fileManager, self.fileWatchURL);
         if (!self.fileWatchURL) { //Stop when use didn't select directory.
 //            NSLog(@"Not set watch directory.");
             return ;
         }
-        [self.fileWatchURL startAccessingSecurityScopedResource];
-        NSDirectoryEnumerator *enumerator = [fileManager enumeratorAtURL:self.fileWatchURL
+        
+        NSDirectoryEnumerator *enumerator = [self.fileManager enumeratorAtURL:self.fileWatchURL
                                               includingPropertiesForKeys:@[NSURLNameKey, NSURLIsDirectoryKey]
                                                                  options:NSDirectoryEnumerationSkipsHiddenFiles
                                                             errorHandler:^BOOL(NSURL *url, NSError *error)
@@ -156,16 +186,15 @@
         }
         
         __block NSMutableArray *tempArr = [NSMutableArray new];
+        __block NSDate *today = [[NSDate alloc] initWithTimeIntervalSinceNow:-60*60*24*7];
         [mutableFileURLs enumerateObjectsUsingBlock:^(id  _Nonnull filePath, NSUInteger idx, BOOL * _Nonnull stop) {
             NSURL *url = filePath;
             NSString *extenstion = url.pathExtension;
             if ([extenstion isEqualToString:@"mp4"] ||
                 [extenstion isEqualToString:@"mkv"] ) {
-                if ([fileManager fileExistsAtPath:url.path]) {
-                    NSDictionary *attributes = [fileManager attributesOfItemAtPath:url.path error:nil];
+                if ([self.fileManager fileExistsAtPath:url.path]) {
+                    NSDictionary *attributes = [self.fileManager attributesOfItemAtPath:url.path error:nil];
                     NSDate *modi = attributes[NSFileModificationDate];
-                    NSDate *today = [[NSDate alloc] initWithTimeIntervalSinceNow:-60*60*24*7];
-                    
                     if ([modi compare:today] == NSOrderedDescending) {
                         FileItem *item = [[FileItem alloc] initWithURL:url
                                                               fileName:mutableFileNames[idx]
@@ -202,13 +231,8 @@
     FileItem *file = self.files[row];
     if ([identifier isEqualToString:@"modifyDateCell"]) {
         NSTableCellView *cellView      = [tableView makeViewWithIdentifier:@"modifyDateCell" owner:self];
-//        NSString *pubDate = [[DMHYTool tool] stringFromSavedDate:torrent.pubDate];
-//        NSDate *modi = file[@"modifyDate"];
         NSDate *modi = file.modifyDate;
-        NSDateFormatter *formater = [NSDateFormatter new];
-        formater.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
-        formater.dateFormat = @"EEE HH:mm:ss yy-MM-dd";
-        NSString *cDate = [formater stringFromDate:modi];
+        NSString *cDate = [[DMHYTool tool] stringFromSavedDate:modi];
         cellView.textField.stringValue = cDate;
         return cellView;
     }
@@ -218,6 +242,15 @@
         return cellView;
     }
     return nil;
+}
+
+- (NSDateFormatter *)formater {
+    if (!_formater) {
+        _formater = [NSDateFormatter new];
+        _formater.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+        _formater.dateFormat = @"EEE HH:mm:ss yy-MM-dd";
+    }
+    return _formater;
 }
 
 #pragma mark - Context Menu Delegate
@@ -256,14 +289,6 @@
     [DMHYNotification addObserver:self selector:@selector(handleThemeChanged) name:DMHYThemeChangedNotification];
     [DMHYNotification addObserver:self selector:@selector(handleFileWatchPathChanged) name:DMHYFileWatchPathChangedNotification];
     [DMHYNotification addObserver:self selector:@selector(handleMainTableViewRowStyleChanged) name:DMHYMainTableViewRowStyleChangedNotification];
-    [DMHYNotification addObserver:self selector:@selector(handleFileWatchIntervalChanged) name:DMHYFileWatchIntervalChangedNotification];
-}
-
-- (void)handleFileWatchIntervalChanged {
-    [self.timer invalidate];
-    self.timer         = nil;
-    self.fileWatchInterval = [PreferenceController fileWatchInterval];
-    [self setupRepeatTask];
 }
 
 - (void)handleFileWatchPathChanged {
@@ -286,6 +311,13 @@
         _files = [NSMutableArray new];
     }
     return _files;
+}
+
+- (NSFileManager *)fileManager {
+    if (!_fileManager) {
+        _fileManager = [NSFileManager defaultManager];
+    }
+    return _fileManager;
 }
 
 #pragma mark - Quick Look panel support

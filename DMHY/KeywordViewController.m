@@ -22,14 +22,23 @@
 @property (weak) IBOutlet NSTableView *tableView;
 @property (weak) IBOutlet NSTextField *infoTextField;
 
+// bgmlist JSON URL String
 @property (nonatomic, strong) NSString               *bangumiURLString;
+
+// 要显示在 TableView 上的数据
 @property (nonatomic, strong) NSMutableArray         *allBangumi;
+// 从 bgmlist 获取到的数据（需要分析）
 @property (nonatomic, strong) NSMutableArray         *bangumiDatas;
-@property (nonatomic, strong) NSMutableArray         *fetchedTitles;
+// 番组名字数据（每个条目需要截取之后作为关键字用）
+@property (nonatomic, strong) NSMutableArray         *fetchedBangumiTitles;
+// 周几数据
 @property (nonatomic, strong) NSArray                *parentKeywords;
+
 @property (nonatomic, strong) AFHTTPSessionManager   *httpManager;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, assign) NSUInteger             titleIndex;
+
+// Raw 条目所在的 Index（ -1 之后就是更新最快的字幕组的 Index）
+@property (nonatomic, assign) NSUInteger             rawBangumiIndex;
 
 @end
 
@@ -63,7 +72,7 @@
 }
 
 /**
- *  Set Bangumi Main Info
+ *  Set Bangumi Main Info 从 bgmlist 获取番组数据
  */
 - (IBAction)fetchBangumiInfo:(id) sender {
     [self.httpManager GET:self.bangumiURLString
@@ -100,7 +109,7 @@
 }
 
 /**
- *  Set Bangumi SubGroup Property
+ *  Set Bangumi SubGroup Property 字幕组数据是以从 bgmlist 获取到的 番组名字 作为关键字从动漫花园搜索之后，定位到 Raw 所在的 Index，然后 －1 之后作为更新最快的带字幕组的番组条目，然后提取出字幕组的名字。
  */
 - (void)setupSubGroup {
     [self.allBangumi enumerateObjectsUsingBlock:^(Bangumi * bgm, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -109,26 +118,30 @@
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
         op.responseSerializer = [AFOnoResponseSerializer XMLResponseSerializer];
+        
         __block NSUInteger progress = idx+2;
+        
         [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, ONOXMLDocument *xmlDoc) {
             dispatch_async(dispatch_queue_create("subGroupQueue", 0), ^{
+        
                 [xmlDoc enumerateElementsWithXPath:kXPathTorrentItem usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
                     NSString *title = [[element firstChildWithTag:@"title"] stringValue];
-                    [self.fetchedTitles addObject:title];
+                    [self.fetchedBangumiTitles addObject:title];
                     if ([title containsString:@"Ohys-Raw"]) {
                         *stop = 1;
-                        self.titleIndex = idx;
+                        self.rawBangumiIndex = idx;
                     }
                 }];
-                
-                if (self.titleIndex == 0) {
-                    self.fetchedTitles = nil;
-                    self.titleIndex = 0;
+                // 如果没有发现 Raw 资源，也就不用去分析离 Raw 最近的字幕组哪一个
+                if (self.rawBangumiIndex == 0) {
+                    self.fetchedBangumiTitles = nil;
+                    self.rawBangumiIndex = 0;
                     bgm.subGroup = @"";
                     return ;
                 }
-                if ((self.titleIndex - 1) > 0) {
-                    NSString *bangumi = self.fetchedTitles[(self.titleIndex-1)];
+                
+                if ((self.rawBangumiIndex - 1) > 0) {
+                    NSString *bangumi = self.fetchedBangumiTitles[(self.rawBangumiIndex-1)];
                     NSMutableString *subGroup = [NSMutableString new];
                     if ([bangumi containsString:@"字幕组"]) {
                         NSRange subRange = [bangumi rangeOfString:@"字幕组"];
@@ -154,9 +167,13 @@
                     bgm.subGroup = subGroup;
 //                    NSLog(@"%@ %@ %@", bgm.titleCN, subGroup, bgm.weekDayCN);
                 }
-                self.fetchedTitles = nil;
-                self.titleIndex = 0;
+                
+                // 单个条目的所有 Title 分析之后清空，准备解析下一个的时候使用
+                self.fetchedBangumiTitles = nil;
+                self.rawBangumiIndex = 0;
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    // 单个条目字幕组解析之后，重新载入 TableView Data，看到效果
                     [self.tableView reloadData];
                     if (progress == self.allBangumi.count) {
                         self.infoTextField.stringValue = @"全部解析完毕 >_< 预测偏差巨大，请谨慎使用。";
@@ -320,11 +337,11 @@
     return _parentKeywords;
 }
 
-- (NSMutableArray *)fetchedTitles {
-    if (!_fetchedTitles) {
-        _fetchedTitles = [NSMutableArray new];
+- (NSMutableArray *)fetchedBangumiTitles {
+    if (!_fetchedBangumiTitles) {
+        _fetchedBangumiTitles = [NSMutableArray new];
     }
-    return _fetchedTitles;
+    return _fetchedBangumiTitles;
 }
 
 - (NSMutableArray *)bangumiDatas {
