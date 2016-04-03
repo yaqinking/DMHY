@@ -143,7 +143,7 @@
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JlD-ih-h2Y">
                                 <rect key="frame" x="16" y="133" width="56" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="全局过滤" id="ycW-7L-bF6">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="仅下载带" id="ycW-7L-bF6">
                                     <font key="font" size="13" name=".PingFangSC-Regular"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -190,7 +190,7 @@
                                 <rect key="frame" x="16" y="53" width="297" height="60"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="VUD-LM-ecw">
                                     <font key="font" metaFont="system"/>
-                                    <string key="placeholderString">使用空格作为分隔（例：[Start]BIG5 MP4[End]）
+                                    <string key="placeholderString">使用空格作为分隔（例：BIG5 MP4）
 设置之后，只下载文件名中既包含 BIG5 同时又包
 含 MP4 的种子</string>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>

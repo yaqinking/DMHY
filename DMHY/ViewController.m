@@ -73,11 +73,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupTableViewStyle];
-    [self checkResponseType];
-    [self setupData:self];
-    [self setupPreference];
+//    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:DMHYThemeKey];
     [self observeNotification];
+    [self setupPreference];
+    [self setupTableViewStyle];
+//    [self checkResponseType];
+    [self setupData:self];
     [self setupRepeatTask];
     [self setupMenuItems];
     [self setupTableViewDoubleAction];
@@ -111,14 +112,14 @@
     }
     return NSTableViewRowSizeStyleSmall;
 }
-
+/**
 - (void)checkResponseType {
     NSString *responseType = self.currentSite[SiteResponseType];
     if (responseType == nil) {
         [SitePreferenceController setupDefaultSites];
     }
 }
-
+*/
 /**
  *  Retrive saved preference value and set to self variable.
  */
@@ -193,12 +194,13 @@
  *  Schedule auto download new torrent task.
  */
 - (void)setupRepeatTask {
-    //self.fetchInterval
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.fetchInterval
+    if (self.fetchInterval != 0) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:self.fetchInterval
                                                       target:self
                                                     selector:@selector(setupAutomaticDownloadNewTorrent)
                                                     userInfo:nil
                                                      repeats:YES];
+    }
 }
 
 /**
@@ -353,7 +355,12 @@
 
 - (NSDictionary *)currentSite {
     if (!_currentSite) {
-        _currentSite = [[NSUserDefaults standardUserDefaults] dictionaryForKey:kCurrentSite];
+        NSDictionary *siteDMHY = @{ SiteNameKey : @"share.dmhy.org",
+                                    SiteMainKey : DMHYRSS,
+                                    SiteSearchKey : DMHYSearchByKeyword,
+                                    SiteResponseType : SiteResponseXML };
+//        _currentSite = [[NSUserDefaults standardUserDefaults] dictionaryForKey:kCurrentSite];
+        _currentSite = siteDMHY;
     }
     return _currentSite;
 }

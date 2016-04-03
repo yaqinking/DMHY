@@ -15,8 +15,6 @@ extern NSString * const DMHYDontDownloadCollectionKeyDidChangedNotification;
 
 @interface PreferenceController : NSViewController<MASPreferencesViewController, NSTextFieldDelegate>
 
-+ (void)setupDefaultPreference;
-
 + (void)setPreferenceDownloadLinkType:(BOOL)type;
 + (BOOL)preferenceDownloadLinkType;
 

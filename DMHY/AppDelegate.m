@@ -30,10 +30,40 @@
 @synthesize managedObjectContext = _context;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    // Insert code here to initialize your application
-    [PreferenceController setupDefaultPreference];
-    
+    [self registeAppDefaults];
     [self setupInitialWeekdaysData];
+}
+
+- (void)registeAppDefaults {
+    NSMutableArray *sites = [NSMutableArray array];
+    NSDictionary *siteDMHY       = @{ SiteNameKey : @"share.dmhy.org",
+                                      SiteMainKey : DMHYRSS,
+                                      SiteSearchKey : DMHYSearchByKeyword,
+                                      SiteResponseType : SiteResponseXML };
+    NSDictionary *siteDandanplay = @{ SiteNameKey : @"dmhy.dandanplay.com",
+                                      SiteMainKey : DMHYdandanplayRSS,
+                                      SiteSearchKey : DMHYdandanplaySearchByKeyword,
+                                      SiteResponseType : SiteResponseXML };
+    NSDictionary *siteACGGG      = @{ SiteNameKey : @"bt.acg.gg",
+                                      SiteMainKey : DMHYACGGGRSS,
+                                      SiteSearchKey : DMHYACGGGSearchByKeyword,
+                                      SiteResponseType : SiteResponseXML };
+    NSDictionary *siteBangumiMoe = @{ SiteNameKey : @"bangumi.moe",
+                                      SiteMainKey : DMHYBangumiMoeRSS,
+                                      SiteSearchKey : DMHYBangumiMoeSearchByKeyword,
+                                      SiteResponseType : SiteResponseJSON };
+    [sites addObject:siteDMHY];
+    [sites addObject:siteDandanplay];
+    [sites addObject:siteACGGG];
+    [sites addObject:siteBangumiMoe];
+    NSDictionary *appDefaults = @{ FliterKeywordKey : @"",
+                                   DontDownloadCollectionKey : @YES,
+                                   kFetchInterval : @300,
+                                   kCurrentSite : siteDMHY,
+                                   kSupportSite : sites,
+                                   kMainViewRowStyle : @2,
+                                   kDownloadLinkType : @0 };
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -78,7 +108,7 @@
 
 - (IBAction)switchTheme:(id)sender {
     NSInteger themeCode = [PreferenceController preferenceTheme];
-    [PreferenceController setPreferenceTheme:!themeCode];
+    [PreferenceController setPreferenceTheme:(!themeCode)];
     NSInteger currentTheme = [PreferenceController preferenceTheme];
     switch (currentTheme) {
         case DMHYThemeLight:
@@ -121,6 +151,8 @@
         NSViewController *generalViewController = [[PreferenceController alloc] init];
         NSViewController *viewViewController = [[ViewPreferenceController alloc] init];
         NSViewController *siteViewController = [[SitePreferenceController alloc] init];
+        
+        
         NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, viewViewController, siteViewController, nil];
         
         // To add a flexible space between General and Advanced preference panes insert [NSNull null]:

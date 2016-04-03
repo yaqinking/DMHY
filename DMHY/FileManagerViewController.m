@@ -62,9 +62,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self observeNotification];
-    [self setupFileData];
-    [self setupTableViewDoubleAction];
-    [self setupFileWatcher];
+    if (self.fileWatchURL) {
+        [self setupFileData];
+        [self setupTableViewDoubleAction];
+        [self setupFileWatcher];
+    }
+    
 }
 
 - (void)setupTableViewDoubleAction {

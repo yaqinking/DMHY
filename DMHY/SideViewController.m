@@ -159,6 +159,7 @@
 }
 
 - (void)handleThemeChanged {
+    NSLog(@"SV ThemeChanged");
     [self.view setNeedsDisplay:YES];
 }
 

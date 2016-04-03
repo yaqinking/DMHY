@@ -63,7 +63,11 @@ NSString * const DMHYDontDownloadCollectionKeyDidChangedNotification = @"DMHYDon
     NSInteger idx = [PreferenceController preferenceDownloadLinkType];
     [self.downloadLinkTypeMatrix selectCellAtRow:idx column:0];
     NSURL *url = [PreferenceController preferenceSavePath];
-    self.savePathLabel.stringValue = [url path];
+    if (url) {
+        self.savePathLabel.stringValue = [url path];
+    } else {
+        self.savePathLabel.stringValue = @"请设置文件保存路径";
+    }
     //Todo bug
 //    self.fileWatchPathLabel.stringValue = [[PreferenceController fileWatchPath] path];
     NSURL *fileWatchPath = [PreferenceController fileWatchPath];
@@ -74,6 +78,7 @@ NSString * const DMHYDontDownloadCollectionKeyDidChangedNotification = @"DMHYDon
     }
     NSInteger seconds = [PreferenceController preferenceFetchInterval];
     NSInteger minutes = seconds / 60;
+    
     [self.fetchIntervalPopUpButton selectItemWithTitle:[NSString stringWithFormat:@"%li",(long)minutes]];
     
     NSInteger dontDownloadCollection = [PreferenceController preferenceDontDownloadCollection];
@@ -131,32 +136,8 @@ NSString * const DMHYDontDownloadCollectionKeyDidChangedNotification = @"DMHYDon
 
 - (IBAction)dontDownloadCollection:(id)sender {
     NSInteger state = ((NSButton *)sender).state;
-    NSLog(@"%li",(long)state);
     [PreferenceController setPreferenceDontDownloadCollection:state];
     [DMHYNotification postNotificationName:DMHYDontDownloadCollectionKeyDidChangedNotification];
-}
-
-
-#pragma mark - Setup
-
-+ (void)setupDefaultPreference {
-    NSURL *savePath = [PreferenceController preferenceSavePath];
-    if (savePath == nil) {
-        [PreferenceController setPreferenceDownloadLinkType:NO];
-        [PreferenceController setPreferenceSavePath:[self userDownloadPath]];
-        [PreferenceController setPreferenceFetchInterval:kFetchIntervalMinimum];
-        // And Other PreferenceViewController default value
-        [ViewPreferenceController setViewPreferenceTableViewRowStyle:2];
-        [SitePreferenceController setupDefaultSites];
-    }
-    //For has v0.9.2.1 version installed check
-    NSInteger fetchInterval = [PreferenceController preferenceFetchInterval];
-    NSLog(@"%li",(long)fetchInterval);
-    if (fetchInterval < kFetchIntervalMinimum) {
-        [PreferenceController setPreferenceFetchInterval:kFetchIntervalMinimum];
-        NSLog(@"Set FetchInterval to default %i minitues.",kFetchIntervalMinimum);
-    }
-    
 }
 
 + (NSURL *)userDownloadPath {
@@ -167,7 +148,6 @@ NSString * const DMHYDontDownloadCollectionKeyDidChangedNotification = @"DMHYDon
                                                                             error:nil];
     return downloadDirectoryURL;
 }
-
 
 + (void)setPreferenceDownloadLinkType:(BOOL)type {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -219,14 +199,8 @@ NSString * const DMHYDontDownloadCollectionKeyDidChangedNotification = @"DMHYDon
 
 + (void)setPreferenceFetchInterval:(NSInteger)seconds {
     NSUserDefaults *userDefautls = [NSUserDefaults standardUserDefaults];
-    if (seconds < kFetchIntervalMinimum || seconds > kFetchIntervalMaximun) {
-        //Not allowed set to default
-        [userDefautls setInteger:kFetchIntervalMinimum forKey:kFetchInterval];
-        [userDefautls synchronize];
-    }
     [userDefautls setInteger:seconds forKey:kFetchInterval];
     [userDefautls synchronize];
-    NSLog(@"Set Fetch Interval to %li seconds.",(long)seconds);
 }
 
 + (NSInteger)preferenceFetchInterval {
@@ -238,13 +212,13 @@ NSString * const DMHYDontDownloadCollectionKeyDidChangedNotification = @"DMHYDon
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     switch (themeCode) {
         case DMHYThemeLight:
-            [userDefaults setInteger:DMHYThemeLight forKey:DMHYThemeKey];
+            [userDefaults setInteger:0 forKey:DMHYThemeKey];
             break;
         case DMHYThemeDark:
-            [userDefaults setInteger:DMHYThemeDark forKey:DMHYThemeKey];
+            [userDefaults setInteger:1 forKey:DMHYThemeKey];
             break;
         default:
-            [userDefaults setInteger:DMHYThemeLight forKey:DMHYThemeKey];
+            [userDefaults setInteger:0 forKey:DMHYThemeKey];
             break;
     }
     [userDefaults synchronize];
