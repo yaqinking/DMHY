@@ -43,6 +43,10 @@
 #pragma mark - IBAction
 
 - (IBAction)addKeyword:(id)sender {
+    NSString *newKeyword = self.keywordTextField.stringValue;
+    if ([newKeyword isEqualToString:@""]) {
+        return;
+    }
     NSMenuItem *selectedItem = [self.parentKeywordsPopUpButton selectedItem];
     NSInteger selectedKeywordIndex = [self.parentKeywordsPopUpButton indexOfItem:selectedItem];
     
@@ -50,7 +54,8 @@
 //    NSLog(@"parentkeyword %@",parentKeyword.keyword);
     DMHYKeyword *subKeyword = [NSEntityDescription insertNewObjectForEntityForName:DMHYKeywordEntityKey
                                                             inManagedObjectContext:self.managedObjectContext];
-    subKeyword.keyword = self.keywordTextField.stringValue;
+    
+    subKeyword.keyword = newKeyword;
     subKeyword.createDate = [NSDate new];
     subKeyword.isSubKeyword = [NSNumber numberWithBool:YES];
     [parentKeyword addSubKeywordsObject:subKeyword];
@@ -111,9 +116,15 @@
 
 - (void)outlineView:(NSOutlineView *)outlineView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn byItem:(id)item {
     DMHYKeyword *keyword = item;
+    NSString *newKeyword = object;
+    
+    if (!keyword.isSubKeyword.boolValue || [newKeyword isEqualToString:@""]) {
+        return;
+    }
+    
     NSString *identifier = tableColumn.identifier;
     if ([identifier isEqualToString:@"Keyword"]) {
-        keyword.keyword = object;
+        keyword.keyword = newKeyword;
         [self saveData];
     }
 }
@@ -122,8 +133,10 @@
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification {
     DMHYKeyword *selectedKeyword = [self.outlineView itemAtRow:[self.outlineView selectedRow]];
-    
     NSString *keyword = selectedKeyword.keyword;
+    if (!selectedKeyword.isSubKeyword.boolValue || keyword.length == 0) {
+        return;
+    }
     NSNumber *isSubKeyword = selectedKeyword.isSubKeyword;
     NSDictionary *userInfo = @{kSelectKeyword             : keyword,
                                kSelectKeywordIsSubKeyword : isSubKeyword};
@@ -134,6 +147,10 @@
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldExpandItem:(id)item {
     return YES;
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item {
+    return ((DMHYKeyword *)item).isSubKeyword.boolValue ? YES : NO;
 }
 
 #pragma mark - Notification
@@ -159,7 +176,6 @@
 }
 
 - (void)handleThemeChanged {
-    NSLog(@"SV ThemeChanged");
     [self.view setNeedsDisplay:YES];
 }
 
@@ -232,7 +248,7 @@
     NSError *error = nil;
     if ([self.managedObjectContext hasChanges]) {
         if (![self.managedObjectContext save:&error]) {
-            NSLog(@"Error %@",[error localizedDescription]);
+            NSLog(@"Side View Controller Error %@",[error localizedDescription]);
         }
     }
 }
