@@ -64,9 +64,9 @@
     [self observeNotification];
     if (self.fileWatchURL) {
         [self setupFileData];
-        [self setupTableViewDoubleAction];
         [self setupFileWatcher];
     }
+    [self setupTableViewDoubleAction];
     
 }
 
