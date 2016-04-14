@@ -7,6 +7,9 @@
 //
 
 #import "DMHYTool.h"
+#import "NSDate+DateTools.h"
+
+NSInteger const kWeekTimeInterval = -7*24*60*60;
 
 @interface DMHYTool ()
 
@@ -90,10 +93,14 @@
     self.dateFormater.dateFormat = @"EEE, dd MM yyyy HH:mm:ss Z";
     self.dateFormater.locale     = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     NSDate *longDate             = [self.dateFormater dateFromString:dateString];
-    self.dateFormater.dateFormat = @"EEE HH:mm:ss yy-MM-dd";
-    self.dateFormater.locale     = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
-    return [self.dateFormater stringFromDate:longDate];
-    
+    NSDate *oneWeekAgo = [NSDate dateWithTimeIntervalSinceNow:kWeekTimeInterval];
+    if ( [longDate isLaterThanOrEqualTo:oneWeekAgo]) {
+        return longDate.timeAgoSinceNow;
+    } else {
+        self.dateFormater.dateFormat = @"EEE HH:mm:ss yy-MM-dd";
+        self.dateFormater.locale     = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+        return [self.dateFormater stringFromDate:longDate];
+    }
 }
 
 - (NSDate *)formatedDateFromDMHYDateString:(NSString *)dateString {

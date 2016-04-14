@@ -21,18 +21,21 @@ PODS:
     - AFNetworking (~> 2.2)
     - Ono (~> 1.0)
   - CDEvents (1.2.2)
+  - DateTools (1.7.0)
   - Ono (1.2.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - AFOnoResponseSerializer
   - CDEvents
+  - DateTools
   - Ono
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   AFOnoResponseSerializer: c02c8bef1d6742ac68f33ecaed41826c9657bc33
   CDEvents: f311f23de13414f4b3625f1a663b2e1d9a85d982
+  DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
 
 COCOAPODS: 0.39.0

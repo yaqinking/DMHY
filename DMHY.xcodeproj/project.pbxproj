@@ -82,6 +82,7 @@
 		F44C9F231C9E3EFD007E1CAA /* KeywordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeywordViewController.m; sourceTree = "<group>"; };
 		F44C9F251C9E7624007E1CAA /* Bangumi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bangumi.h; path = Model/Bangumi.h; sourceTree = "<group>"; };
 		F44C9F261C9E7624007E1CAA /* Bangumi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Bangumi.m; path = Model/Bangumi.m; sourceTree = "<group>"; };
+		F44E86101CBFCF5A00384897 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		F4592BBC1CA16BEA00981DDF /* SitePreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SitePreferenceController.h; path = Preferences/SitePreferenceController.h; sourceTree = "<group>"; };
 		F4592BBD1CA16BEA00981DDF /* SitePreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SitePreferenceController.m; path = Preferences/SitePreferenceController.m; sourceTree = "<group>"; };
 		F4592BBE1CA16BEA00981DDF /* SitePreferenceController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SitePreferenceController.xib; path = Preferences/SitePreferenceController.xib; sourceTree = "<group>"; };
@@ -481,6 +482,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				F48F8C381BA03643002C96C3 /* Base */,
+				F44E86101CBFCF5A00384897 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

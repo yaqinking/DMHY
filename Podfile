@@ -7,6 +7,7 @@ pod 'AFNetworking', '~> 2.0'
 pod 'Ono'
 pod 'AFOnoResponseSerializer'
 pod 'CDEvents'
+pod 'DateTools'
 
 end
 
