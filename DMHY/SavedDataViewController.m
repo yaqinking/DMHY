@@ -10,8 +10,8 @@
 #import "DMHYAPI.h"
 #import "DMHYCoreDataStackManager.h"
 #import "DMHYTorrent.h"
-#import "ViewPreferenceController.h"
 #import "DMHYTool.h"
+#import "PreferenceController.h"
 
 @interface SavedDataViewController ()<NSTabViewDelegate, NSTableViewDataSource>
 
@@ -76,7 +76,7 @@
 }
 
 - (NSTableViewRowSizeStyle )preferedRowSizeStyle {
-    NSInteger rowStyle = [ViewPreferenceController viewPreferenceTableViewRowStyle];
+    NSInteger rowStyle = [PreferenceController viewPreferenceTableViewRowStyle];
     switch (rowStyle) {
         case 0:
             return NSTableViewRowSizeStyleSmall;

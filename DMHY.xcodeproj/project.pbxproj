@@ -26,8 +26,6 @@
 		F4592BC01CA16BEA00981DDF /* SitePreferenceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4592BBE1CA16BEA00981DDF /* SitePreferenceController.xib */; };
 		F46EFC121CA054BB00B2E3F3 /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46EFC101CA054BB00B2E3F3 /* MASPreferencesWindowController.m */; };
 		F46EFC131CA054BB00B2E3F3 /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F46EFC111CA054BB00B2E3F3 /* MASPreferencesWindow.xib */; };
-		F46EFC191CA05C4900B2E3F3 /* ViewPreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46EFC171CA05C4900B2E3F3 /* ViewPreferenceController.m */; };
-		F46EFC1A1CA05C4900B2E3F3 /* ViewPreferenceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F46EFC181CA05C4900B2E3F3 /* ViewPreferenceController.xib */; };
 		F4712E921CA6DFB000BD332D /* FileItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4712E911CA6DFB000BD332D /* FileItem.m */; };
 		F4712E951CA6EA9000BD332D /* FileTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4712E941CA6EA9000BD332D /* FileTableView.m */; };
 		F483EA1A1BAD92C100D02E60 /* SideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F483EA191BAD92C100D02E60 /* SideViewController.m */; };
@@ -90,9 +88,6 @@
 		F46EFC0F1CA054BB00B2E3F3 /* MASPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASPreferencesWindowController.h; sourceTree = "<group>"; };
 		F46EFC101CA054BB00B2E3F3 /* MASPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASPreferencesWindowController.m; sourceTree = "<group>"; };
 		F46EFC111CA054BB00B2E3F3 /* MASPreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MASPreferencesWindow.xib; sourceTree = "<group>"; };
-		F46EFC161CA05C4900B2E3F3 /* ViewPreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewPreferenceController.h; path = Preferences/ViewPreferenceController.h; sourceTree = "<group>"; };
-		F46EFC171CA05C4900B2E3F3 /* ViewPreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewPreferenceController.m; path = Preferences/ViewPreferenceController.m; sourceTree = "<group>"; };
-		F46EFC181CA05C4900B2E3F3 /* ViewPreferenceController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewPreferenceController.xib; path = Preferences/ViewPreferenceController.xib; sourceTree = "<group>"; };
 		F4712E901CA6DFB000BD332D /* FileItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileItem.h; path = Model/FileItem.h; sourceTree = "<group>"; };
 		F4712E911CA6DFB000BD332D /* FileItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileItem.m; path = Model/FileItem.m; sourceTree = "<group>"; };
 		F4712E931CA6EA9000BD332D /* FileTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileTableView.h; path = View/FileTableView.h; sourceTree = "<group>"; };
@@ -205,9 +200,6 @@
 				F4DEA05A1BA99890008E89B8 /* PreferenceController.h */,
 				F4DEA05B1BA99890008E89B8 /* PreferenceController.m */,
 				F4DEA05F1BA99936008E89B8 /* Preference.xib */,
-				F46EFC161CA05C4900B2E3F3 /* ViewPreferenceController.h */,
-				F46EFC171CA05C4900B2E3F3 /* ViewPreferenceController.m */,
-				F46EFC181CA05C4900B2E3F3 /* ViewPreferenceController.xib */,
 				F4592BBC1CA16BEA00981DDF /* SitePreferenceController.h */,
 				F4592BBD1CA16BEA00981DDF /* SitePreferenceController.m */,
 				F4592BBE1CA16BEA00981DDF /* SitePreferenceController.xib */,
@@ -380,7 +372,6 @@
 				F4592BC01CA16BEA00981DDF /* SitePreferenceController.xib in Resources */,
 				F4DEA0601BA99936008E89B8 /* Preference.xib in Resources */,
 				F48F8C411BA036ED002C96C3 /* download.png in Resources */,
-				F46EFC1A1CA05C4900B2E3F3 /* ViewPreferenceController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,7 +434,6 @@
 				F44C9F271C9E7624007E1CAA /* Bangumi.m in Sources */,
 				F48F8C311BA03643002C96C3 /* ViewController.m in Sources */,
 				F4712E951CA6EA9000BD332D /* FileTableView.m in Sources */,
-				F46EFC191CA05C4900B2E3F3 /* ViewPreferenceController.m in Sources */,
 				F48F8C4C1BA05FB9002C96C3 /* NavigationView.m in Sources */,
 				F48F8C471BA03705002C96C3 /* TorrentItem.m in Sources */,
 				F4DFBB161CACB26B000F4555 /* DMHYXMLDataManager.m in Sources */,

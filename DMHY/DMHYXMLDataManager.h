@@ -12,8 +12,7 @@ extern NSString * const pubDateKey;
 extern NSString * const titleKey;
 extern NSString * const linkKey;
 extern NSString * const authorKey;
-extern NSString * const enclosureURLXPathKey;
-extern NSString * const kXPathItem ;
+extern NSString * const kXPathItem;
 extern NSString * const DMHYXMLDataLoadCompletedNotification;
 
 @interface DMHYXMLDataManager : NSObject

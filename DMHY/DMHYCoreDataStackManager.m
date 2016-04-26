@@ -118,4 +118,19 @@ NSString *const ErrorDomain                       = @"CoreDataStackManager";
     return _persistentStoreCoordinator;
 }
 
+- (BOOL)resetDatabase {
+    NSURL *storedURL = [self storeURL];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error = nil;
+    if ([fileManager fileExistsAtPath:storedURL.path]) {
+        if (![fileManager removeItemAtURL:storedURL error:&error]) {
+            [NSApp presentError:error];
+            return NO;
+        } else {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 @end

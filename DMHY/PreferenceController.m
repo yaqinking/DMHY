@@ -7,9 +7,9 @@
 //
 
 #import "PreferenceController.h"
-#import "ViewPreferenceController.h"
 #import "SitePreferenceController.h"
 #import "DMHYAPI.h"
+#import "DMHYCoreDataStackManager.h"
 #include <Carbon/Carbon.h>
 
 NSString * const FliterKeywordKey = @"FliterKeyword";
@@ -21,13 +21,14 @@ NSString * const DMHYDontDownloadCollectionKeyDidChangedNotification = @"DMHYDon
 @property (weak) IBOutlet NSTextField *savePathLabel;
 @property (weak) IBOutlet NSTextField *fileWatchPathLabel;
 
-@property (weak) IBOutlet NSTextField *fetchIntervalTextField;
-
 @property (weak) IBOutlet NSPopUpButton *fetchIntervalPopUpButton;
 
 @property (weak) IBOutlet NSTextField *fliterKeywordTextField;
 
 @property (weak) IBOutlet NSButton *dontDownloadCollectionButton;
+
+@property (weak) IBOutlet NSMatrix *mainViewRowStyleMatrix;
+@property (weak) IBOutlet NSMatrix *doubleActionMatrix;
 
 @end
 
@@ -62,20 +63,21 @@ NSString * const DMHYDontDownloadCollectionKeyDidChangedNotification = @"DMHYDon
 - (void)configurePreference {
     NSInteger idx = [PreferenceController preferenceDownloadLinkType];
     [self.downloadLinkTypeMatrix selectCellAtRow:idx column:0];
+    
     NSURL *url = [PreferenceController preferenceSavePath];
     if (url) {
         self.savePathLabel.stringValue = [url path];
     } else {
-        self.savePathLabel.stringValue = @"请设置文件保存路径";
+        self.savePathLabel.stringValue = [[PreferenceController userDownloadPath] path];
     }
-    //Todo bug
-//    self.fileWatchPathLabel.stringValue = [[PreferenceController fileWatchPath] path];
+
     NSURL *fileWatchPath = [PreferenceController fileWatchPath];
     if (fileWatchPath) {
         self.fileWatchPathLabel.stringValue = fileWatchPath.path;
     } else {
         self.fileWatchPathLabel.stringValue = @"请设置文件查看路径 <_<";
     }
+    
     NSInteger seconds = [PreferenceController preferenceFetchInterval];
     NSInteger minutes = seconds / 60;
     
@@ -86,6 +88,11 @@ NSString * const DMHYDontDownloadCollectionKeyDidChangedNotification = @"DMHYDon
     
     NSString *fliter = [[NSUserDefaults standardUserDefaults] stringForKey:FliterKeywordKey];
     self.fliterKeywordTextField.stringValue = fliter;
+    
+    NSInteger rowStyleIdx = [PreferenceController viewPreferenceTableViewRowStyle];
+    [self.mainViewRowStyleMatrix selectCellAtRow:rowStyleIdx column:0];
+    NSInteger rowDoubleAction = [PreferenceController preferenceDoubleAction];
+    [self.doubleActionMatrix selectCellAtRow:rowDoubleAction column:0];
 }
 
 - (void)controlTextDidEndEditing:(NSNotification *)obj {
@@ -227,6 +234,86 @@ NSString * const DMHYDontDownloadCollectionKeyDidChangedNotification = @"DMHYDon
 + (NSInteger)preferenceTheme {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     return [userDefaults integerForKey:DMHYThemeKey];
+}
+
++ (void)setViewPreferenceTableViewRowStyle:(NSInteger)style {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setInteger:style forKey:kMainTableViewRowStyle];
+    [userDefaults synchronize];
+}
+
++ (NSInteger)viewPreferenceTableViewRowStyle {
+    return [[NSUserDefaults standardUserDefaults] integerForKey:kMainTableViewRowStyle];
+}
+
++ (void)setPreferenceDoubleAction:(NSInteger)action {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setInteger:action forKey:kDoubleAction];
+    [userDefaults synchronize];
+}
+
++ (NSInteger)preferenceDoubleAction {
+    return [[NSUserDefaults standardUserDefaults] integerForKey:kDoubleAction];
+}
+
+- (IBAction)mainTableViewRowStyleChanged:(id)sender {
+    NSInteger style = [self.mainViewRowStyleMatrix selectedRow];
+    [PreferenceController setViewPreferenceTableViewRowStyle:style];
+    [DMHYNotification postNotificationName:DMHYMainTableViewRowStyleChangedNotification];
+}
+
+- (IBAction)doubleActionChanged:(id)sender {
+    NSInteger action = [self.doubleActionMatrix selectedRow];
+    [PreferenceController setPreferenceDoubleAction:action];
+    [DMHYNotification postNotificationName:DMHYDoubleActionChangedNotification];
+}
+
+- (IBAction)resetPreference:(id)sender {
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText:@"确定要重置设置？"];
+    [alert setInformativeText:@"该操作会删除所有自定义设置。重置设置成功之后，会重新启动本应用 _(:3 」∠)_"];
+    [alert addButtonWithTitle:@"重置"];
+    [alert addButtonWithTitle:@"取消"];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    
+    [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode == NSAlertFirstButtonReturn) {
+            NSString *domainName = [[NSBundle mainBundle] bundleIdentifier];
+            [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:domainName];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [self relaunchAfterDelay:1.0];
+        }
+    }];
+    
+}
+
+- (void)relaunchAfterDelay:(float)seconds {
+    NSTask *task = [[NSTask alloc] init];
+    NSMutableArray *args = [NSMutableArray array];
+    [args addObject:@"-c"];
+    [args addObject:[NSString stringWithFormat:@"sleep %f; open \"%@\"", seconds, [[NSBundle mainBundle] bundlePath]]];
+    [task setLaunchPath:@"/bin/sh"];
+    [task setArguments:args];
+    [task launch];
+    [NSApp terminate:self];
+}
+
+- (IBAction)resetDatabase:(id)sender {
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText:@"确定要重置数据库？"];
+    [alert setInformativeText:@"该操作会删除所有已保存的关键字和已下载的种子记录。重置数据库成功之后，会自动重新启动本应用 _(:3 」∠)_"];
+    [alert addButtonWithTitle:@"重置"];
+    [alert addButtonWithTitle:@"取消"];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    
+    [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode == NSAlertFirstButtonReturn) {
+            if ([[DMHYCoreDataStackManager sharedManager] resetDatabase]) {
+                [self relaunchAfterDelay:1.0];
+            }
+        }
+    }];
+    
 }
 
 @end

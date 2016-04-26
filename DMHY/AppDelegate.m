@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "PreferenceController.h"
-#import "ViewPreferenceController.h"
 #import "SitePreferenceController.h"
 #import "DMHYCoreDataStackManager.h"
 #import "DMHYKeyword+CoreDataProperties.h"
@@ -149,11 +148,10 @@
     if (_preferencesWindowController == nil)
     {
         NSViewController *generalViewController = [[PreferenceController alloc] init];
-        NSViewController *viewViewController = [[ViewPreferenceController alloc] init];
         NSViewController *siteViewController = [[SitePreferenceController alloc] init];
         
         
-        NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, viewViewController, siteViewController, nil];
+        NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, siteViewController, nil];
         
         // To add a flexible space between General and Advanced preference panes insert [NSNull null]:
         //     NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, [NSNull null], advancedViewController, nil];

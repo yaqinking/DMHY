@@ -30,11 +30,13 @@
     NSURLSessionDownloadTask *downloadTask = [self.manager downloadTaskWithRequest:request
                                                                           progress:nil
                                                                        destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-                                                                            NSURL *savePath = [PreferenceController preferenceSavePath];
+                                                                           NSURL *savePath = [PreferenceController preferenceSavePath];
+                                                                           if (!savePath) {
+                                                                               savePath = [PreferenceController userDownloadPath];
+                                                                           }
                                                                            return [savePath URLByAppendingPathComponent:[response suggestedFilename]];
                                                                            
                                                                        } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nonnull filePath, NSError * _Nonnull error) {
-                                                                           //NSLog(@"Download to : %@",filePath);
                                                                            NSString *fileName = [response suggestedFilename];
                                                                            [self postUserNotificationWithFileName:fileName];
                                                                            

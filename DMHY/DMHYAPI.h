@@ -54,7 +54,11 @@
 #define kCurrentSite  @"CurrentSite"
 #define SiteResponseType @"SiteResponseType"
 #define kMainViewRowStyle @"MainViewRowStyle"
+#define kMainTableViewRowStyle @"MainTableViewRowStyle"
+#define kDoubleAction @"DoubleAction"
 
+#define DMHYMainTableViewRowStyleChangedNotification @"DMHYMainTableViewRowStyleChangedNotification"
+#define DMHYDoubleActionChangedNotification @"DMHYDoubleActionChangedNotification"
 #define kFetchInterval            @"FetchInterval"
 #define kFetchIntervalMinimum     30                  //5 minutes
 #define kFetchIntervalMaximun     43200               //12 hours

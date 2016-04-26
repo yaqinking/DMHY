@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import "PreferenceController.h"
-#import "ViewPreferenceController.h"
 #import "SitePreferenceController.h"
 #import "DMHYAPI.h"
 #import "DMHYTorrent.h"
@@ -99,7 +98,7 @@
 }
 
 - (NSTableViewRowSizeStyle )preferedRowSizeStyle {
-    NSInteger rowStyle = [ViewPreferenceController viewPreferenceTableViewRowStyle];
+    NSInteger rowStyle = [PreferenceController viewPreferenceTableViewRowStyle];
     switch (rowStyle) {
         case 0:
             return NSTableViewRowSizeStyleSmall;
@@ -314,7 +313,7 @@
 }
 
 - (void)setupTableViewDoubleAction {
-    NSInteger action = [ViewPreferenceController preferenceDoubleAction];
+    NSInteger action = [PreferenceController preferenceDoubleAction];
     switch (action) {
         case 0:
             self.tableView.doubleAction = @selector(openTorrentLink:);
@@ -468,9 +467,7 @@
         //Click column header do nothing.
         return;
     }
-    
     TorrentItem *item = self.torrents[rowIndex];
-    NSLog(@"Item Link %@",item.link);
     [[NSWorkspace sharedWorkspace] openURL:item.link];
 }
 
@@ -485,6 +482,7 @@
     NSFetchRequest *requestTodayKeywords = [self fetchRequestTodayKeywords];
     NSArray *fetchedKeywords = [self.managedObjectContext executeFetchRequest:requestTodayKeywords
                                                      error:NULL];
+    
     for (DMHYKeyword *weekdayKeyword in fetchedKeywords) {
         NSLog(@"%@ has %lu bangumi.", weekdayKeyword.keyword, weekdayKeyword.subKeywords.count);
         for (DMHYKeyword *keyword in weekdayKeyword.subKeywords) {
@@ -537,7 +535,8 @@
                         item.title = [[element firstChildWithTag:@"title"] stringValue];
                         item.link = [[element firstChildWithTag:@"link"] stringValue];
                         item.author = [[element firstChildWithTag:@"author"] stringValue];
-                        NSString *magStr = [[element firstChildWithXPath:@"//enclosure/@url"] stringValue];
+                        NSString *magnetXPath = [NSString stringWithFormat:@"//item[%lu]//enclosure/@url", (idx+1)];
+                        NSString *magStr     = [[element firstChildWithXPath:magnetXPath] stringValue];
                         item.magnet = magStr;
                         item.isNewTorrent = @YES;
                         item.isDownloaded = @NO;
@@ -580,7 +579,11 @@
                 BOOL isNewTorrent = torrent.isNewTorrent.boolValue;
                 if (isNewTorrent) {
                     torrent.isNewTorrent = @NO;
-                    [self extractTorrentDownloadURLWithURLString:torrent.link];
+                    if (self.isMagnetLink) {
+                        [self openMagnetWith:[NSURL URLWithString:torrent.magnet]];
+                    } else {
+                        [self extractTorrentDownloadURLWithURLString:torrent.link];
+                    }
                 }
             }
         }

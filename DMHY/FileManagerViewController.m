@@ -8,7 +8,6 @@
 
 #import "FileManagerViewController.h"
 #import "DMHYAPI.h"
-#import "ViewPreferenceController.h"
 #import "PreferenceController.h"
 #import "AppDelegate.h"
 #import "NSTableView+ContextMenu.h"
@@ -65,6 +64,8 @@
     if (self.fileWatchURL) {
         [self setupFileData];
         [self setupFileWatcher];
+    } else {
+        self.infoTextField.stringValue = @"请在设定里设置文件监控路径 >_<";
     }
     [self setupTableViewDoubleAction];
     
@@ -103,7 +104,7 @@
 }
 
 - (NSTableViewRowSizeStyle )preferedRowSizeStyle {
-    NSInteger rowStyle = [ViewPreferenceController viewPreferenceTableViewRowStyle];
+    NSInteger rowStyle = [PreferenceController viewPreferenceTableViewRowStyle];
     switch (rowStyle) {
         case 0:
             return NSTableViewRowSizeStyleSmall;

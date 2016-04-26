@@ -21,7 +21,6 @@ NSString * const pubDateKey           = @"pubDate";
 NSString * const titleKey             = @"title";
 NSString * const linkKey              = @"link";
 NSString * const authorKey            = @"author";
-NSString * const enclosureURLXPathKey = @"//enclosure/@url";
 
 NSString * const kXPathItem           = @"//item";
 
@@ -60,7 +59,8 @@ NSString * const kXPathItem           = @"//item";
             item.title           = [[element firstChildWithTag:titleKey] stringValue];
             item.link            = [NSURL URLWithString:[[element firstChildWithTag:linkKey] stringValue]];
             item.author          = [[element firstChildWithTag:authorKey] stringValue];
-            NSString *magStr     = [[element firstChildWithXPath:enclosureURLXPathKey] stringValue];
+            NSString *magnetXPath = [NSString stringWithFormat:@"//item[%lu]//enclosure/@url", (idx+1)];
+            NSString *magStr     = [[element firstChildWithXPath:magnetXPath] stringValue];
             item.magnet          = [NSURL URLWithString:magStr];
             [torrents addObject:item];
         }];

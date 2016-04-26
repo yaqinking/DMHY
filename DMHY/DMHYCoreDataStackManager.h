@@ -18,5 +18,6 @@
 @property (nonatomic, readonly) NSURL *applicationDocumentsDirectory;
 
 + (instancetype)sharedManager;
+- (BOOL)resetDatabase;
 
 @end

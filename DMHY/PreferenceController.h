@@ -35,4 +35,9 @@ extern NSString * const DMHYDontDownloadCollectionKeyDidChangedNotification;
 
 + (NSURL *)userDownloadPath;
 
++ (void)setViewPreferenceTableViewRowStyle:(NSInteger)style;
++ (NSInteger)viewPreferenceTableViewRowStyle;
++ (void)setPreferenceDoubleAction:(NSInteger)action;
++ (NSInteger)preferenceDoubleAction;
+
 @end
