@@ -3,25 +3,20 @@
 
 使用手册见 [Wiki](https://github.com/yaqinking/DMHY/wiki)
 
-目前也支持从 http://dmhy.dandanplay.com 自动下载
+同时也支持以下站点搜索
 
-同时也支持以下站点搜索和打开磁力链功能（在设置中保持选中磁力链和相应站点，暂未在 releases 里发布。） 
-
+- http://dmhy.dandanplay.com
 - http://bt.acg.gg
 - https://bangumi.moe
 
 ## Screenshot
 暗色主题
 
-![1.1Dark](http://i.imgur.com/tUZHfWe.jpg)
-
-亮色主题
-
-![1.1Light](http://i.imgur.com/hWpYxs0.jpg)
+![Imgur](http://i.imgur.com/YxNY2ou.png)
 
 设置界面
 
-![v1.0](http://i.imgur.com/xxhe8U8.jpg)
+![Imgur](http://i.imgur.com/x1ofBnX.jpg)
 
 自动下载新种子（后台观测时，实际使用时只会在下载完成时通知。）
 
@@ -30,7 +25,7 @@
 ## Usage
 - 默认下载种子到 ~/Downloads/ 文件夹下
 - 默认使用 ⇧⌘D 打开种子下载到文件夹
-- 可在设置中调是下载种子，还是使用 uTorrent 打开 magnet 链接
+- 可在设置中调是下载种子，还是使用系统默认应用打开 magnet 链接
 - 可在设置中调整下载文件夹的位置
 - 可添加关键字（按 `Return` 键或者 `添加` 按钮）
 - 可删除关键字（按 `Command+Delete` 或者 `Edit ➡ 删除关键字`）
