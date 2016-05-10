@@ -269,6 +269,8 @@
 - (void)observeNotification {
     [DMHYNotification addObserver:self selector:@selector(handleXMLDataLoadCompleted:) name:DMHYXMLDataLoadCompletedNotification];
     [DMHYNotification addObserver:self selector:@selector(handleJSONDataLoadCompleted:) name:DMHYJSONDataLoadCompletedNotification];
+    [DMHYNotification addObserver:self selector:@selector(setErrorInfoAndStopIndicator) name:DMHYXMLDataLoadErrorNotification];
+    [DMHYNotification addObserver:self selector:@selector(setErrorInfoAndStopIndicator) name:DMHYJSONDataLoadErrorNotification];
     [DMHYNotification addObserver:self selector:@selector(handleDownloadTypeChanged)   name:DMHYDownloadLinkTypeNotification];
     [DMHYNotification addObserver:self selector:@selector(handleDownloadSiteChanged)   name:DMHYDownloadSiteChangedNotification];
     [DMHYNotification addObserver:self selector:@selector(handleSelectKeywordChanged:) name:DMHYSelectKeywordChangedNotification];

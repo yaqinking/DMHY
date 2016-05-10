@@ -14,6 +14,7 @@ extern NSString * const linkKey;
 extern NSString * const authorKey;
 extern NSString * const kXPathItem;
 extern NSString * const DMHYXMLDataLoadCompletedNotification;
+extern NSString * const DMHYXMLDataLoadErrorNotification;
 
 @interface DMHYXMLDataManager : NSObject
 

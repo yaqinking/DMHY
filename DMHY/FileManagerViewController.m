@@ -131,14 +131,16 @@ typedef NS_ENUM(UInt32, DMHYFileEventFlag) {
     DMHYFileEventFlagFileMoved = 128256,
     DMHYFileEventFlagFileChanged = 67584,
     DMHYFileEventFlagFileDeleted = 70656,
+    DMHYFileEventFlagDirectoryChanged = 163840
 };
 
 - (void)URLWatcher:(CDEvents *)urlWatcher eventOccurred:(CDEvent *)event {
 //    NSLog(@"[Delegate] URLWatcher: %@\nEvent: %@", urlWatcher, event);
 //    NSLog(@"Event Desc %@" , event.description);
     if (event.flags == DMHYFileEventFlagFileChanged ||
-        event.flags == DMHYFileEventFlagFileMoved ) {
-//        NSLog(@"\n \n File Changed %@ \n \n Rescan",event);
+        event.flags == DMHYFileEventFlagFileMoved ||
+        event.flags == DMHYFileEventFlagDirectoryChanged) {
+        NSLog(@"\n \n File Changed %@ \n \n Rescan",event);
         [self setupFileData];
     }
     

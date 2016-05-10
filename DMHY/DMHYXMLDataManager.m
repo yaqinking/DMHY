@@ -16,6 +16,7 @@
 #import "PreferenceController.h"
 
 NSString * const DMHYXMLDataLoadCompletedNotification = @"DMHYXMLDataLoadCompletedNotification";
+NSString * const DMHYXMLDataLoadErrorNotification = @"DMHYXMLDataLoadErrorNotification";
 
 NSString * const pubDateKey           = @"pubDate";
 NSString * const titleKey             = @"title";
@@ -75,6 +76,8 @@ NSString * const kXPathItem           = @"//item";
         if ([acceptableContentTypeError containsString:@"text/xml"]) {
            self.accepableContentTypes = [NSSet setWithObject:@"text/xml"];
         }
+        NSNumber *statusCode = [NSNumber numberWithInteger:operation.response.statusCode];
+        [DMHYNotification postNotificationName:DMHYXMLDataLoadErrorNotification object:statusCode];
     }];
     [[NSOperationQueue mainQueue] addOperation:op];
 }

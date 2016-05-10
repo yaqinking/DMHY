@@ -15,6 +15,7 @@ extern NSString * const teamNameKeyPath;
 extern NSString * const uploaderUserNameKeyPath;
 extern NSString * const magnetKey;
 extern NSString * const DMHYJSONDataLoadCompletedNotification;
+extern NSString * const DMHYJSONDataLoadErrorNotification;
 
 @interface DMHYJSONDataManager : NSObject
 

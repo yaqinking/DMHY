@@ -18,6 +18,7 @@ NSString * const teamNameKeyPath                           = @"team.name";
 NSString * const uploaderUserNameKeyPath                   = @"uploader.username";
 NSString * const magnetKey                                 = @"magnet";
 NSString * const DMHYJSONDataLoadCompletedNotification     = @"DMHYJSONDataLoadCompletedNotification";
+NSString * const DMHYJSONDataLoadErrorNotification         = @"DMHYJSONDataLoadErrorNotification";
 
 @interface DMHYJSONDataManager()
 
@@ -60,8 +61,10 @@ NSString * const DMHYJSONDataLoadCompletedNotification     = @"DMHYJSONDataLoadC
                       }
                       [DMHYNotification postNotificationName:DMHYJSONDataLoadCompletedNotification object:data];
                   } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                      
+                      NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)task.response;
                       NSLog(@"Error %@",[error localizedDescription]);
+                      NSNumber *statusCode = [NSNumber numberWithInteger:httpResponse.statusCode];
+                      [DMHYNotification postNotificationName:DMHYJSONDataLoadErrorNotification object:statusCode];
                   }];
 }
 
