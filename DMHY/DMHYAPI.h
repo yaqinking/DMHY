@@ -136,6 +136,8 @@ typedef NS_ENUM(NSInteger, DMHYSite) {
     DMHYSiteBangumiMoe
 };
 
+static NSString * const AppDomain = @"com.yaqinking.DMHY";
+
 #import "DMHYTool.h"
 #import "DMHYNotification.h"
 #import "DMHYDownloader.h"

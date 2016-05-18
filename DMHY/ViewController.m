@@ -72,11 +72,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:DMHYThemeKey];
+    [self registeAppDefaults];
     [self observeNotification];
     [self setupPreference];
     [self setupTableViewStyle];
-//    [self checkResponseType];
     [self setupData:self];
     [self setupRepeatTask];
     [self setupMenuItems];
@@ -89,6 +88,39 @@
 }
 
 #pragma mark - Setup
+
+- (void)registeAppDefaults {
+    NSMutableArray *sites = [NSMutableArray array];
+    NSDictionary *siteDMHY       = @{ SiteNameKey : @"share.dmhy.org",
+                                      SiteMainKey : DMHYRSS,
+                                      SiteSearchKey : DMHYSearchByKeyword,
+                                      SiteResponseType : SiteResponseXML };
+    NSDictionary *siteDandanplay = @{ SiteNameKey : @"dmhy.dandanplay.com",
+                                      SiteMainKey : DMHYdandanplayRSS,
+                                      SiteSearchKey : DMHYdandanplaySearchByKeyword,
+                                      SiteResponseType : SiteResponseXML };
+    NSDictionary *siteACGGG      = @{ SiteNameKey : @"bt.acg.gg",
+                                      SiteMainKey : DMHYACGGGRSS,
+                                      SiteSearchKey : DMHYACGGGSearchByKeyword,
+                                      SiteResponseType : SiteResponseXML };
+    NSDictionary *siteBangumiMoe = @{ SiteNameKey : @"bangumi.moe",
+                                      SiteMainKey : DMHYBangumiMoeRSS,
+                                      SiteSearchKey : DMHYBangumiMoeSearchByKeyword,
+                                      SiteResponseType : SiteResponseJSON };
+    [sites addObject:siteDMHY];
+    [sites addObject:siteDandanplay];
+    [sites addObject:siteACGGG];
+    [sites addObject:siteBangumiMoe];
+    NSDictionary *appDefaults = @{ FliterKeywordKey : @"",
+                                   DontDownloadCollectionKey : @YES,
+                                   kFetchInterval : @(15*60),
+                                   kCurrentSite : siteDMHY,
+                                   kSupportSite : sites,
+                                   kMainTableViewRowStyle :@2,
+                                   kDownloadLinkType :@0,
+                                   DMHYThemeKey : @1 };
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+}
 
 - (void)setupTableViewStyle {
     self.tableView.rowSizeStyle = [self preferedRowSizeStyle];
@@ -111,14 +143,7 @@
     }
     return NSTableViewRowSizeStyleSmall;
 }
-/**
-- (void)checkResponseType {
-    NSString *responseType = self.currentSite[SiteResponseType];
-    if (responseType == nil) {
-        [SitePreferenceController setupDefaultSites];
-    }
-}
-*/
+
 /**
  *  Retrive saved preference value and set to self variable.
  */
@@ -193,12 +218,21 @@
  *  Schedule auto download new torrent task.
  */
 - (void)setupRepeatTask {
-    if (self.fetchInterval != 0) {
+    if (self.fetchInterval >= 300) {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:self.fetchInterval
                                                       target:self
                                                     selector:@selector(setupAutomaticDownloadNewTorrent)
                                                     userInfo:nil
                                                      repeats:YES];
+        NSLog(@"Repeat Task Start Every %li seconds.", (long)self.fetchInterval);
+    } else {
+        NSString *reason = [NSString stringWithFormat:@"\nFetch interval value is invalid. Current %li", (long)self.fetchInterval];
+        NSString *suggestion = [NSString stringWithFormat:@"You can open Terminal.app type\n\ndefaults write %@ FetchInterval 300\n\nThen press Enter key.\nRestart app to fix it.", AppDomain];
+        NSDictionary *userInfo = @{ NSLocalizedFailureReasonErrorKey : reason,
+                                    NSLocalizedRecoverySuggestionErrorKey : suggestion};
+        NSError *error = [NSError errorWithDomain:AppDomain code:4444 userInfo:userInfo];
+        [NSApp presentError:error];
+        [NSApp terminate:self];
     }
 }
 
@@ -284,6 +318,7 @@
 - (void)handleDownloadSiteChanged {
     self.currentSite = nil;
     [self setupPreference];
+    [self setupData:self];
 }
 
 - (void)handleDownloadTypeChanged {
@@ -356,12 +391,7 @@
 
 - (NSDictionary *)currentSite {
     if (!_currentSite) {
-        NSDictionary *siteDMHY = @{ SiteNameKey : @"share.dmhy.org",
-                                    SiteMainKey : DMHYRSS,
-                                    SiteSearchKey : DMHYSearchByKeyword,
-                                    SiteResponseType : SiteResponseXML };
-//        _currentSite = [[NSUserDefaults standardUserDefaults] dictionaryForKey:kCurrentSite];
-        _currentSite = siteDMHY;
+        _currentSite = [[NSUserDefaults standardUserDefaults] dictionaryForKey:kCurrentSite];
     }
     return _currentSite;
 }

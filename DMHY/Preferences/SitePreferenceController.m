@@ -29,7 +29,6 @@ NSString * const SiteResponseXML = @"XML";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [[NSUserDefaults standardUserDefaults] setObject:[NSNull null] forKey:kSupportSite];
     // Do view setup here.
     [self observeNotifications];
     [SitePreferenceController setupDefaultSites];
@@ -74,10 +73,8 @@ NSString * const SiteResponseXML = @"XML";
         [sites addObject:siteBangumiMoe];
         [userDefaults setObject:sites forKey:kSupportSite];
         if ([userDefaults synchronize]) {
-            
+            [DMHYNotification postNotificationName:DMHYDefaultSitesSetupComplatedNotification];
         };
-        [DMHYNotification postNotificationName:DMHYDefaultSitesSetupComplatedNotification];
-        NSLog(@"Initial");
     }
 }
 
