@@ -424,9 +424,9 @@
     return [self.keyword.stringValue isEqualToString:@""] ? YES : NO;
 }
 
-- (BOOL)isCurrentSiteACGGG {
+- (BOOL)isCurrentSiteDMHY {
     NSString *siteName = self.currentSite[SiteNameKey];
-    return [siteName isEqualToString:ACGGG] ? YES : NO;
+    return ([siteName isEqualToString:DMHY] || [siteName isEqualToString:Dandanplay]) ? YES : NO;
 }
 
 #pragma mark - Download
@@ -445,19 +445,22 @@
     }
     [self startAnimatingProgressIndicator];
     TorrentItem *item = (TorrentItem *)[self.torrents objectAtIndex:row];
-    if ([self isCurrentSiteACGGG]) {
-        // As acggg the enclose url is download url
-        if (self.isMagnetLink) {
-            [[DMHYDownloader downloader] downloadTorrentWithURL:item.magnet];
+    if ([self isCurrentSiteDMHY]) {
+        if (!self.isMagnetLink) {
+           [self extractTorrentDownloadURLWithURLString:item.link.absoluteString];
             return;
         }
     }
-    if (self.isMagnetLink) {
+    // acg.rip contains .torrent bt.acg.gg contains down.php
+    if ([item.magnet.absoluteString containsString:@".torrent"] ||
+        [item.magnet.absoluteString containsString:@"down.php"]) {
+        [[DMHYDownloader downloader] downloadTorrentWithURL:item.magnet];
+        return;
+    }
+    if ([item.magnet.absoluteString containsString:@"magnet:?xt=urn:btih:"]) {
         [self stopAnimatingProgressIndicator];
         [self openMagnetWith:item.magnet];
         return;
-    } else {
-        [self extractTorrentDownloadURLWithURLString:item.link.absoluteString];
     }
 }
 
