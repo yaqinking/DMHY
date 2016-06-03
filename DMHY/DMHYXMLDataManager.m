@@ -56,11 +56,12 @@ NSString * const kXPathItem           = @"//item";
         [xmlDoc enumerateElementsWithXPath:kXPathItem usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
             TorrentItem *item = [[TorrentItem alloc] init];
             NSString *dateString = [[element firstChildWithTag:pubDateKey] stringValue];
-            item.pubDate         = [[DMHYTool tool] formatedDateStringFromDMHYDateString:dateString];
+            NSString *pubDate = [[DMHYTool tool] formatedDateStringFromDMHYDateString:dateString];
+            item.pubDate         = pubDate ? pubDate : @"";
             item.title           = [[element firstChildWithTag:titleKey] stringValue];
             item.link            = [NSURL URLWithString:[[element firstChildWithTag:linkKey] stringValue]];
             NSString *author = [[element firstChildWithTag:authorKey] stringValue];
-            item.author          = author == nil ? @"" : author;
+            item.author          = author ? author : @"";
             NSString *magnetXPath = [NSString stringWithFormat:@"//item[%lu]//enclosure/@url", (idx+1)];
             NSString *magStr     = [[element firstChildWithXPath:magnetXPath] stringValue];
             item.magnet          = [NSURL URLWithString:magStr];

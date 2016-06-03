@@ -22,6 +22,15 @@
 #define DMHYBangumiMoeRSS             @"https://bangumi.moe/api/v2/torrent/page/1?limit=50"
 #define DMHYBangumiMoeSearchByKeyword @"https://bangumi.moe/api/v2/torrent/search?limit=50&p=1&query=%@"
 
+#define DMHYACGRIPRSS                 @"https://acg.rip/.xml"
+#define DMHYACGRIPSearchByKeyword     @"https://acg.rip/.xml?term=%@"
+
+#define DMHYKissSubRSS                @"http://www.kisssub.org/rss.xml"
+#define DMHYKissSubSearchByKeyword    @"http://www.kisssub.org/rss-%@.xml"
+
+#define DMHYMikanRSS                  @"http://mikanani.me/RSS/Classic"
+#define DMHYMikanSearchByKeyword      @"http://mikanani.me/RSS/Search?searchstr=%@"
+
 #define kXpathTorrentDownloadShortURL   @"//div[@class='dis ui-tabs-panel ui-widget-content ui-corner-bottom']/a/@href"
 #define kXpathTorrentDirectDownloadLink @"//div[@class='dis']//p//a//@href"
 
