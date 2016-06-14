@@ -8,7 +8,6 @@
 
 #import "DMHYXMLDataManager.h"
 #import "AFNetworking.h"
-#import "AFOnoResponseSerializer.h"
 #import "Ono.h"
 #import "TorrentItem.h"
 #import "DMHYTool.h"
@@ -43,16 +42,14 @@ NSString * const kXPathItem           = @"//item";
 }
 
 - (void)GET:(NSString *)urlString fromSite:(NSString *)siteName {
-    NSURL *url = [NSURL URLWithString:urlString];
-    NSLog(@"url -> %@",url);
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    op.responseSerializer = [AFOnoResponseSerializer XMLResponseSerializer];
-    op.responseSerializer.acceptableContentTypes = self.accepableContentTypes;
-    
+    NSLog(@"urlString -> %@",urlString);
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFXMLDocumentResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = self.accepableContentTypes;
     __block NSMutableArray *torrents = [NSMutableArray new];
-    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, ONOXMLDocument *xmlDoc) {
-        
+    
+    [manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        ONOXMLDocument *xmlDoc = [ONOXMLDocument XMLDocumentWithString:[responseObject description] encoding:NSUTF8StringEncoding error:nil];
         [xmlDoc enumerateElementsWithXPath:kXPathItem usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
             TorrentItem *item = [[TorrentItem alloc] init];
             NSString *dateString = [[element firstChildWithTag:pubDateKey] stringValue];
@@ -68,20 +65,18 @@ NSString * const kXPathItem           = @"//item";
             [torrents addObject:item];
         }];
         [DMHYNotification postNotificationName:DMHYXMLDataLoadCompletedNotification object:torrents];
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        
-        NSLog(@"Error %@",[error localizedDescription]);
-        NSString *acceptableContentTypeError = [error localizedDescription];
-        if ([acceptableContentTypeError containsString:@"application/rss+xml"]) {
-            self.accepableContentTypes = [NSSet setWithObject:@"application/rss+xml"];
-        }
-        if ([acceptableContentTypeError containsString:@"text/xml"]) {
-           self.accepableContentTypes = [NSSet setWithObject:@"text/xml"];
-        }
-        NSNumber *statusCode = [NSNumber numberWithInteger:operation.response.statusCode];
-        [DMHYNotification postNotificationName:DMHYXMLDataLoadErrorNotification object:statusCode];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"XML Document request Error %@",[error localizedDescription]);
+       //        NSNumber *statusCode = [NSNumber numberWithInteger:operation.response.statusCode];
+//        [DMHYNotification postNotificationName:DMHYXMLDataLoadErrorNotification object:statusCode];
     }];
-    [[NSOperationQueue mainQueue] addOperation:op];
+}
+
+- (NSSet *)accepableContentTypes {
+    if (!_accepableContentTypes) {
+        _accepableContentTypes = [NSSet setWithObjects:@"application/rss+xml",@"text/xml", nil];
+    }
+    return _accepableContentTypes;
 }
 
 @end

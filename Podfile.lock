@@ -1,41 +1,33 @@
 PODS:
-  - AFNetworking (2.6.3):
-    - AFNetworking/NSURLConnection (= 2.6.3)
-    - AFNetworking/NSURLSession (= 2.6.3)
-    - AFNetworking/Reachability (= 2.6.3)
-    - AFNetworking/Security (= 2.6.3)
-    - AFNetworking/Serialization (= 2.6.3)
-    - AFNetworking/UIKit (= 2.6.3)
-  - AFNetworking/NSURLConnection (2.6.3):
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.6.3):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.6.3)
-  - AFNetworking/Security (2.6.3)
-  - AFNetworking/Serialization (2.6.3)
-  - AFOnoResponseSerializer (1.0.0):
-    - AFNetworking (~> 2.2)
-    - Ono (~> 1.0)
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
   - CDEvents (1.2.2)
   - DateTools (1.7.0)
   - Ono (1.2.2)
 
 DEPENDENCIES:
-  - AFNetworking (~> 2.0)
-  - AFOnoResponseSerializer
+  - AFNetworking (~> 3.0)
   - CDEvents
   - DateTools
   - Ono
 
 SPEC CHECKSUMS:
-  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
-  AFOnoResponseSerializer: c02c8bef1d6742ac68f33ecaed41826c9657bc33
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   CDEvents: f311f23de13414f4b3625f1a663b2e1d9a85d982
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
   Ono: 80b1c686777d3f6d5d5ce6fcac8a74afef4ca197
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: cdeda80e5c313d6f68f1c2a7f581fe7906f52591
+
+COCOAPODS: 1.0.1

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F401A9731BA2895E001BF9BE /* libPods-DMHY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D009E0C851A892591A01FC32 /* libPods-DMHY.a */; };
+		06F614C9FC3EBEB4D21812BF /* libPods-DMHY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B5EB0C999E9F02A73B8D60 /* libPods-DMHY.a */; };
 		F41697B81C8D4D1C002521A4 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41697B71C8D4D1C002521A4 /* WindowController.m */; };
 		F4258FA11CA5808500B4DF8D /* FileManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4258FA01CA5808500B4DF8D /* FileManagerViewController.m */; };
 		F4258FA41CA580D700B4DF8D /* SavedDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4258FA31CA580D700B4DF8D /* SavedDataViewController.m */; };
@@ -50,9 +50,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1C595D7C866159F1BCD3B37D /* Pods-DMHY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMHY.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMHY/Pods-DMHY.release.xcconfig"; sourceTree = "<group>"; };
-		D009E0C851A892591A01FC32 /* libPods-DMHY.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DMHY.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EAA3952C390934E328DA1C12 /* Pods-DMHY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMHY.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMHY/Pods-DMHY.debug.xcconfig"; sourceTree = "<group>"; };
+		48B5EB0C999E9F02A73B8D60 /* libPods-DMHY.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DMHY.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F7ED7A7CAA64C992577D80D /* Pods-DMHY.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMHY.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMHY/Pods-DMHY.debug.xcconfig"; sourceTree = "<group>"; };
 		F41697B61C8D4D1C002521A4 /* WindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowController.h; sourceTree = "<group>"; };
 		F41697B71C8D4D1C002521A4 /* WindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindowController.m; sourceTree = "<group>"; };
 		F4258F9F1CA5808500B4DF8D /* FileManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManagerViewController.h; sourceTree = "<group>"; };
@@ -130,6 +129,7 @@
 		F4EC473D1C82FECC00EBF0B9 /* DMHYTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHYTool.h; sourceTree = "<group>"; };
 		F4EC473E1C82FECC00EBF0B9 /* DMHYTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHYTool.m; sourceTree = "<group>"; };
 		F4FC772F1BA2DA810095F753 /* DMHY.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DMHY.entitlements; sourceTree = "<group>"; };
+		FA4A8013B89A57AC2CB71310 /* Pods-DMHY.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMHY.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMHY/Pods-DMHY.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,28 +137,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F401A9731BA2895E001BF9BE /* libPods-DMHY.a in Frameworks */,
+				06F614C9FC3EBEB4D21812BF /* libPods-DMHY.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		425B025F256B120C0EA72701 /* Pods */ = {
+		B8F402F3F52F9571A1B79F62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EAA3952C390934E328DA1C12 /* Pods-DMHY.debug.xcconfig */,
-				1C595D7C866159F1BCD3B37D /* Pods-DMHY.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		B0A81ACA1B32C03EF83A7935 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D009E0C851A892591A01FC32 /* libPods-DMHY.a */,
+				48B5EB0C999E9F02A73B8D60 /* libPods-DMHY.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EB161EE472D3575729C3A0E0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9F7ED7A7CAA64C992577D80D /* Pods-DMHY.debug.xcconfig */,
+				FA4A8013B89A57AC2CB71310 /* Pods-DMHY.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		F43A1E6B1BB1714300B7CFBA /* Model */ = {
@@ -212,8 +212,8 @@
 			children = (
 				F48F8C281BA03643002C96C3 /* DMHY */,
 				F48F8C271BA03643002C96C3 /* Products */,
-				425B025F256B120C0EA72701 /* Pods */,
-				B0A81ACA1B32C03EF83A7935 /* Frameworks */,
+				EB161EE472D3575729C3A0E0 /* Pods */,
+				B8F402F3F52F9571A1B79F62 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -306,12 +306,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F48F8C3D1BA03643002C96C3 /* Build configuration list for PBXNativeTarget "DMHY" */;
 			buildPhases = (
-				2362FE4DAA42CFACB4417EE6 /* Check Pods Manifest.lock */,
+				42A1A92169CACD10B3528C3F /* [CP] Check Pods Manifest.lock */,
 				F48F8C221BA03643002C96C3 /* Sources */,
 				F48F8C231BA03643002C96C3 /* Frameworks */,
 				F48F8C241BA03643002C96C3 /* Resources */,
-				626678F78F4AB1EF5DA77307 /* Copy Pods Resources */,
-				AA47D900DBF300FE9787F7D7 /* Embed Pods Frameworks */,
+				D5FA09C28A31D2C2FF17B60E /* [CP] Embed Pods Frameworks */,
+				F69A2848D1513B35E0740A0F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -378,14 +378,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2362FE4DAA42CFACB4417EE6 /* Check Pods Manifest.lock */ = {
+		42A1A92169CACD10B3528C3F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -393,34 +393,34 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		626678F78F4AB1EF5DA77307 /* Copy Pods Resources */ = {
+		D5FA09C28A31D2C2FF17B60E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DMHY/Pods-DMHY-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AA47D900DBF300FE9787F7D7 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DMHY/Pods-DMHY-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F69A2848D1513B35E0740A0F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DMHY/Pods-DMHY-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -563,7 +563,7 @@
 		};
 		F48F8C3E1BA03643002C96C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EAA3952C390934E328DA1C12 /* Pods-DMHY.debug.xcconfig */;
+			baseConfigurationReference = 9F7ED7A7CAA64C992577D80D /* Pods-DMHY.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DMHY/DMHY.entitlements;
@@ -580,7 +580,7 @@
 		};
 		F48F8C3F1BA03643002C96C3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C595D7C866159F1BCD3B37D /* Pods-DMHY.release.xcconfig */;
+			baseConfigurationReference = FA4A8013B89A57AC2CB71310 /* Pods-DMHY.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DMHY/DMHY.entitlements;

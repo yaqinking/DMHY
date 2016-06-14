@@ -18,7 +18,6 @@
 #import "NavigationView.h"
 // Networking and XML parse
 #import "AFNetworking.h"
-#import "AFOnoResponseSerializer.h"
 #import "Ono.h"
 #import "DMHYXMLDataManager.h"
 #import "DMHYJSONDataManager.h"
@@ -524,14 +523,10 @@
             NSLog(@"%@ => %@", weekdayKeyword.keyword, keyword.keyword);
             NSString *searchStr = [[NSString stringWithFormat:DMHYSearchByKeyword,keyword.keyword]
                                    stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-            NSURL *url = [NSURL URLWithString:searchStr];
-            NSURLRequest *request = [NSURLRequest requestWithURL:url];
-            AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-            if (op) {
-                op.responseSerializer = [AFOnoResponseSerializer XMLResponseSerializer];
-            }
-            
-            [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, ONOXMLDocument *xmlDoc) {
+            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+            manager.responseSerializer = [AFXMLDocumentResponseSerializer serializer];
+            [manager GET:searchStr parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                ONOXMLDocument *xmlDoc = [ONOXMLDocument XMLDocumentWithString:[responseObject description] encoding:NSUTF8StringEncoding error:nil];
                 [xmlDoc enumerateElementsWithXPath:kXPathTorrentItem usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
                     NSString *title                     = [[element firstChildWithTag:@"title"] stringValue];
                     if (self.dontDownloadCollection) {
@@ -586,14 +581,9 @@
                         *stop = 1;
                     }
                 }];
-            } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-                /*
-                 self.info.stringValue = @"电波很差 poi 或者 花园酱傲娇了 w";
-                 [self stopAnimatingProgressIndicator];
-                 NSLog(@"Error %@",[error localizedDescription]);
-                 */
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                
             }];
-            [[NSOperationQueue mainQueue] addOperation:op];
         }
     }
     NSDate *time = [NSDate new];
@@ -613,7 +603,7 @@
             for (DMHYTorrent *torrent in keyword.torrents) {
                 BOOL isNewTorrent = torrent.isNewTorrent.boolValue;
                 if (isNewTorrent) {
-                    torrent.isNewTorrent = @NO;
+//                    torrent.isNewTorrent = @NO;
                     if (self.isMagnetLink) {
                         [self openMagnetWith:[NSURL URLWithString:torrent.magnet]];
                     } else {
@@ -648,16 +638,11 @@
  */
 - (void)extractTorrentDownloadURLWithURLString:(NSString *)urlString {
     [self startAnimatingProgressIndicator];
-    NSURL *url = [NSURL URLWithString:urlString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    if (op) {
-        op.responseSerializer = [AFOnoResponseSerializer HTMLResponseSerializer];
-    }
-    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, ONOXMLDocument *doc ){
-        
-        dispatch_async(dispatch_queue_create("download queue", nil), ^{
-            
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+       dispatch_async(dispatch_queue_create("download queue", nil), ^{
+           ONOXMLDocument *doc = [ONOXMLDocument HTMLDocumentWithData:responseObject error:nil];
             __block NSMutableString *downloadString = [NSMutableString new];
             [doc enumerateElementsWithXPath:kXpathTorrentDirectDownloadLink usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
                 downloadString = [[element stringValue] mutableCopy];
@@ -670,13 +655,11 @@
                 [self stopAnimatingProgressIndicator];
             });
         });
-        
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"Error %@",[error localizedDescription]);
         [self stopAnimatingProgressIndicator];
+
     }];
-    
-    [[NSOperationQueue mainQueue] addOperation:op];
 }
 
 - (NSManagedObjectContext *)managedObjectContext {

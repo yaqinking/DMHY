@@ -14,7 +14,6 @@
 #import "DMHYCoreDataStackManager.h"
 #import "Bangumi.h"
 #import "AFNetworking.h"
-#import "AFOnoResponseSerializer.h"
 #import "Ono.h"
 
 @interface KeywordViewController ()<NSTableViewDataSource, NSTableViewDelegate>
@@ -75,8 +74,7 @@
  *  Set Bangumi Main Info 从 bgmlist 获取番组数据
  */
 - (IBAction)fetchBangumiInfo:(id) sender {
-    [self.httpManager GET:self.bangumiURLString
-               parameters:nil
+    [self.httpManager GET:self.bangumiURLString parameters:nil progress:nil
                   success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
                       NSArray *bangumiList = [responseObject allValues];
                       for (NSDictionary *bgmDict in bangumiList) {
@@ -112,18 +110,14 @@
  *  Set Bangumi SubGroup Property 字幕组数据是以从 bgmlist 获取到的 番组名字 作为关键字从动漫花园搜索之后，定位到 Raw 所在的 Index，然后 －1 之后作为更新最快的带字幕组的番组条目，然后提取出字幕组的名字。
  */
 - (void)setupSubGroup {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFXMLDocumentResponseSerializer serializer];
     [self.allBangumi enumerateObjectsUsingBlock:^(Bangumi * bgm, NSUInteger idx, BOOL * _Nonnull stop) {
         NSString *searchURLString = [[NSString stringWithFormat:DMHYSearchByKeyword, bgm.titleCN] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-        NSURL *url = [NSURL URLWithString:searchURLString];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-        op.responseSerializer = [AFOnoResponseSerializer XMLResponseSerializer];
-        
         __block NSUInteger progress = idx+2;
-        
-        [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, ONOXMLDocument *xmlDoc) {
+        [manager GET:searchURLString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            ONOXMLDocument *xmlDoc = [ONOXMLDocument XMLDocumentWithString:[responseObject description] encoding:NSUTF8StringEncoding error:nil];
             dispatch_async(dispatch_queue_create("subGroupQueue", 0), ^{
-        
                 [xmlDoc enumerateElementsWithXPath:kXPathTorrentItem usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
                     NSString *title = [[element firstChildWithTag:@"title"] stringValue];
                     [self.fetchedBangumiTitles addObject:title];
@@ -165,7 +159,7 @@
                         }
                     }
                     bgm.subGroup = subGroup;
-//                    NSLog(@"%@ %@ %@", bgm.titleCN, subGroup, bgm.weekDayCN);
+                    //                    NSLog(@"%@ %@ %@", bgm.titleCN, subGroup, bgm.weekDayCN);
                 }
                 
                 // 单个条目的所有 Title 分析之后清空，准备解析下一个的时候使用
@@ -182,12 +176,12 @@
                     }
                 });
             });
-            
-        } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+ 
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             self.infoTextField.stringValue = @"不知道哪里出问题了 _(:3 」∠)_";
             NSLog(@"Error %@",[error localizedDescription]);
+ 
         }];
-        [[NSOperationQueue mainQueue] addOperation:op];
     }];
 }
 

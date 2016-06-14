@@ -9,6 +9,7 @@
 #ifndef DMHYAPI_h
 #define DMHYAPI_h
 
+// 似乎大部分 RSS 站点都可以的样子（并不确定 _(:3 」∠)_）
 #define DMHYRSS                       @"https://share.dmhy.org/topics/rss/rss.xml"
 #define DMHYSearchByKeyword           @"https://share.dmhy.org/topics/rss/rss.xml?keyword=%@"
 
@@ -30,6 +31,9 @@
 
 #define DMHYMikanRSS                  @"http://mikanani.me/RSS/Classic"
 #define DMHYMikanSearchByKeyword      @"http://mikanani.me/RSS/Search?searchstr=%@"
+
+#define DMHYNyaaRSS                   @"http://www.nyaa.se/?page=rss"
+#define DMHYNyaaSearchByKeyword       @"http://www.nyaa.se/?page=rss&term=%@"
 
 #define kXpathTorrentDownloadShortURL   @"//div[@class='dis ui-tabs-panel ui-widget-content ui-corner-bottom']/a/@href"
 #define kXpathTorrentDirectDownloadLink @"//div[@class='dis']//p//a//@href"

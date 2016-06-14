@@ -88,12 +88,6 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="U5J-Ah-qwa"/>
-                                        <menuItem title="添加季度关键字" keyEquivalent="A" id="wJR-J2-GEX">
-                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
-                                            <connections>
-                                                <segue destination="DTa-6Z-o28" kind="show" id="rAT-ZQ-zOK"/>
-                                            </connections>
-                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
