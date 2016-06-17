@@ -11,11 +11,6 @@
 #import "Ono.h"
 #import "TorrentItem.h"
 #import "DMHYTool.h"
-#import "DMHYNotification.h"
-#import "PreferenceController.h"
-
-NSString * const DMHYXMLDataLoadCompletedNotification = @"DMHYXMLDataLoadCompletedNotification";
-NSString * const DMHYXMLDataLoadErrorNotification = @"DMHYXMLDataLoadErrorNotification";
 
 NSString * const pubDateKey           = @"pubDate";
 NSString * const titleKey             = @"title";
@@ -40,9 +35,9 @@ NSString * const kXPathItem           = @"//item";
     });
     return sharedManager;
 }
-
-- (void)GET:(NSString *)urlString fromSite:(NSString *)siteName {
-    NSLog(@"urlString -> %@",urlString);
+- (void)GET:(NSString *)urlString success:(DMHYXMLDataFetchSuccessBlock)successBlock failure:(DMHYXMLDataFetchFailureBlock)failureBlock {
+    _successBlock = successBlock;
+    _failureBlock = failureBlock;
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFXMLDocumentResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = self.accepableContentTypes;
@@ -64,11 +59,9 @@ NSString * const kXPathItem           = @"//item";
             item.magnet          = [NSURL URLWithString:magStr];
             [torrents addObject:item];
         }];
-        [DMHYNotification postNotificationName:DMHYXMLDataLoadCompletedNotification object:torrents];
+        _successBlock(torrents);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"XML Document request Error %@",[error localizedDescription]);
-       //        NSNumber *statusCode = [NSNumber numberWithInteger:operation.response.statusCode];
-//        [DMHYNotification postNotificationName:DMHYXMLDataLoadErrorNotification object:statusCode];
+        _failureBlock(error);
     }];
 }
 

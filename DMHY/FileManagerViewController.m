@@ -89,11 +89,6 @@
                      ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
                                  excludeURLs:0
                          streamCreationFlags:creationFlags];
-    //[_events setIgnoreEventsFromSubDirectories:YES];
-    
-//    NSLog(@"File Watcher: \n%@\n------\n%@",
-//          _events,
-//          [_events streamDescription]);
 }
 
 - (void)setupTableViewStyle {
@@ -135,12 +130,9 @@ typedef NS_ENUM(UInt32, DMHYFileEventFlag) {
 };
 
 - (void)URLWatcher:(CDEvents *)urlWatcher eventOccurred:(CDEvent *)event {
-//    NSLog(@"[Delegate] URLWatcher: %@\nEvent: %@", urlWatcher, event);
-//    NSLog(@"Event Desc %@" , event.description);
     if (event.flags == DMHYFileEventFlagFileChanged ||
         event.flags == DMHYFileEventFlagFileMoved ||
         event.flags == DMHYFileEventFlagDirectoryChanged) {
-        NSLog(@"\n \n File Changed %@ \n \n Rescan",event);
         [self setupFileData];
     }
     

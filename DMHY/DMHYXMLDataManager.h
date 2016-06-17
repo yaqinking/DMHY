@@ -8,18 +8,24 @@
 
 #import <Foundation/Foundation.h>
 
+@class TorrentItem;
+
 extern NSString * const pubDateKey;
 extern NSString * const titleKey;
 extern NSString * const linkKey;
 extern NSString * const authorKey;
 extern NSString * const kXPathItem;
-extern NSString * const DMHYXMLDataLoadCompletedNotification;
-extern NSString * const DMHYXMLDataLoadErrorNotification;
+
+typedef void (^DMHYXMLDataFetchSuccessBlock)(NSArray<TorrentItem *> *objects);
+typedef void (^DMHYXMLDataFetchFailureBlock)(NSError *error);
 
 @interface DMHYXMLDataManager : NSObject
 
+@property (nonatomic, readonly) DMHYXMLDataFetchSuccessBlock successBlock;
+@property (nonatomic, readonly) DMHYXMLDataFetchFailureBlock failureBlock;
+
 + (DMHYXMLDataManager *)manager;
 
-- (void)GET:(NSString *)urlString fromSite:(NSString *)siteName;
+- (void)GET:(NSString *)urlString success:(DMHYXMLDataFetchSuccessBlock) successBlock failure:(DMHYXMLDataFetchFailureBlock) failureBlock;
 
 @end

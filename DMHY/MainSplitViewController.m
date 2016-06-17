@@ -21,7 +21,6 @@
     
     [super viewDidLoad];
     [self setupMenuItems];
-   
 }
 - (void)setupMenuItems {
     NSMenu *viewSubMenu = [self viewSubMenu];

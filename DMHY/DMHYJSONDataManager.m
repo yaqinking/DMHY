@@ -9,7 +9,6 @@
 #import "DMHYJSONDataManager.h"
 #import "AFNetworking.h"
 #import "TorrentItem.h"
-#import "DMHYNotification.h"
 
 NSString * const DMHYBangumiMoeOpenTorrentPagePrefixFormat = @"https://bangumi.moe/torrent/%@";
 NSString * const publishTimeKey                            = @"publish_time";
@@ -17,8 +16,6 @@ NSString * const idKey                                     = @"_id";
 NSString * const teamNameKeyPath                           = @"team.name";
 NSString * const uploaderUserNameKeyPath                   = @"uploader.username";
 NSString * const magnetKey                                 = @"magnet";
-NSString * const DMHYJSONDataLoadCompletedNotification     = @"DMHYJSONDataLoadCompletedNotification";
-NSString * const DMHYJSONDataLoadErrorNotification         = @"DMHYJSONDataLoadErrorNotification";
 
 @interface DMHYJSONDataManager()
 
@@ -38,9 +35,9 @@ NSString * const DMHYJSONDataLoadErrorNotification         = @"DMHYJSONDataLoadE
 
 }
 
-- (void)GET:(NSString *)urlString fromSite:(NSString *)siteName {
+- (void)GET:(NSString *)urlString success:(DMHYJSONDataFetchSuccessBlock)successBlock failure:(DMHYJSONDataFetchFailureBlock)failureBlock {
     [self.httpManager GET:urlString
-               parameters:nil
+               parameters:nil progress:nil
                   success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
                       NSArray *torrentsArray = [responseObject valueForKey:@"torrents"];
                       NSMutableArray *data = [NSMutableArray new];
@@ -59,12 +56,12 @@ NSString * const DMHYJSONDataLoadErrorNotification         = @"DMHYJSONDataLoadE
                           item.author  = team_name;
                           [data addObject:item];
                       }
-                      [DMHYNotification postNotificationName:DMHYJSONDataLoadCompletedNotification object:data];
+                      successBlock(data);
                   } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                       NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)task.response;
                       NSLog(@"Error %@",[error localizedDescription]);
                       NSNumber *statusCode = [NSNumber numberWithInteger:httpResponse.statusCode];
-                      [DMHYNotification postNotificationName:DMHYJSONDataLoadErrorNotification object:statusCode];
+                      failureBlock(error);
                   }];
 }
 

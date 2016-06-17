@@ -86,9 +86,7 @@ NSString *const ErrorDomain                       = @"CoreDataStackManager";
 - (NSURL *)storeURL {
     if (!_storeURL) {
         _storeURL = [self.applicationDocumentsDirectory URLByAppendingPathComponent:MainStoreFileName];
-//        NSLog(@"Store URL -> %@",_storeURL);
     }
-//    NSLog(@"Store URL -> %@",_storeURL);
     return _storeURL;
 }
 

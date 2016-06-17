@@ -11,6 +11,6 @@
 /**
  *  已保存的关键字
  */
-@interface SideViewController : NSViewController<NSOutlineViewDataSource, NSOutlineViewDelegate, NSTextFieldDelegate>
+@interface SideViewController : NSViewController<NSOutlineViewDataSource, NSOutlineViewDelegate, NSTextFieldDelegate, NSSplitViewDelegate>
 
 @end

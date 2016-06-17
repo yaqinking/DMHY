@@ -20,7 +20,6 @@
 		F42DCC471BB26DD9004EC373 /* DMHYKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC431BB26DD9004EC373 /* DMHYKeyword.m */; };
 		F43E8C221CA37E6B0068AF92 /* DMHYDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = F43E8C211CA37E6B0068AF92 /* DMHYDownloader.m */; };
 		F43E8C3B1CA3AADA0068AF92 /* ViewerPreferences.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F43E8C3A1CA3AADA0068AF92 /* ViewerPreferences.tiff */; };
-		F44C9F241C9E3EFD007E1CAA /* KeywordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F44C9F231C9E3EFD007E1CAA /* KeywordViewController.m */; };
 		F44C9F271C9E7624007E1CAA /* Bangumi.m in Sources */ = {isa = PBXBuildFile; fileRef = F44C9F261C9E7624007E1CAA /* Bangumi.m */; };
 		F4592BBF1CA16BEA00981DDF /* SitePreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4592BBD1CA16BEA00981DDF /* SitePreferenceController.m */; };
 		F4592BC01CA16BEA00981DDF /* SitePreferenceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4592BBE1CA16BEA00981DDF /* SitePreferenceController.xib */; };
@@ -75,8 +74,6 @@
 		F43E8C201CA37E6B0068AF92 /* DMHYDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHYDownloader.h; sourceTree = "<group>"; };
 		F43E8C211CA37E6B0068AF92 /* DMHYDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHYDownloader.m; sourceTree = "<group>"; };
 		F43E8C3A1CA3AADA0068AF92 /* ViewerPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ViewerPreferences.tiff; sourceTree = "<group>"; };
-		F44C9F221C9E3EFD007E1CAA /* KeywordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeywordViewController.h; sourceTree = "<group>"; };
-		F44C9F231C9E3EFD007E1CAA /* KeywordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeywordViewController.m; sourceTree = "<group>"; };
 		F44C9F251C9E7624007E1CAA /* Bangumi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bangumi.h; path = Model/Bangumi.h; sourceTree = "<group>"; };
 		F44C9F261C9E7624007E1CAA /* Bangumi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Bangumi.m; path = Model/Bangumi.m; sourceTree = "<group>"; };
 		F44E86101CBFCF5A00384897 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -238,8 +235,6 @@
 				F483EA191BAD92C100D02E60 /* SideViewController.m */,
 				F48F8C2F1BA03643002C96C3 /* ViewController.h */,
 				F48F8C301BA03643002C96C3 /* ViewController.m */,
-				F44C9F221C9E3EFD007E1CAA /* KeywordViewController.h */,
-				F44C9F231C9E3EFD007E1CAA /* KeywordViewController.m */,
 				F4258FA21CA580D700B4DF8D /* SavedDataViewController.h */,
 				F4258FA31CA580D700B4DF8D /* SavedDataViewController.m */,
 				F4258F9F1CA5808500B4DF8D /* FileManagerViewController.h */,
@@ -458,7 +453,6 @@
 				F483EA1D1BAD9DB200D02E60 /* MainSplitViewController.m in Sources */,
 				F42DCC111BB180A4004EC373 /* DMHYCoreDataStackManager.m in Sources */,
 				F4A0E3E21CA130A700092C4D /* NSTableView+ContextMenu.m in Sources */,
-				F44C9F241C9E3EFD007E1CAA /* KeywordViewController.m in Sources */,
 				F43E8C221CA37E6B0068AF92 /* DMHYDownloader.m in Sources */,
 				F48F8C341BA03643002C96C3 /* DMHY.xcdatamodeld in Sources */,
 				F4258FA41CA580D700B4DF8D /* SavedDataViewController.m in Sources */,

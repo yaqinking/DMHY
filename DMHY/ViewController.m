@@ -168,23 +168,23 @@
     [self configureSearchURLString];
     [self.torrents removeAllObjects];
     if ([self isCurrentSiteResponseJSONData]) {
-        [[DMHYJSONDataManager manager] GET:self.searchURLString fromSite:self.currentSite[SiteNameKey]];
+        [[DMHYJSONDataManager manager] GET:self.searchURLString success:^(NSArray<TorrentItem *> *objects) {
+            self.torrents = [objects mutableCopy];
+            [self reloadDataAndStopIndicator];
+        } failure:^(NSError *error) {
+            [self setErrorInfoAndStopIndicator];
+        }];
     } else {
-       [[DMHYXMLDataManager manager] GET:self.searchURLString fromSite:self.currentSite[SiteNameKey]];
+        [[DMHYXMLDataManager manager] GET:self.searchURLString success:^(NSArray<TorrentItem *> *objects) {
+            self.torrents = [objects mutableCopy];
+            [self reloadDataAndStopIndicator];
+        } failure:^(NSError *error) {
+            [self setErrorInfoAndStopIndicator];
+        }];
     }
 }
 
-#pragma mark - Notification Data Load Completed
-
-- (void)handleXMLDataLoadCompleted:(NSNotification *)noti {
-    self.torrents = noti.object;
-    [self reloadDataAndStopIndicator];
-}
-
-- (void)handleJSONDataLoadCompleted:(NSNotification *)noti {
-    self.torrents = noti.object;
-    [self reloadDataAndStopIndicator];
-}
+#pragma mark - Indicator and reload table view data
 
 - (void)reloadDataAndStopIndicator {
     [self stopAnimatingProgressIndicator];
@@ -300,10 +300,6 @@
 #pragma mark - Notification
 
 - (void)observeNotification {
-    [DMHYNotification addObserver:self selector:@selector(handleXMLDataLoadCompleted:) name:DMHYXMLDataLoadCompletedNotification];
-    [DMHYNotification addObserver:self selector:@selector(handleJSONDataLoadCompleted:) name:DMHYJSONDataLoadCompletedNotification];
-    [DMHYNotification addObserver:self selector:@selector(setErrorInfoAndStopIndicator) name:DMHYXMLDataLoadErrorNotification];
-    [DMHYNotification addObserver:self selector:@selector(setErrorInfoAndStopIndicator) name:DMHYJSONDataLoadErrorNotification];
     [DMHYNotification addObserver:self selector:@selector(handleDownloadTypeChanged)   name:DMHYDownloadLinkTypeNotification];
     [DMHYNotification addObserver:self selector:@selector(handleDownloadSiteChanged)   name:DMHYDownloadSiteChangedNotification];
     [DMHYNotification addObserver:self selector:@selector(handleSelectKeywordChanged:) name:DMHYSelectKeywordChangedNotification];
@@ -603,7 +599,7 @@
             for (DMHYTorrent *torrent in keyword.torrents) {
                 BOOL isNewTorrent = torrent.isNewTorrent.boolValue;
                 if (isNewTorrent) {
-//                    torrent.isNewTorrent = @NO;
+                    torrent.isNewTorrent = @NO;
                     if (self.isMagnetLink) {
                         [self openMagnetWith:[NSURL URLWithString:torrent.magnet]];
                     } else {

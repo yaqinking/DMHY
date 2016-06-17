@@ -119,7 +119,6 @@
 }
 
 - (void)tableView:(NSTableView *)tableView sortDescriptorsDidChange:(NSArray<NSSortDescriptor *> *)oldDescriptors {
-    NSLog(@"Sort");
 }
 
 - (void)deleteSelectTorrent {

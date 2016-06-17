@@ -153,6 +153,12 @@
     return ((DMHYKeyword *)item).isSubKeyword.boolValue ? YES : NO;
 }
 
+#pragma mark - NSSplitViewDelegate
+
+- (NSRect)splitView:(NSSplitView *)splitView effectiveRect:(NSRect)proposedEffectiveRect forDrawnRect:(NSRect)drawnRect ofDividerAtIndex:(NSInteger)dividerIndex {
+    return NSRectFromCGRect(CGRectZero);
+}
+
 #pragma mark - Notification
 
 - (void)observeNotification {
@@ -163,7 +169,6 @@
 }
 
 - (void)handleSeasonKeywordAdded {
-    NSLog(@"handleSeasonKeywordAdded");
     self.keywords = nil;
     [self reloadData];
 }
@@ -248,7 +253,17 @@
     NSError *error = nil;
     if ([self.managedObjectContext hasChanges]) {
         if (![self.managedObjectContext save:&error]) {
-            NSLog(@"Side View Controller Error %@",[error localizedDescription]);
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert setMessageText:@"删除关键字时出现错误"];
+            [alert setInformativeText:[NSString stringWithFormat:@"%@", [error localizedDescription]]];
+            [alert addButtonWithTitle:@"OK"];
+            [alert setAlertStyle:NSWarningAlertStyle];
+            
+            [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
+                if (returnCode == NSAlertFirstButtonReturn) {
+                    
+                }
+            }];
         }
     }
 }
