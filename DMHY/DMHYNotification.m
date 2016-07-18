@@ -22,6 +22,10 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:name object:object];
 }
 
++ (void)postNotificationName:(NSString *)name object:(id)object userInfo:(id)info {
+    [[NSNotificationCenter defaultCenter] postNotificationName:name object:object userInfo:info];
+}
+
 + (void)addObserver:(id)object selector:(SEL)selector name:(NSString *)name {
     [[NSNotificationCenter defaultCenter] addObserver:object
                                              selector:selector

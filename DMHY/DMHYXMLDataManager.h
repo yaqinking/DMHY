@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DMHYCoreDataStackManager.h"
 
 @class TorrentItem;
 
@@ -18,6 +19,8 @@ extern NSString * const kXPathItem;
 
 typedef void (^DMHYXMLDataFetchSuccessBlock)(NSArray<TorrentItem *> *objects);
 typedef void (^DMHYXMLDataFetchFailureBlock)(NSError *error);
+typedef void (^DMHYXMLDataFetchedNewTorrentBlock)(DMHYTorrent *torrent);
+typedef void (^DMHYXMLDataFetchCompletionBlock)();
 
 @interface DMHYXMLDataManager : NSObject
 
@@ -27,5 +30,6 @@ typedef void (^DMHYXMLDataFetchFailureBlock)(NSError *error);
 + (DMHYXMLDataManager *)manager;
 
 - (void)GET:(NSString *)urlString success:(DMHYXMLDataFetchSuccessBlock) successBlock failure:(DMHYXMLDataFetchFailureBlock) failureBlock;
+- (void)fetchFromSite:(DMHYSite *) site queryKeyword:(DMHYKeyword *)keyword fetchedNew:(DMHYXMLDataFetchedNewTorrentBlock) block completion:(DMHYXMLDataFetchCompletionBlock) completionHandler failure:(DMHYXMLDataFetchFailureBlock) failureHandler;
 
 @end

@@ -9,48 +9,8 @@
 #ifndef DMHYAPI_h
 #define DMHYAPI_h
 
-// 似乎大部分 RSS 站点都可以的样子（并不确定 _(:3 」∠)_）
-#define DMHYRSS                       @"https://share.dmhy.org/topics/rss/rss.xml"
-#define DMHYSearchByKeyword           @"https://share.dmhy.org/topics/rss/rss.xml?keyword=%@"
-
-#define DMHYdandanplayRSS             @"http://dmhy.dandanplay.com/topics/rss/rss.xml"
-#define DMHYdandanplaySearchByKeyword @"http://dmhy.dandanplay.com/topics/rss/rss.xml?keyword=%@"
-
-#define DMHYACGGGRSS                  @"http://bt.acg.gg/rss.xml"
-#define DMHYACGGGSearchByKeyword      @"http://bt.acg.gg/rss.xml?keyword=%@"
-
-// BangumiMoe return JSON data. Also can set placeholder to [page][limit].
-#define DMHYBangumiMoeRSS             @"https://bangumi.moe/api/v2/torrent/page/1?limit=50"
-#define DMHYBangumiMoeSearchByKeyword @"https://bangumi.moe/api/v2/torrent/search?limit=50&p=1&query=%@"
-
-#define DMHYACGRIPRSS                 @"https://acg.rip/.xml"
-#define DMHYACGRIPSearchByKeyword     @"https://acg.rip/.xml?term=%@"
-
-#define DMHYKissSubRSS                @"http://www.kisssub.org/rss.xml"
-#define DMHYKissSubSearchByKeyword    @"http://www.kisssub.org/rss-%@.xml"
-
-#define DMHYMikanRSS                  @"http://mikanani.me/RSS/Classic"
-#define DMHYMikanSearchByKeyword      @"http://mikanani.me/RSS/Search?searchstr=%@"
-
-#define DMHYNyaaRSS                   @"http://www.nyaa.se/?page=rss"
-#define DMHYNyaaSearchByKeyword       @"http://www.nyaa.se/?page=rss&term=%@"
-
 #define kXpathTorrentDownloadShortURL   @"//div[@class='dis ui-tabs-panel ui-widget-content ui-corner-bottom']/a/@href"
 #define kXpathTorrentDirectDownloadLink @"//div[@class='dis']//p//a//@href"
-
-#define DMHYURLPrefixFormat             @"https:%@"
-#define DMHYDandanplayURLPrefixFormat   @"http:%@"
-
-#define DMHYBangumiMoeAPITorrentPagePrefixFormat  @"https://bangumi.moe/api/v2/torrent/%@"
-//#define DMHYBangumiMoeOpenTorrentPagePrefixFormat @"https://bangumi.moe/torrent/%@"
-
-#define DMHY       @"share.dmhy.org"
-#define Dandanplay @"dmhy.dandanplay.com"
-#define ACGGG      @"bt.acg.gg"
-#define BangumiMoe @"bangumi.moe"
-
-// bgmlist GitHub raw json file
-#define BGMListYearSeasonFormat @"https://raw.githubusercontent.com/wxt2005/bangumi-list/master/json/bangumi-%@%@.json"
 
 #define kXPathTorrentItem @"//item"
 #define kDownloadLinkType @"DownloadLinkType"
@@ -60,12 +20,6 @@
 #define kSelectKeyword    @"SelectKeyword"
 #define kSelectKeywordIsSubKeyword @"SelectKeywordIsSubKeyword"
 #define kWeekdayOther @"其他"
-#define kSupportSite  @"SupportSite"
-#define SiteNameKey   @"siteName"
-#define SiteMainKey   @"siteMain"
-#define SiteSearchKey @"siteSearch"
-#define kCurrentSite  @"CurrentSite"
-#define SiteResponseType @"SiteResponseType"
 #define kMainViewRowStyle @"MainViewRowStyle"
 #define kMainTableViewRowStyle @"MainTableViewRowStyle"
 #define kDoubleAction @"DoubleAction"
@@ -73,7 +27,7 @@
 #define DMHYMainTableViewRowStyleChangedNotification @"DMHYMainTableViewRowStyleChangedNotification"
 #define DMHYDoubleActionChangedNotification @"DMHYDoubleActionChangedNotification"
 #define kFetchInterval            @"FetchInterval"
-#define kFetchIntervalMinimum     30                  //5 minutes
+#define kFetchIntervalMinimum     300                  //5 minutes
 #define kFetchIntervalMaximun     43200               //12 hours
 
 #define kFileWatchInterval        @"FileWatchInterval"
@@ -85,64 +39,22 @@
 #define DMHYFileWatchPathChangedNotification @"DMHYFileWatchPathChangedNotification"
 #define DMHYDatabaseChangedNotification              @"DMHYDatabaseChangedNotification"
 #define DMHYDownloadLinkTypeNotification             @"DMHYDownloadLinkTypeNotification"
-#define DMHYDownloadSiteChangedNotification          @"DMHYDownloadSiteChangedNotification"
-#define DMHYSearsonKeywordAddedNotification          @"DMHYSearsonKeywordAddedNotification"
+#define DMHYAutoDownloadSiteChangedNotification      @"DMHYAutoDownloadSiteChangedNotification"
 #define DMHYDoubleActionChangedNotification          @"DMHYDoubleActionChangedNotification"
 #define DMHYSelectKeywordChangedNotification         @"DMHYSelectKeywordChangedNotification"
 #define DMHYFetchIntervalChangedNotification         @"DMHYFetchIntervalChangedNotification"
-#define DMHYInitialWeekdayCompleteNotification       @"DMHYInitialWeekdayCompleteNotification"
-#define DMHYDefaultSitesSetupComplatedNotification   @"DMHYDefaultSitesSetupComplatedNotification"
+
 #define DMHYMainTableViewRowStyleChangedNotification @"DMHYMainTableViewRowStyleChangedNotification"
 #define DMHYFileWatchIntervalChangedNotification @"DMHYFileWatchIntervalChangedNotification"
 
-#define DMHYKeywordEntityKey @"Keyword"
-#define DMHYTorrentEntityKey @"Torrent"
-
 #define DMHYThemeKey @"ThemeType"
-
-// bgmlist entity key
-#define BangumiTitleCNKey     @"titleCN"
-#define BangumiTitleJPKey     @"titleJP"
-#define BangumiTitleENKey     @"titleEN"
-
-#define BangumiWeekDayJPKey   @"weekDayJP"
-#define BangumiWeekDayCNKey   @"weekDayCN"
-
-#define BangumiTimeJPKey      @"timeJP"
-#define BangumiTimeCNKey      @"timeCN"
-
-#define BangumiNewBGMKey      @"newBgm" // 这个可以来做［只添加当季度新番］
-
-#define BangumiShowDateKey    @"showDate"
-#define BangumiOfficalSiteKey @"officalSite"
-/*********************************************
- * bgmlist example bangumi
- *********************************************
- "1601_21": {
- "titleCN": "红壳的潘多拉",
- "titleJP": "紅殻のパンドラ",
- "titleEN": "",
- "officalSite": "http://k-pandora.com/",
- "weekDayJP": 5,
- "weekDayCN": 6,
- "timeJP": "2200",
- "timeCN": "0040",
- "onAirSite": [
- "http://www.bilibili.com/bangumi/i/3114/"
- ],
- "newBgm": true,
- "showDate": "2016-01-08",
- "bgmId": 159269
- }
- */
-//#define BangumiDownloadKeywordKey @"downloadKeyword" 并没有卯月还要根据字幕组更新速度自己筛选 poi
 
 typedef NS_ENUM(NSInteger, DMHYThemeType) {
     DMHYThemeLight,
     DMHYThemeDark
 };
 
-typedef NS_ENUM(NSInteger, DMHYSite) {
+typedef NS_ENUM(NSInteger, DMHYSiteType) {
     DMHYSiteDefault,
     DMHYSiteDandanplay,
     DMHYSiteACGGG,
@@ -150,6 +62,26 @@ typedef NS_ENUM(NSInteger, DMHYSite) {
 };
 
 static NSString * const AppDomain = @"com.yaqinking.DMHY";
+
+static NSString * const DMHYSiteEntityKey = @"Site";
+static NSString * const DMHYKeywordEntityKey = @"Keyword";
+static NSString * const DMHYTorrentEntityKey = @"Torrent";
+
+static NSString * const DMHYSiteNameKey = @"site_name";
+static NSString * const DMHYSiteMainURLKey = @"main_url";
+static NSString * const DMHYSiteSearchURLKey = @"search_url";
+static NSString * const DMHYSiteFliterKey = @"fliter_site";
+static NSString * const DMHYSiteAutoDLKey = @"auto_download";
+static NSString * const DMHYSiteDLTypeKey = @"download_type";
+static NSString * const DMHYSiteDLFinKey = @"download_fin";
+static NSString * const DMHYSiteResponseTypeKey = @"response_type";
+static NSString * const DMHYSiteCurrentUseKey = @"current_use";
+static NSString * const DMHYSiteKeywordsKey = @"keywords";
+
+static NSString * const DMHYKeywordAddedNotification = @"moe.yaqinking.dmhy.added.keyword.notification";
+static NSString * const DMHYSearchSiteChangedNotification = @"moe.yaqinking.dmhy.search.site.changed.notification";
+static NSString * const DMHYSiteAddedNotification = @"moe.yaqinking.dmhy.site.added.notification";
+static NSString * const DMHYKeywordCheckedNotification = @"moe.yaqinking.dmhy.keyword.checked.notification";
 
 #import "DMHYTool.h"
 #import "DMHYNotification.h"

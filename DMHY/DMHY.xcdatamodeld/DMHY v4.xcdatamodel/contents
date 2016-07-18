@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Automatic">
+    <entity name="Keyword" representedClassName="DMHYKeyword" syncable="YES">
+        <attribute name="createDate" attributeType="Date" syncable="YES"/>
+        <attribute name="isSubKeyword" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="keyword" attributeType="String" syncable="YES"/>
+        <relationship name="site" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Site" inverseName="keywords" inverseEntity="Site" syncable="YES"/>
+        <relationship name="subKeywords" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Keyword" syncable="YES"/>
+        <relationship name="torrents" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Torrent" inverseName="keyword" inverseEntity="Torrent" syncable="YES"/>
+    </entity>
+    <entity name="Site" representedClassName="DMHYSite" syncable="YES">
+        <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="downloadType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isAutoDownload" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="isCurrentUse" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="isDownloadFin" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="isFliterSite" optional="YES" attributeType="Boolean" defaultValueString="0" syncable="YES"/>
+        <attribute name="mainURL" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="responseType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="searchURL" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="keywords" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Keyword" inverseName="site" inverseEntity="Keyword" syncable="YES"/>
+    </entity>
+    <entity name="Torrent" representedClassName="DMHYTorrent" syncable="YES">
+        <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isDownloaded" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isNewTorrent" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="magnet" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pubDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="keyword" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Keyword" inverseName="torrents" inverseEntity="Keyword" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Keyword" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="Torrent" positionX="-308" positionY="84" width="128" height="180"/>
+        <element name="Site" positionX="-171" positionY="108" width="128" height="210"/>
+    </elements>
+</model>

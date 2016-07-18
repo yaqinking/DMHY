@@ -58,9 +58,9 @@ NSString * const magnetKey                                 = @"magnet";
                       }
                       successBlock(data);
                   } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                      NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)task.response;
-                      NSLog(@"Error %@",[error localizedDescription]);
-                      NSNumber *statusCode = [NSNumber numberWithInteger:httpResponse.statusCode];
+//                      NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)task.response;
+                      NSLog(@"XMLDataManager Request Error %@",[error localizedDescription]);
+//                      NSNumber *statusCode = [NSNumber numberWithInteger:httpResponse.statusCode];
                       failureBlock(error);
                   }];
 }

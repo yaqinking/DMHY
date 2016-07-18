@@ -2,7 +2,7 @@
 //  DMHYKeyword+CoreDataProperties.m
 //  DMHY
 //
-//  Created by 小笠原やきん on 3/26/16.
+//  Created by 小笠原やきん on 7/16/16.
 //  Copyright © 2016 yaqinking. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -18,5 +18,6 @@
 @dynamic keyword;
 @dynamic subKeywords;
 @dynamic torrents;
+@dynamic site;
 
 @end

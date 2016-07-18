@@ -14,6 +14,4 @@ extern NSString * const SiteResponseXML;
 
 @interface SitePreferenceController : NSViewController<MASPreferencesViewController>
 
-+ (void)setupDefaultSites;
-
 @end

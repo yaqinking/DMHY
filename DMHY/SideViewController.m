@@ -7,18 +7,16 @@
 //
 
 #import "SideViewController.h"
-#import "DMHYKeyword+CoreDataProperties.h"
 #import "DMHYCoreDataStackManager.h"
-#import "DMHYAPI.h"
 
 @interface SideViewController ()
 
-@property (weak) IBOutlet NSTextField   *keywordTextField;
-@property (weak) IBOutlet NSPopUpButton *parentKeywordsPopUpButton;
+@property (weak) IBOutlet NSPopUpButton *sitesPopUpButton;
 @property (weak) IBOutlet NSOutlineView *outlineView;
 
 @property (nonatomic, readonly) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong  ) NSMutableArray         *keywords;
+@property (nonatomic, strong  ) NSMutableArray *keywords;
+@property (nonatomic, strong) DMHYSite *site;
 
 @end
 
@@ -42,37 +40,27 @@
 
 #pragma mark - IBAction
 
-- (IBAction)addKeyword:(id)sender {
-    NSString *newKeyword = self.keywordTextField.stringValue;
-    if ([newKeyword isEqualToString:@""]) {
-        return;
-    }
-    NSMenuItem *selectedItem = [self.parentKeywordsPopUpButton selectedItem];
-    NSInteger selectedKeywordIndex = [self.parentKeywordsPopUpButton indexOfItem:selectedItem];
-    
-    DMHYKeyword *parentKeyword = self.keywords[selectedKeywordIndex];
-//    NSLog(@"parentkeyword %@",parentKeyword.keyword);
-    DMHYKeyword *subKeyword = [NSEntityDescription insertNewObjectForEntityForName:DMHYKeywordEntityKey
-                                                            inManagedObjectContext:self.managedObjectContext];
-    
-    subKeyword.keyword = newKeyword;
-    subKeyword.createDate = [NSDate new];
-    subKeyword.isSubKeyword = [NSNumber numberWithBool:YES];
-    [parentKeyword addSubKeywordsObject:subKeyword];
-    [self saveData];
+
+- (IBAction)siteChanged:(NSPopUpButton *)sender {
+    NSMenuItem *item = [self.sitesPopUpButton selectedItem];
+    NSInteger selectIndex = [self.sitesPopUpButton indexOfItem:item];
+    DMHYSite *site = [[[DMHYCoreDataStackManager sharedManager] allSites] objectAtIndex:selectIndex];
+    self.site = site;
+    self.keywords = nil;
     [self reloadData];
+    [DMHYNotification postNotificationName:DMHYSearchSiteChangedNotification object:site];
 }
 
 #pragma mark - Setup Data
 
 - (void)setupPopupButtonData {
-//    NSLog(@"keywords count %lu",self.keywords.count);
-    NSMutableArray *keywordsName = [[NSMutableArray alloc] init];
-    for (DMHYKeyword *weekday in self.keywords) {
-        [keywordsName addObject:weekday.keyword];
-    }
-    [self.parentKeywordsPopUpButton addItemsWithTitles:keywordsName];
-//    NSLog(@"popupButtonData end");
+    NSMutableArray *siteNames = [[NSMutableArray alloc] init];
+    NSArray<DMHYSite *> *sites = [[DMHYCoreDataStackManager sharedManager] allSites];
+    [sites enumerateObjectsUsingBlock:^(DMHYSite * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [siteNames addObject:obj.name];
+    }];
+    [self.sitesPopUpButton addItemsWithTitles:siteNames];
+    [self.sitesPopUpButton selectItemWithTitle:self.site.name];
 }
 
 - (void)setupMenuItems {
@@ -84,10 +72,8 @@
     NSMenuItem *removeSubKeywordMenuItem = [[NSMenuItem alloc] initWithTitle:@"删除关键字"
                                                                       action:@selector(deleteSubKeyword)
                                                                keyEquivalent:delete];
-    
     [editSubMenu addItem:removeSubKeywordMenuItem];
 }
-
 
 #pragma mark - NSOutlineViewDataSource
 
@@ -140,9 +126,7 @@
     NSNumber *isSubKeyword = selectedKeyword.isSubKeyword;
     NSDictionary *userInfo = @{kSelectKeyword             : keyword,
                                kSelectKeywordIsSubKeyword : isSubKeyword};
-    
-    [DMHYNotification postNotificationName:DMHYSelectKeywordChangedNotification userInfo:userInfo];
-    
+    [DMHYNotification postNotificationName:DMHYSelectKeywordChangedNotification object:selectedKeyword userInfo:userInfo];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldExpandItem:(id)item {
@@ -162,22 +146,35 @@
 #pragma mark - Notification
 
 - (void)observeNotification {
-    [DMHYNotification addObserver:self selector:@selector(handleInitialWeekdayComplete) name:DMHYInitialWeekdayCompleteNotification];
+    [DMHYNotification addObserver:self selector:@selector(handleSeedDataComplete) name:DMHYSeedDataCompletedNotification];
     [DMHYNotification addObserver:self selector:@selector(handleThemeChanged) name:DMHYThemeChangedNotification];
-    [DMHYNotification addObserver:self selector:@selector(handleSeasonKeywordAdded) name:DMHYSearsonKeywordAddedNotification];
-    
+    [DMHYNotification addObserver:self selector:@selector(handleKeywordAdded:) name:DMHYKeywordAddedNotification];
+    [DMHYNotification addObserver:self selector:@selector(handleSiteAdded) name:DMHYSiteAddedNotification];
 }
 
-- (void)handleSeasonKeywordAdded {
-    self.keywords = nil;
-    [self reloadData];
-}
-
-- (void)handleInitialWeekdayComplete {
-    self.keywords = nil;
+- (void)handleSiteAdded {
+    [self reset];
     [self setupPopupButtonData];
+}
+
+- (void)handleKeywordAdded:(NSNotification *)notification {
+    DMHYSite *site = notification.object;
+    if ([site.name isEqualToString:self.site.name]) {
+        self.site = site;
+        self.keywords = nil;
+        [self reloadData];
+    }
+}
+
+- (void)reset {
+    self.site = nil;
+    self.keywords = nil;
     [self reloadData];
-    
+}
+
+- (void)handleSeedDataComplete {
+    [self reset];
+    [self setupPopupButtonData];
 }
 
 - (void)handleThemeChanged {
@@ -220,31 +217,26 @@
 - (NSMutableArray *)keywords {
 
     if (!_keywords) {
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:DMHYKeywordEntityKey];
         NSSortDescriptor *sortDesc = [[NSSortDescriptor alloc] initWithKey:@"createDate" ascending:YES];
-        request.sortDescriptors = @[sortDesc];
-        request.predicate = [NSPredicate predicateWithFormat:@"isSubKeyword != YES"];
-        _keywords = [[self.managedObjectContext executeFetchRequest:request
-                                                              error:NULL] mutableCopy];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isSubKeyword != YES"];
+        NSArray *weekdayKeywords = [[self.site.keywords allObjects] filteredArrayUsingPredicate:predicate];
+        _keywords = [[weekdayKeywords sortedArrayUsingDescriptors:@[sortDesc]] mutableCopy];
     }
     return _keywords;
 }
 
-- (NSManagedObjectContext *)managedObjectContext {
-    if (!_context) {
-        _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-        _context.persistentStoreCoordinator = [[DMHYCoreDataStackManager sharedManager] persistentStoreCoordinator];
-        _context.undoManager = nil;
+- (DMHYSite *)site {
+    if (!_site) {
+        _site = [[DMHYCoreDataStackManager sharedManager] currentUseSite];
     }
-    return _context;
+    return _site;
 }
 
-#pragma mark - NSTextFieldDelegate
-
-- (void)controlTextDidEndEditing:(NSNotification *)notification {
-    if ([notification.userInfo[@"NSTextMovement"] intValue] == NSReturnTextMovement) {
-        [self addKeyword:nil];
+- (NSManagedObjectContext *)managedObjectContext {
+    if (!_context) {
+        _context = [[DMHYCoreDataStackManager sharedManager] managedObjectContext];
     }
+    return _context;
 }
 
 #pragma mark - Utils
@@ -270,5 +262,7 @@
 
 - (void)reloadData {
     [self.outlineView reloadData];
+    [self expandOutlineViewItem];
 }
+
 @end

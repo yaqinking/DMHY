@@ -29,7 +29,7 @@
 @synthesize managedObjectContext = _context;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    [self setupInitialWeekdaysData];
+
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -111,23 +111,6 @@
         _context.persistentStoreCoordinator = [[DMHYCoreDataStackManager sharedManager] persistentStoreCoordinator];
     }
     return _context;
-}
-
-#pragma mark - Initial Data
-
-- (void)setupInitialWeekdaysData {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:DMHYKeywordEntityKey];
-    NSArray *fetchedWeekdays = [self.managedObjectContext executeFetchRequest:request error:NULL];
-    if (fetchedWeekdays.count == 0) {
-        NSArray *weekdays = @[@"周一", @"周二", @"周三", @"周四", @"周五", @"周六", @"周日", @"其他"];
-        for (int i = 0; i < weekdays.count; i++) {
-            DMHYKeyword *keyword = [NSEntityDescription insertNewObjectForEntityForName:DMHYKeywordEntityKey inManagedObjectContext:self.managedObjectContext];
-            keyword.keyword = weekdays[i];
-            keyword.createDate = [NSDate new];
-        };
-        [self saveData];
-        [DMHYNotification postNotificationName:DMHYInitialWeekdayCompleteNotification];
-    }
 }
 
 - (void)saveData {

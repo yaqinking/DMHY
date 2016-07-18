@@ -106,9 +106,15 @@
         cellView.textField.stringValue = torrent.title;
         return cellView;
     }
-    if ([identifier isEqualToString:@"theNewTorrentCell"]) {
-        NSTableCellView *cellView      = [tableView makeViewWithIdentifier:@"theNewTorrentCell" owner:self];
-        cellView.textField.stringValue = torrent.isNewTorrent.boolValue ? @"是" : @"否";
+    
+    if ([identifier isEqualToString:@"linkCell"]) {
+        NSTableCellView *cellView   = [tableView makeViewWithIdentifier:@"linkCell" owner:self];
+        cellView.textField.stringValue = torrent.link;
+        return cellView;
+    }
+    if ([identifier isEqualToString:@"magnetCell"]) {
+        NSTableCellView *cellView   = [tableView makeViewWithIdentifier:@"magnetCell" owner:self];
+        cellView.textField.stringValue = torrent.magnet;
         return cellView;
     }
     return nil;

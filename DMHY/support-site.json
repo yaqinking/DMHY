@@ -1,0 +1,90 @@
+{
+  "id": "yaqinking",
+  "create_at": "2016-07-16",
+  "sites": [
+  	{
+      "site_name": "dmhy",
+      "main_url": "https://share.dmhy.org/topics/rss/rss.xml",
+      "search_url": "https://share.dmhy.org/topics/rss/rss.xml?keyword=%@",
+      "fliter_site": false,
+      "auto_download": true,
+      "download_type": "torrent",
+      "download_fin": false,
+      "response_type": "xml",
+      "current_use": true,
+      "keywords": {}
+	},
+	{
+	  "site_name": "acg.rip",
+      "main_url": "https://acg.rip/.xml",
+      "search_url": "https://acg.rip/.xml?term=%@",
+      "fliter_site": false,
+      "auto_download": false,
+      "download_type": "torrent",
+      "download_fin": false,
+      "response_type": "xml",
+      "current_use": false,
+      "keywords": {}
+	},
+	{
+	  "site_name": "bangumi.moe",
+      "main_url": "https://bangumi.moe/api/v2/torrent/page/1?limit=50",
+      "search_url": "https://bangumi.moe/api/v2/torrent/search?limit=50&p=1&query=%@",
+      "fliter_site": false,
+      "auto_download": false,
+      "download_type": "magnet",
+      "download_fin": false,
+      "response_type": "json",
+      "current_use": false,
+      "keywords": {}
+	},
+	{
+	  "site_name": "acg.gg",
+      "main_url": "http://bt.acg.gg/rss.xml",
+      "search_url": "http://bt.acg.gg/rss.xml?keyword=%@",
+      "fliter_site": false,
+      "auto_download": false,
+      "download_type": "torrent",
+      "download_fin": false,
+      "response_type": "xml",
+      "current_use": false,
+      "keywords": {}
+	},
+	{
+	  "site_name": "kisssub.org",
+      "main_url": "http://www.kisssub.org/rss.xml",
+      "search_url": "http://www.kisssub.org/rss-%@.xml",
+      "fliter_site": false,
+      "auto_download": false,
+      "download_type": "torrent",
+      "download_fin": false,
+      "response_type": "xml",
+      "current_use": false,
+      "keywords": {}
+	},
+	{
+	  "site_name": "mikanani.me",
+      "main_url": "http://mikanani.me/RSS/Classic",
+      "search_url": "http://mikanani.me/RSS/Search?searchstr=%@",
+      "fliter_site": false,
+      "auto_download": false,
+      "download_type": "magnet",
+      "download_fin": false,
+      "response_type": "xml",
+      "current_use": false,
+      "keywords": {}
+	},
+	{
+	  "site_name": "nyaa.se",
+      "main_url": "http://www.nyaa.se/?page=rss",
+      "search_url": "http://www.nyaa.se/?page=rss&term=%@",
+      "fliter_site": false,
+      "auto_download": false,
+      "download_type": "torrent",
+      "download_fin": false,
+      "response_type": "xml",
+      "current_use": false,
+      "keywords": {}
+	}
+  ]
+}

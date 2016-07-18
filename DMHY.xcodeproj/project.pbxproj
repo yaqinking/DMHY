@@ -11,8 +11,6 @@
 		F41697B81C8D4D1C002521A4 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41697B71C8D4D1C002521A4 /* WindowController.m */; };
 		F4258FA11CA5808500B4DF8D /* FileManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4258FA01CA5808500B4DF8D /* FileManagerViewController.m */; };
 		F4258FA41CA580D700B4DF8D /* SavedDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4258FA31CA580D700B4DF8D /* SavedDataViewController.m */; };
-		F4258FA71CA5815700B4DF8D /* ContainerSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4258FA61CA5815700B4DF8D /* ContainerSplitViewController.m */; };
-		F4258FAB1CA5818C00B4DF8D /* VerticalSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4258FA91CA5818C00B4DF8D /* VerticalSplitViewController.m */; };
 		F42DCC111BB180A4004EC373 /* DMHYCoreDataStackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC101BB180A4004EC373 /* DMHYCoreDataStackManager.m */; };
 		F42DCC441BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC3D1BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m */; };
 		F42DCC451BB26DD9004EC373 /* DMHYTorrent.m in Sources */ = {isa = PBXBuildFile; fileRef = F42DCC3F1BB26DD9004EC373 /* DMHYTorrent.m */; };
@@ -23,6 +21,10 @@
 		F44C9F271C9E7624007E1CAA /* Bangumi.m in Sources */ = {isa = PBXBuildFile; fileRef = F44C9F261C9E7624007E1CAA /* Bangumi.m */; };
 		F4592BBF1CA16BEA00981DDF /* SitePreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4592BBD1CA16BEA00981DDF /* SitePreferenceController.m */; };
 		F4592BC01CA16BEA00981DDF /* SitePreferenceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4592BBE1CA16BEA00981DDF /* SitePreferenceController.xib */; };
+		F45981811D3B6451009B9C74 /* ButtonTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45981801D3B6451009B9C74 /* ButtonTableCellView.m */; };
+		F45981841D3B9200009B9C74 /* AddKeywordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45981831D3B9200009B9C74 /* AddKeywordViewController.m */; };
+		F45981871D3C60D0009B9C74 /* ImportKeywordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45981861D3C60D0009B9C74 /* ImportKeywordViewController.m */; };
+		F459818A1D3C60F6009B9C74 /* ExportKeywordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45981891D3C60F6009B9C74 /* ExportKeywordViewController.m */; };
 		F46EFC121CA054BB00B2E3F3 /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46EFC101CA054BB00B2E3F3 /* MASPreferencesWindowController.m */; };
 		F46EFC131CA054BB00B2E3F3 /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F46EFC111CA054BB00B2E3F3 /* MASPreferencesWindow.xib */; };
 		F4712E921CA6DFB000BD332D /* FileItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4712E911CA6DFB000BD332D /* FileItem.m */; };
@@ -37,10 +39,14 @@
 		F48F8C361BA03643002C96C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F48F8C351BA03643002C96C3 /* Assets.xcassets */; };
 		F48F8C391BA03643002C96C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F48F8C371BA03643002C96C3 /* Main.storyboard */; };
 		F48F8C411BA036ED002C96C3 /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = F48F8C401BA036ED002C96C3 /* download.png */; };
-		F48F8C471BA03705002C96C3 /* TorrentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C441BA03705002C96C3 /* TorrentItem.m */; };
 		F48F8C481BA03705002C96C3 /* TitleTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C461BA03705002C96C3 /* TitleTableCellView.m */; };
 		F48F8C4C1BA05FB9002C96C3 /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F48F8C4B1BA05FB9002C96C3 /* NavigationView.m */; };
+		F4A037341D39D3DF00183048 /* DMHYSiteChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A037331D39D3DF00183048 /* DMHYSiteChecker.m */; };
+		F4A0373A1D39FD1700183048 /* DMHYSite+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A037371D39FD1700183048 /* DMHYSite+CoreDataProperties.m */; };
+		F4A0373B1D39FD1700183048 /* DMHYSite.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A037391D39FD1700183048 /* DMHYSite.m */; };
+		F4A0373D1D3A0E2B00183048 /* support-site.json in Resources */ = {isa = PBXBuildFile; fileRef = F4A0373C1D3A0E2B00183048 /* support-site.json */; };
 		F4A0E3E21CA130A700092C4D /* NSTableView+ContextMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A0E3E11CA130A700092C4D /* NSTableView+ContextMenu.m */; };
+		F4D51E641D3B001F00E9E9A6 /* TorrentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D51E631D3B001F00E9E9A6 /* TorrentItem.m */; };
 		F4DEA05D1BA99890008E89B8 /* PreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DEA05B1BA99890008E89B8 /* PreferenceController.m */; };
 		F4DEA0601BA99936008E89B8 /* Preference.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4DEA05F1BA99936008E89B8 /* Preference.xib */; };
 		F4DFBB161CACB26B000F4555 /* DMHYXMLDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DFBB151CACB26B000F4555 /* DMHYXMLDataManager.m */; };
@@ -57,10 +63,6 @@
 		F4258FA01CA5808500B4DF8D /* FileManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManagerViewController.m; sourceTree = "<group>"; };
 		F4258FA21CA580D700B4DF8D /* SavedDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedDataViewController.h; sourceTree = "<group>"; };
 		F4258FA31CA580D700B4DF8D /* SavedDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedDataViewController.m; sourceTree = "<group>"; };
-		F4258FA51CA5815700B4DF8D /* ContainerSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainerSplitViewController.h; path = Controller/ContainerSplitViewController.h; sourceTree = "<group>"; };
-		F4258FA61CA5815700B4DF8D /* ContainerSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContainerSplitViewController.m; path = Controller/ContainerSplitViewController.m; sourceTree = "<group>"; };
-		F4258FA81CA5818C00B4DF8D /* VerticalSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VerticalSplitViewController.h; path = Controller/VerticalSplitViewController.h; sourceTree = "<group>"; };
-		F4258FA91CA5818C00B4DF8D /* VerticalSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VerticalSplitViewController.m; path = Controller/VerticalSplitViewController.m; sourceTree = "<group>"; };
 		F42DCC0F1BB180A4004EC373 /* DMHYCoreDataStackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHYCoreDataStackManager.h; sourceTree = "<group>"; };
 		F42DCC101BB180A4004EC373 /* DMHYCoreDataStackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHYCoreDataStackManager.m; sourceTree = "<group>"; };
 		F42DCC3C1BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DMHYTorrent+CoreDataProperties.h"; path = "Model/DMHYTorrent+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -80,6 +82,14 @@
 		F4592BBC1CA16BEA00981DDF /* SitePreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SitePreferenceController.h; path = Preferences/SitePreferenceController.h; sourceTree = "<group>"; };
 		F4592BBD1CA16BEA00981DDF /* SitePreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SitePreferenceController.m; path = Preferences/SitePreferenceController.m; sourceTree = "<group>"; };
 		F4592BBE1CA16BEA00981DDF /* SitePreferenceController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SitePreferenceController.xib; path = Preferences/SitePreferenceController.xib; sourceTree = "<group>"; };
+		F459817F1D3B6451009B9C74 /* ButtonTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ButtonTableCellView.h; path = View/ButtonTableCellView.h; sourceTree = "<group>"; };
+		F45981801D3B6451009B9C74 /* ButtonTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ButtonTableCellView.m; path = View/ButtonTableCellView.m; sourceTree = "<group>"; };
+		F45981821D3B9200009B9C74 /* AddKeywordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddKeywordViewController.h; path = Controller/AddKeywordViewController.h; sourceTree = "<group>"; };
+		F45981831D3B9200009B9C74 /* AddKeywordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddKeywordViewController.m; path = Controller/AddKeywordViewController.m; sourceTree = "<group>"; };
+		F45981851D3C60D0009B9C74 /* ImportKeywordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImportKeywordViewController.h; path = Controller/ImportKeywordViewController.h; sourceTree = "<group>"; };
+		F45981861D3C60D0009B9C74 /* ImportKeywordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportKeywordViewController.m; path = Controller/ImportKeywordViewController.m; sourceTree = "<group>"; };
+		F45981881D3C60F6009B9C74 /* ExportKeywordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExportKeywordViewController.h; path = Controller/ExportKeywordViewController.h; sourceTree = "<group>"; };
+		F45981891D3C60F6009B9C74 /* ExportKeywordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExportKeywordViewController.m; path = Controller/ExportKeywordViewController.m; sourceTree = "<group>"; };
 		F46EFC0E1CA054BB00B2E3F3 /* MASPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASPreferencesViewController.h; sourceTree = "<group>"; };
 		F46EFC0F1CA054BB00B2E3F3 /* MASPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASPreferencesWindowController.h; sourceTree = "<group>"; };
 		F46EFC101CA054BB00B2E3F3 /* MASPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASPreferencesWindowController.m; sourceTree = "<group>"; };
@@ -106,16 +116,24 @@
 		F48F8C3A1BA03643002C96C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F48F8C401BA036ED002C96C3 /* download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = download.png; sourceTree = "<group>"; };
 		F48F8C421BA03705002C96C3 /* DMHYAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHYAPI.h; sourceTree = "<group>"; };
-		F48F8C431BA03705002C96C3 /* TorrentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentItem.h; sourceTree = "<group>"; };
-		F48F8C441BA03705002C96C3 /* TorrentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorrentItem.m; sourceTree = "<group>"; };
 		F48F8C451BA03705002C96C3 /* TitleTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleTableCellView.h; sourceTree = "<group>"; };
 		F48F8C461BA03705002C96C3 /* TitleTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleTableCellView.m; sourceTree = "<group>"; };
 		F48F8C4A1BA05FB9002C96C3 /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationView.h; sourceTree = "<group>"; };
 		F48F8C4B1BA05FB9002C96C3 /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationView.m; sourceTree = "<group>"; };
+		F4A037321D39D3DF00183048 /* DMHYSiteChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHYSiteChecker.h; sourceTree = "<group>"; };
+		F4A037331D39D3DF00183048 /* DMHYSiteChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHYSiteChecker.m; sourceTree = "<group>"; };
+		F4A037351D39EC2E00183048 /* DMHY v4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DMHY v4.xcdatamodel"; sourceTree = "<group>"; };
+		F4A037361D39FD1700183048 /* DMHYSite+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DMHYSite+CoreDataProperties.h"; path = "Model/DMHYSite+CoreDataProperties.h"; sourceTree = "<group>"; };
+		F4A037371D39FD1700183048 /* DMHYSite+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DMHYSite+CoreDataProperties.m"; path = "Model/DMHYSite+CoreDataProperties.m"; sourceTree = "<group>"; };
+		F4A037381D39FD1700183048 /* DMHYSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMHYSite.h; path = Model/DMHYSite.h; sourceTree = "<group>"; };
+		F4A037391D39FD1700183048 /* DMHYSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMHYSite.m; path = Model/DMHYSite.m; sourceTree = "<group>"; };
+		F4A0373C1D3A0E2B00183048 /* support-site.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "support-site.json"; sourceTree = "<group>"; };
 		F4A0E3E01CA130A700092C4D /* NSTableView+ContextMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSTableView+ContextMenu.h"; path = "View/NSTableView+ContextMenu.h"; sourceTree = "<group>"; };
 		F4A0E3E11CA130A700092C4D /* NSTableView+ContextMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSTableView+ContextMenu.m"; path = "View/NSTableView+ContextMenu.m"; sourceTree = "<group>"; };
 		F4AC86621C82A6BA00C420F2 /* DMHY v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DMHY v2.xcdatamodel"; sourceTree = "<group>"; };
 		F4AC86631C82D8B500C420F2 /* DMHY v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DMHY v3.xcdatamodel"; sourceTree = "<group>"; };
+		F4D51E621D3B001F00E9E9A6 /* TorrentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorrentItem.h; sourceTree = "<group>"; };
+		F4D51E631D3B001F00E9E9A6 /* TorrentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorrentItem.m; sourceTree = "<group>"; };
 		F4DEA05A1BA99890008E89B8 /* PreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferenceController.h; sourceTree = "<group>"; };
 		F4DEA05B1BA99890008E89B8 /* PreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferenceController.m; sourceTree = "<group>"; };
 		F4DEA05F1BA99936008E89B8 /* Preference.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preference.xib; sourceTree = "<group>"; };
@@ -161,6 +179,12 @@
 		F43A1E6B1BB1714300B7CFBA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F4D51E621D3B001F00E9E9A6 /* TorrentItem.h */,
+				F4D51E631D3B001F00E9E9A6 /* TorrentItem.m */,
+				F4A037361D39FD1700183048 /* DMHYSite+CoreDataProperties.h */,
+				F4A037371D39FD1700183048 /* DMHYSite+CoreDataProperties.m */,
+				F4A037381D39FD1700183048 /* DMHYSite.h */,
+				F4A037391D39FD1700183048 /* DMHYSite.m */,
 				F48F8C321BA03643002C96C3 /* DMHY.xcdatamodeld */,
 				F42DCC3C1BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.h */,
 				F42DCC3D1BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m */,
@@ -170,8 +194,6 @@
 				F42DCC411BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m */,
 				F42DCC421BB26DD9004EC373 /* DMHYKeyword.h */,
 				F42DCC431BB26DD9004EC373 /* DMHYKeyword.m */,
-				F48F8C431BA03705002C96C3 /* TorrentItem.h */,
-				F48F8C441BA03705002C96C3 /* TorrentItem.m */,
 				F44C9F251C9E7624007E1CAA /* Bangumi.h */,
 				F44C9F261C9E7624007E1CAA /* Bangumi.m */,
 				F4712E901CA6DFB000BD332D /* FileItem.h */,
@@ -239,7 +261,6 @@
 				F4258FA31CA580D700B4DF8D /* SavedDataViewController.m */,
 				F4258F9F1CA5808500B4DF8D /* FileManagerViewController.h */,
 				F4258FA01CA5808500B4DF8D /* FileManagerViewController.m */,
-				F48F8C371BA03643002C96C3 /* Main.storyboard */,
 				F48F8C421BA03705002C96C3 /* DMHYAPI.h */,
 				F4EC473D1C82FECC00EBF0B9 /* DMHYTool.h */,
 				F4EC473E1C82FECC00EBF0B9 /* DMHYTool.m */,
@@ -247,12 +268,11 @@
 				F48CC38C1CA2643200EBEAB7 /* DMHYNotification.m */,
 				F43E8C201CA37E6B0068AF92 /* DMHYDownloader.h */,
 				F43E8C211CA37E6B0068AF92 /* DMHYDownloader.m */,
+				F48F8C371BA03643002C96C3 /* Main.storyboard */,
+				F4A037321D39D3DF00183048 /* DMHYSiteChecker.h */,
+				F4A037331D39D3DF00183048 /* DMHYSiteChecker.m */,
 				F483EA1B1BAD9DB200D02E60 /* MainSplitViewController.h */,
 				F483EA1C1BAD9DB200D02E60 /* MainSplitViewController.m */,
-				F4258FA51CA5815700B4DF8D /* ContainerSplitViewController.h */,
-				F4258FA61CA5815700B4DF8D /* ContainerSplitViewController.m */,
-				F4258FA81CA5818C00B4DF8D /* VerticalSplitViewController.h */,
-				F4258FA91CA5818C00B4DF8D /* VerticalSplitViewController.m */,
 				F41697B61C8D4D1C002521A4 /* WindowController.h */,
 				F41697B71C8D4D1C002521A4 /* WindowController.m */,
 				F42DCC0F1BB180A4004EC373 /* DMHYCoreDataStackManager.h */,
@@ -261,6 +281,12 @@
 				F4DFBB151CACB26B000F4555 /* DMHYXMLDataManager.m */,
 				F4DFBB171CACBF85000F4555 /* DMHYJSONDataManager.h */,
 				F4DFBB181CACBF85000F4555 /* DMHYJSONDataManager.m */,
+				F45981821D3B9200009B9C74 /* AddKeywordViewController.h */,
+				F45981831D3B9200009B9C74 /* AddKeywordViewController.m */,
+				F45981851D3C60D0009B9C74 /* ImportKeywordViewController.h */,
+				F45981861D3C60D0009B9C74 /* ImportKeywordViewController.m */,
+				F45981881D3C60F6009B9C74 /* ExportKeywordViewController.h */,
+				F45981891D3C60F6009B9C74 /* ExportKeywordViewController.m */,
 			);
 			path = DMHY;
 			sourceTree = "<group>";
@@ -275,6 +301,7 @@
 				F46EFC141CA054F500B2E3F3 /* MASPreferences */,
 				F48F8C401BA036ED002C96C3 /* download.png */,
 				F48F8C2D1BA03643002C96C3 /* main.m */,
+				F4A0373C1D3A0E2B00183048 /* support-site.json */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -290,6 +317,8 @@
 				F48F8C4B1BA05FB9002C96C3 /* NavigationView.m */,
 				F4712E931CA6EA9000BD332D /* FileTableView.h */,
 				F4712E941CA6EA9000BD332D /* FileTableView.m */,
+				F459817F1D3B6451009B9C74 /* ButtonTableCellView.h */,
+				F45981801D3B6451009B9C74 /* ButtonTableCellView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -360,6 +389,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4A0373D1D3A0E2B00183048 /* support-site.json in Resources */,
 				F48F8C361BA03643002C96C3 /* Assets.xcassets in Resources */,
 				F43E8C3B1CA3AADA0068AF92 /* ViewerPreferences.tiff in Resources */,
 				F48F8C391BA03643002C96C3 /* Main.storyboard in Resources */,
@@ -426,18 +456,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4258FA11CA5808500B4DF8D /* FileManagerViewController.m in Sources */,
+				F45981811D3B6451009B9C74 /* ButtonTableCellView.m in Sources */,
 				F44C9F271C9E7624007E1CAA /* Bangumi.m in Sources */,
 				F48F8C311BA03643002C96C3 /* ViewController.m in Sources */,
 				F4712E951CA6EA9000BD332D /* FileTableView.m in Sources */,
 				F48F8C4C1BA05FB9002C96C3 /* NavigationView.m in Sources */,
-				F48F8C471BA03705002C96C3 /* TorrentItem.m in Sources */,
+				F4D51E641D3B001F00E9E9A6 /* TorrentItem.m in Sources */,
 				F4DFBB161CACB26B000F4555 /* DMHYXMLDataManager.m in Sources */,
-				F4258FAB1CA5818C00B4DF8D /* VerticalSplitViewController.m in Sources */,
 				F48F8C481BA03705002C96C3 /* TitleTableCellView.m in Sources */,
-				F4258FA71CA5815700B4DF8D /* ContainerSplitViewController.m in Sources */,
 				F4DFBB191CACBF85000F4555 /* DMHYJSONDataManager.m in Sources */,
 				F48CC38D1CA2643200EBEAB7 /* DMHYNotification.m in Sources */,
 				F4712E921CA6DFB000BD332D /* FileItem.m in Sources */,
+				F4A0373A1D39FD1700183048 /* DMHYSite+CoreDataProperties.m in Sources */,
+				F4A0373B1D39FD1700183048 /* DMHYSite.m in Sources */,
 				F42DCC461BB26DD9004EC373 /* DMHYKeyword+CoreDataProperties.m in Sources */,
 				F41697B81C8D4D1C002521A4 /* WindowController.m in Sources */,
 				F4EC473F1C82FECC00EBF0B9 /* DMHYTool.m in Sources */,
@@ -445,16 +476,20 @@
 				F42DCC471BB26DD9004EC373 /* DMHYKeyword.m in Sources */,
 				F483EA1A1BAD92C100D02E60 /* SideViewController.m in Sources */,
 				F42DCC451BB26DD9004EC373 /* DMHYTorrent.m in Sources */,
+				F45981871D3C60D0009B9C74 /* ImportKeywordViewController.m in Sources */,
 				F4DEA05D1BA99890008E89B8 /* PreferenceController.m in Sources */,
 				F48F8C2E1BA03643002C96C3 /* main.m in Sources */,
 				F48F8C2B1BA03643002C96C3 /* AppDelegate.m in Sources */,
 				F42DCC441BB26DD9004EC373 /* DMHYTorrent+CoreDataProperties.m in Sources */,
+				F459818A1D3C60F6009B9C74 /* ExportKeywordViewController.m in Sources */,
 				F4592BBF1CA16BEA00981DDF /* SitePreferenceController.m in Sources */,
 				F483EA1D1BAD9DB200D02E60 /* MainSplitViewController.m in Sources */,
 				F42DCC111BB180A4004EC373 /* DMHYCoreDataStackManager.m in Sources */,
+				F45981841D3B9200009B9C74 /* AddKeywordViewController.m in Sources */,
 				F4A0E3E21CA130A700092C4D /* NSTableView+ContextMenu.m in Sources */,
 				F43E8C221CA37E6B0068AF92 /* DMHYDownloader.m in Sources */,
 				F48F8C341BA03643002C96C3 /* DMHY.xcdatamodeld in Sources */,
+				F4A037341D39D3DF00183048 /* DMHYSiteChecker.m in Sources */,
 				F4258FA41CA580D700B4DF8D /* SavedDataViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -616,11 +651,12 @@
 		F48F8C321BA03643002C96C3 /* DMHY.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				F4A037351D39EC2E00183048 /* DMHY v4.xcdatamodel */,
 				F4AC86631C82D8B500C420F2 /* DMHY v3.xcdatamodel */,
 				F4AC86621C82A6BA00C420F2 /* DMHY v2.xcdatamodel */,
 				F48F8C331BA03643002C96C3 /* DMHY.xcdatamodel */,
 			);
-			currentVersion = F4AC86631C82D8B500C420F2 /* DMHY v3.xcdatamodel */;
+			currentVersion = F4A037351D39EC2E00183048 /* DMHY v4.xcdatamodel */;
 			path = DMHY.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

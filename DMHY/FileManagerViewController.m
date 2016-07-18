@@ -68,7 +68,7 @@
         self.infoTextField.stringValue = @"请在设定里设置文件监控路径 >_<";
     }
     [self setupTableViewDoubleAction];
-    
+    self.title = NSLocalizedString(@"File Manager", @"");
 }
 
 - (void)setupTableViewDoubleAction {

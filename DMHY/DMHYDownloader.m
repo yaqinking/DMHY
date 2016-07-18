@@ -44,6 +44,38 @@
     [downloadTask resume];
 }
 
+- (void)downloadTorrentFromPageURLString:(NSString *)urlString {
+    [self downloadTorrentFromPageURLString:urlString willStartBlock:nil success:nil failure:nil];
+}
+
+- (void)downloadTorrentFromPageURLString:(NSString *)urlString willStartBlock:(void (^)())startBlock success:(void (^)())successHandler failure:(void (^)(NSError *))failureHandler {
+    if (startBlock) {
+        startBlock();
+    }
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        dispatch_async(dispatch_queue_create("download queue", nil), ^{
+            ONOXMLDocument *doc = [ONOXMLDocument HTMLDocumentWithData:responseObject error:nil];
+            __block NSMutableString *downloadString = [NSMutableString new];
+            [doc enumerateElementsWithXPath:kXpathTorrentDirectDownloadLink usingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *stop) {
+                downloadString = [[element stringValue] mutableCopy];
+                *stop = YES;
+            }];
+            
+            NSURL *dlURL = [NSURL URLWithString:[NSString stringWithFormat:@"https:%@",downloadString]];
+            [self downloadTorrentWithURL:dlURL];
+            if (successHandler) {
+                successHandler();
+            }
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (failureHandler) {
+            failureHandler(error);
+        }
+    }];
+}
+
 #pragma mark - LocalNotification
 
 - (void)postUserNotificationWithFileName:(NSString *)fileName {

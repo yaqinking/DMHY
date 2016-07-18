@@ -23,9 +23,7 @@ typedef NS_ENUM(NSInteger, DMHYThemeType) {
     
     // Drawing code here.
 
-//    self.frame = NSMakeRect(0, 0, 320, self.bounds.size.height);
     NSInteger themecode = [PreferenceController preferenceTheme];
-    
     switch (themecode) {
         case DMHYThemeLight:
            self.appearance = [NSAppearance appearanceNamed:NSAppearanceNameVibrantLight];
