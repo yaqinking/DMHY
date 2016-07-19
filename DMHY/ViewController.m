@@ -127,6 +127,7 @@
     if (!self.isSubKeyword) {
         return;
     }
+    [self resetData];
     [self startAnimatingProgressIndicator];
     [self configureSearchURLString];
     [self.torrents removeAllObjects];
@@ -261,6 +262,11 @@
     DMHYSite *site = notification.object;
     self.site = site;
     [self setupData:self];
+}
+
+- (void)resetData {
+    [self.torrents removeAllObjects];
+    [self.tableView reloadData];
 }
 
 - (void)handleAutoDownloadSiteChanged {
