@@ -98,23 +98,23 @@
     if ([identifier isEqualToString:@"pubDateCell"]) {
         NSTableCellView *cellView      = [tableView makeViewWithIdentifier:@"pubDateCell" owner:self];
         NSString *pubDate = [[DMHYTool tool] stringFromSavedDate:torrent.pubDate];
-        cellView.textField.stringValue = pubDate;
+        cellView.textField.stringValue = pubDate ? pubDate : @"";
         return cellView;
     }
     if ([identifier isEqualToString:@"titleCell"]) {
         NSTableCellView *cellView   = [tableView makeViewWithIdentifier:@"titleCell" owner:self];
-        cellView.textField.stringValue = torrent.title;
+        cellView.textField.stringValue = torrent.title ? torrent.title : @"";
         return cellView;
     }
     
     if ([identifier isEqualToString:@"linkCell"]) {
         NSTableCellView *cellView   = [tableView makeViewWithIdentifier:@"linkCell" owner:self];
-        cellView.textField.stringValue = torrent.link;
+        cellView.textField.stringValue = torrent.link ? torrent.link : @"";
         return cellView;
     }
     if ([identifier isEqualToString:@"magnetCell"]) {
         NSTableCellView *cellView   = [tableView makeViewWithIdentifier:@"magnetCell" owner:self];
-        cellView.textField.stringValue = torrent.magnet;
+        cellView.textField.stringValue = torrent.magnet ? torrent.magnet : @"";
         return cellView;
     }
     return nil;
