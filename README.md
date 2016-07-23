@@ -16,11 +16,11 @@
 - http://bt.acg.gg
 - http://www.kisssub.org
 - http://mikanani.me
+- http://www.nyaa.se
 
 支持以下站点搜索
 
 - https://bangumi.moe
-- http://www.nyaa.se
 
 其它 RSS 站点如果支持类似 `https://share.dmhy.org/topics/rss/rss.xml?keyword=%@` 这种格式的可以尝试一下添加自定义站点看是否能够正常使用。（`%@` 代表搜索关键字）
 
