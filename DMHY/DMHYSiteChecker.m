@@ -74,6 +74,9 @@
                     [[DMHYXMLDataManager manager] fetchFromSite:site queryKeyword:keyword fetchedNew:^(DMHYTorrent *torrent) {
                         if ([site.name isEqualToString:@"dmhy"]) {
                             [[DMHYDownloader downloader] downloadTorrentFromPageURLString:torrent.link];
+                        }
+                        if ([site.name containsString:@"nyaa.se"]) {
+                            [[DMHYDownloader downloader] downloadTorrentWithURL:[NSURL URLWithString:torrent.link]];
                         } else {
                             NSURL *url = [NSURL URLWithString:torrent.magnet];
                             // acg.rip contains .torrent bt.acg.gg contains down.php

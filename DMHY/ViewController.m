@@ -396,6 +396,11 @@
             return;
         }
     }
+    if ([self.site.name containsString:@"nyaa.se"]) {
+        [[DMHYDownloader downloader] downloadTorrentWithURL:item.link];
+        [self stopAnimatingProgressIndicator];
+        return;
+    }
     // acg.rip contains .torrent bt.acg.gg contains down.php
     if ([item.magnet.absoluteString containsString:@".torrent"] ||
         [item.magnet.absoluteString containsString:@"down.php"]) {
