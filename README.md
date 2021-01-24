@@ -5,7 +5,9 @@
 
 个人使用方法：把每天要看动画的关键字+字幕组+字幕类型设定好之后，每隔 60 分钟让她自动检测是否有新 ep。
 
-- 运行系统要求：最低 OS X 10.10
+软件运行系统需求：
+- 系统最低支持 OS X 10.10
+- 支持 Intel 和 Apple Silicon 处理器的 Mac
 
 目前
 
@@ -16,7 +18,7 @@
 - http://bt.acg.gg
 - http://www.kisssub.org
 - http://mikanani.me
-- http://www.nyaa.se
+- http://www.nyaa.si （提示：由于 nyaa 域名进行过更改，如果不是第一次使用本 app 需要重置数据库后才会更改为新域名。）
 
 支持以下站点搜索
 
@@ -33,8 +35,8 @@
 
 附加说明：
 
-- 使用 Developer 帐号进行过签名
 - 使用 Sandbox
+- 使用 Apple Notarization
 
 ## Screenshot
 暗色主题
@@ -59,8 +61,8 @@
 
 ## 开发环境
 
-- OS X 10.11
-- Xcode 7.3.1
+- macOS 11.1
+- Xcode 12.3
 
 ## Contact
 - [Twitter](https://twitter.com/yaqinking)

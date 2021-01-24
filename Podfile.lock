@@ -22,6 +22,13 @@ DEPENDENCIES:
   - DateTools
   - Ono
 
+SPEC REPOS:
+  trunk:
+    - AFNetworking
+    - CDEvents
+    - DateTools
+    - Ono
+
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   CDEvents: f311f23de13414f4b3625f1a663b2e1d9a85d982
@@ -30,4 +37,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: cdeda80e5c313d6f68f1c2a7f581fe7906f52591
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.10.1

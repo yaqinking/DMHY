@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
-        <capability name="box content view" minToolsVersion="7.0"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PreferenceController">
@@ -24,30 +25,32 @@
             <rect key="frame" x="0.0" y="0.0" width="518" height="519"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <box fixedFrame="YES" title="下载类型" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="ITO-UL-lQn">
+                <box fixedFrame="YES" borderType="line" title="下载类型" translatesAutoresizingMaskIntoConstraints="NO" id="ITO-UL-lQn">
                     <rect key="frame" x="22" y="406" width="135" height="93"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <view key="contentView" id="Twf-8a-beD">
-                        <rect key="frame" x="1" y="1" width="133" height="77"/>
+                        <rect key="frame" x="3" y="3" width="129" height="75"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gwS-CR-rps">
-                                <rect key="frame" x="20" y="14" width="76" height="48"/>
+                                <rect key="frame" x="20" y="12" width="76" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 <size key="cellSize" width="76" height="17"/>
                                 <size key="intercellSpacing" width="0.0" height="14"/>
                                 <buttonCell key="prototype" type="radio" title="种子" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Czc-Vu-dsd">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <cells>
                                     <column>
                                         <buttonCell type="radio" title="种子" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="sjy-hl-FPi">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <buttonCell type="radio" title="磁力链接" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="U1v-1T-E8D">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </column>
                                 </cells>
@@ -57,38 +60,37 @@
                             </matrix>
                         </subviews>
                     </view>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" size="11" name=".PingFangSC-Regular"/>
                 </box>
-                <box fixedFrame="YES" title="主页字体大小" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="FI3-zP-2ln">
+                <box fixedFrame="YES" borderType="line" title="主页字体大小" translatesAutoresizingMaskIntoConstraints="NO" id="FI3-zP-2ln">
                     <rect key="frame" x="22" y="276" width="135" height="123"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <view key="contentView" id="1Oq-ip-SeA">
-                        <rect key="frame" x="1" y="1" width="133" height="107"/>
+                        <rect key="frame" x="3" y="3" width="129" height="105"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EnP-D0-Nb8">
-                                <rect key="frame" x="20" y="10" width="93" height="88"/>
+                                <rect key="frame" x="20" y="8" width="93" height="88"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 <size key="cellSize" width="93" height="20"/>
                                 <size key="intercellSpacing" width="0.0" height="14"/>
                                 <buttonCell key="prototype" type="radio" title="种子" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="RZZ-eV-PIa">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <cells>
                                     <column>
                                         <buttonCell type="radio" title="小" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="G5M-yn-kcA">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <buttonCell type="radio" title="中" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="xTG-ro-8OM">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <buttonCell type="radio" title="大" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="1mY-dN-ma6">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </column>
                                 </cells>
@@ -98,34 +100,33 @@
                             </matrix>
                         </subviews>
                     </view>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" size="11" name=".PingFangSC-Regular"/>
                 </box>
-                <box fixedFrame="YES" title="双击功能" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="tWV-PO-xZw">
+                <box fixedFrame="YES" borderType="line" title="双击功能" translatesAutoresizingMaskIntoConstraints="NO" id="tWV-PO-xZw">
                     <rect key="frame" x="22" y="147" width="135" height="111"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <view key="contentView" id="aVS-xg-xWq">
-                        <rect key="frame" x="1" y="1" width="133" height="95"/>
+                        <rect key="frame" x="3" y="3" width="129" height="93"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGR-74-gfs">
-                                <rect key="frame" x="20" y="21" width="102" height="54"/>
+                                <rect key="frame" x="20" y="19" width="102" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 <size key="cellSize" width="102" height="20"/>
                                 <size key="intercellSpacing" width="0.0" height="14"/>
                                 <buttonCell key="prototype" type="radio" title="种子" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="8Oa-sa-7ec">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <cells>
                                     <column>
                                         <buttonCell type="radio" title="打开介绍页面" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="fbn-be-DyP">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <buttonCell type="radio" title="下载" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="eBi-Nv-KsE">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </column>
                                 </cells>
@@ -135,31 +136,31 @@
                             </matrix>
                         </subviews>
                     </view>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" size="11" name=".PingFangSC-Regular"/>
                 </box>
-                <box fixedFrame="YES" title="重置" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="dLU-zB-ib9">
+                <box fixedFrame="YES" borderType="line" title="重置" translatesAutoresizingMaskIntoConstraints="NO" id="dLU-zB-ib9">
                     <rect key="frame" x="22" y="16" width="135" height="111"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <view key="contentView" id="9aL-PQ-Cdx">
-                        <rect key="frame" x="1" y="1" width="133" height="95"/>
+                        <rect key="frame" x="3" y="3" width="129" height="93"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Huc-sw-xng">
-                                <rect key="frame" x="20" y="56" width="79" height="25"/>
+                                <rect key="frame" x="20" y="54" width="79" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="roundTextured" title="重置设置" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="NqN-sF-FFD">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="resetPreference:" target="-2" id="MNX-Ci-Qh8"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KOg-yC-sK9">
-                                <rect key="frame" x="20" y="18" width="79" height="25"/>
+                                <rect key="frame" x="20" y="16" width="79" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="roundTextured" title="重置数据库" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cNH-Ng-R0J">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="resetDatabase:" target="-2" id="Srt-oc-XbR"/>
@@ -167,18 +168,17 @@
                             </button>
                         </subviews>
                     </view>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" size="11" name=".PingFangSC-Regular"/>
                 </box>
-                <box fixedFrame="YES" title="存储路径" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="MJj-R4-r7m">
+                <box fixedFrame="YES" borderType="line" title="存储路径" translatesAutoresizingMaskIntoConstraints="NO" id="MJj-R4-r7m">
                     <rect key="frame" x="173" y="147" width="242" height="111"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <view key="contentView" id="euh-Kw-Vsn">
-                        <rect key="frame" x="1" y="1" width="240" height="95"/>
+                        <rect key="frame" x="3" y="3" width="236" height="93"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="veq-Pa-RmW">
-                                <rect key="frame" x="18" y="0.0" width="204" height="95"/>
+                                <rect key="frame" x="18" y="-2" width="204" height="95"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="eXV-2f-3eP">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -187,28 +187,28 @@
                             </textField>
                         </subviews>
                     </view>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" size="11" name=".PingFangSC-Regular"/>
                 </box>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eR2-q3-M7M">
                     <rect key="frame" x="434" y="191" width="64" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="roundTextured" title="更改到…" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JSO-cP-aOs">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" size="13" name=".PingFangSC-Regular"/>
+                        <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
                         <action selector="changeSavePath:" target="-2" id="KM9-Cc-Uui"/>
                     </connections>
                 </button>
-                <box fixedFrame="YES" title="文件查看路径" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="FAH-OQ-F7x">
+                <box fixedFrame="YES" borderType="line" title="文件查看路径" translatesAutoresizingMaskIntoConstraints="NO" id="FAH-OQ-F7x">
                     <rect key="frame" x="173" y="16" width="242" height="111"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <view key="contentView" id="IVQ-J7-X0v">
-                        <rect key="frame" x="1" y="1" width="240" height="95"/>
+                        <rect key="frame" x="3" y="3" width="236" height="93"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xgl-l1-bw4">
-                                <rect key="frame" x="18" y="0.0" width="204" height="95"/>
+                                <rect key="frame" x="18" y="-2" width="204" height="95"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="R5U-am-j2L">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -217,55 +217,58 @@
                             </textField>
                         </subviews>
                     </view>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" size="11" name=".PingFangSC-Regular"/>
                 </box>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bks-22-dkE">
                     <rect key="frame" x="434" y="60" width="64" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="roundTextured" title="更改到…" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0NM-sh-ODi">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" size="13" name=".PingFangSC-Regular"/>
+                        <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
                         <action selector="changeFileWatchPath:" target="-2" id="NUV-67-lOj"/>
                     </connections>
                 </button>
-                <box fixedFrame="YES" title="自动下载新种子设置" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="sr4-HR-LtJ">
+                <box fixedFrame="YES" borderType="line" title="自动下载新种子设置" translatesAutoresizingMaskIntoConstraints="NO" id="sr4-HR-LtJ">
                     <rect key="frame" x="173" y="276" width="328" height="223"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <view key="contentView" id="mFc-SE-EWr">
-                        <rect key="frame" x="1" y="1" width="326" height="207"/>
+                        <rect key="frame" x="3" y="3" width="322" height="205"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dpz-pO-it0">
-                                <rect key="frame" x="174" y="173" width="82" height="17"/>
+                                <rect key="frame" x="174" y="171" width="82" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="分钟" id="Udm-gF-9Me">
-                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zMd-yl-zzB">
-                                <rect key="frame" x="10" y="173" width="69" height="18"/>
+                                <rect key="frame" x="10" y="171" width="69" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="刷新间隔" id="uHq-74-l6j">
-                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JlD-ih-h2Y">
-                                <rect key="frame" x="16" y="133" width="56" height="17"/>
+                                <rect key="frame" x="16" y="131" width="56" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="仅下载带" id="ycW-7L-bF6">
-                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bq7-QP-4D3">
-                                <rect key="frame" x="90" y="129" width="71" height="22"/>
+                                <rect key="frame" x="90" y="127" width="71" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="pBQ-W9-eHq">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
@@ -273,15 +276,17 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qvM-IB-nGR">
-                                <rect key="frame" x="174" y="132" width="82" height="17"/>
+                                <rect key="frame" x="174" y="130" width="82" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" title="关键字的种子" id="rqG-FG-ibd">
-                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xDL-0E-GfE">
-                                <rect key="frame" x="88" y="168" width="76" height="26"/>
+                                <rect key="frame" x="88" y="166" width="76" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Ym3-cj-bm4">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -299,7 +304,8 @@
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40R-Dc-aFd">
-                                <rect key="frame" x="16" y="62" width="297" height="51"/>
+                                <rect key="frame" x="16" y="60" width="297" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="VUD-LM-ecw">
                                     <font key="font" metaFont="system"/>
                                     <string key="placeholderString">使用空格作为分隔（例：BIG5 MP4）
@@ -310,10 +316,11 @@
                                 </textFieldCell>
                             </textField>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KeH-fz-ezi">
-                                <rect key="frame" x="16" y="21" width="178" height="18"/>
+                                <rect key="frame" x="16" y="19" width="178" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="不下载合集（完结）的种子" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="wtb-Ft-FQh">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="dontDownloadCollection:" target="-2" id="s0Y-vb-bHj"/>
@@ -321,9 +328,6 @@
                             </button>
                         </subviews>
                     </view>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <font key="titleFont" size="11" name=".PingFangSC-Regular"/>
                 </box>
             </subviews>
             <point key="canvasLocation" x="868" y="816.5"/>

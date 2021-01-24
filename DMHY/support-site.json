@@ -75,9 +75,9 @@
       "keywords": {}
 	},
 	{
-	  "site_name": "nyaa.se",
-      "main_url": "http://www.nyaa.se/?page=rss",
-      "search_url": "http://www.nyaa.se/?page=rss&term=%@",
+	  "site_name": "nyaa.si",
+      "main_url": "http://www.nyaa.si/?page=rss",
+      "search_url": "http://www.nyaa.si/?page=rss&term=%@",
       "fliter_site": false,
       "auto_download": false,
       "download_type": "torrent",
