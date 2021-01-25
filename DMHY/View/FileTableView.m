@@ -16,7 +16,8 @@
     NSString *key = [theEvent charactersIgnoringModifiers];
     if ([key isEqual:@" "])
     {
-//        [[NSApp delegate] togglePreviewPanel:self];
+        AppDelegate *delegate = [[NSApplication sharedApplication] delegate];
+        [delegate togglePreviewPanel:self];
     }
     else
     {
