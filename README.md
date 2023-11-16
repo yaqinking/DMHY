@@ -64,14 +64,6 @@
 - macOS 11.1
 - Xcode 12.3
 
-## Contact
-- [Twitter](https://twitter.com/yaqinking)
-- [Telegram](https://telegram.me/yaqinking)
-
-## Donate
-- [Alipay](https://www.alipay.com) yaqinking@yahoo.co.jp
-- [PayPal](https://www.paypal.com) yaqinking@yahoo.co.jp
-
 ## Thanks
 
 - [AFNetworking](https://github.com/AFNetworking/AFNetworking)
